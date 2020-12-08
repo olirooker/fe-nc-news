@@ -22,7 +22,7 @@ class SingleArticle extends Component {
         const { article_id } = this.props;
 
         return (
-            <div>
+            <main>
                 <section>
                     <div>
                         <p><Link to={`/${article.topic}/articles`}>{article.topic}</Link>. Posted by <Link to={`/users/${article.author}/articles`}>{article.author}</Link> {moment(article.created_at).fromNow()}</p>
@@ -44,10 +44,9 @@ class SingleArticle extends Component {
                 </section>
 
                 <section>
-                    <h3>Comments Here</h3>
                     <CommentsList articleId={article_id} />
                 </section>
-            </div>
+            </main>
 
         );
     }
