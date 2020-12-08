@@ -4,6 +4,7 @@ import Header from './components/Header';
 import ArticlesList from './components/ArticlesList';
 import TopicsList from './components/TopicsList';
 import UsersList from './components/UsersList';
+import SingleArticle from './components/SingleArticle';
 
 class App extends Component {
   state = {
@@ -25,6 +26,7 @@ class App extends Component {
           <ArticlesList path="/" />
           <ArticlesList path="/:topic/articles" />
           <ArticlesList path="/users/:username/articles" />
+          <SingleArticle path="/articles/:article_id" />
           <TopicsList path="/topics" />
           <UsersList path="/:username" />
         </Router>

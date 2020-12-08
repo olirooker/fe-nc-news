@@ -10,3 +10,10 @@ export const getTopics = () => {
             return data.topics
         })
 };
+
+export const getArticles = () => {
+    return ncNewsApi.get('/articles')
+        .then(({ data }) => {
+            return data.articles
+        })
+};

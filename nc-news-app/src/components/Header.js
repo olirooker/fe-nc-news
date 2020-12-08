@@ -23,9 +23,7 @@ class Header extends Component {
 
         return (
             <header>
-                <Link to="/">
-                    <h1>NC News</h1>
-                </Link>
+                <Link to="/"><h1>NC News</h1></Link>
                 <div>
                     <label>
                         <select defaultValue="">
