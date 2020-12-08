@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { Router } from "@reach/router";
+import Header from './components/Header';
+import ArticlesList from './components/ArticlesList';
+import TopicsList from './components/TopicsList';
+import UsersList from './components/UsersList';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    user: {},
+    isLoggedIn: false,
+  };
+
+  // get request to api/users to get user info if signed in.
+
+  render() {
+    return (
+      <div>
+        <Header userInfo={this.state} />
+        <Router>
+          <ArticlesList path="/" />
+          <TopicsList path="/topics" />
+          <UsersList path="/:username" />
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
