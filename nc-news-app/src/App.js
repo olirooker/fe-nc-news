@@ -11,7 +11,11 @@ class App extends Component {
     isLoggedIn: false,
   };
 
-  // get request to api/users to get user info if signed in.
+  // Maybe doesn't make a request for user info until user clicks sign-in
+  // opens an input field for a username
+  // make a get request for users/username
+  // if the user name exists then data is returned and the state is populated
+  // else no data and returns a create account page.
 
   render() {
     return (
@@ -19,6 +23,8 @@ class App extends Component {
         <Header userInfo={this.state} />
         <Router>
           <ArticlesList path="/" />
+          <ArticlesList path="/articles/:topic" />
+          <ArticlesList path="/articles/:author" />
           <TopicsList path="/topics" />
           <UsersList path="/:username" />
         </Router>
