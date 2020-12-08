@@ -11,9 +11,20 @@ export const getTopics = () => {
         })
 };
 
-export const getArticles = () => {
-    return ncNewsApi.get('/articles')
+export const getArticles = (topic) => {
+    return ncNewsApi.get('/articles', {
+        params: {
+            topic: topic,
+        }
+    })
         .then(({ data }) => {
             return data.articles
+        })
+};
+
+export const getSingleArticle = (article_id) => {
+    return ncNewsApi.get(`/articles/${article_id}`)
+        .then(({ data }) => {
+            return data.article
         })
 };

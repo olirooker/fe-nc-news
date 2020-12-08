@@ -30,6 +30,7 @@ class Header extends Component {
                             <option key="topic-placeholder" disabled={true} value="">Select a topic</option>
                             {this.state.topics.map(topic => {
                                 return (
+                                    // <Link to={`/${topic.slug}/articles`}></Link>
                                     <option key={topic.slug}>{topic.slug}</option>
                                 )
                             })}
@@ -37,7 +38,7 @@ class Header extends Component {
                     </label>
                 </div>
                 <div>
-                    {userInfo.isLoggedIn ? <Link to="/"><p>Hello, {userInfo.user.username}</p></Link> : <Link to="/"><p>Sign-in</p></Link>}
+                    {userInfo.isLoggedIn ? <p>Hello, <Link to="/">{userInfo.user.username}</Link></p> : <Link to="/"><p>Sign-in</p></Link>}
                 </div>
             </header>
         );
