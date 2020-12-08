@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
+import { getTopics } from '../api';
 
 class Header extends Component {
     state = {
-        topics: [
-            {
-                slug: 'React JS',
-                description: 'Building things in React'
-            },
-            {
-                slug: 'Heroku Apps',
-                description: 'Getting the most from Heroku'
-            },
-            {
-                slug: 'VS Code',
-                description: 'Essential information on VS Code'
-            }
-        ]
+        topics: [],
     };
 
+    componentDidMount() {
+        getTopics().then((topics) => {
+            this.setState({ topics });
+        });
+    };
 
     // sign in and create account components go here?
 
