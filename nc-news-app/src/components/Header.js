@@ -2,7 +2,23 @@ import React, { Component } from 'react';
 import { Link } from '@reach/router';
 
 class Header extends Component {
-    state = {};
+    state = {
+        topics: [
+            {
+                slug: 'React JS',
+                description: 'Building things in React'
+            },
+            {
+                slug: 'Heroku Apps',
+                description: 'Getting the most from Heroku'
+            },
+            {
+                slug: 'VS Code',
+                description: 'Essential information on VS Code'
+            }
+        ]
+    };
+
 
     // sign in and create account components go here?
 
@@ -17,7 +33,18 @@ class Header extends Component {
                 <Link to="/">
                     <h1>NC News</h1>
                 </Link>
-                <p>Header - Topics drop down to go here</p>
+                <div>
+                    <label>
+                        <select defaultValue="">
+                            <option key="topic-placeholder" disabled={true} value="">Select a topic</option>
+                            {this.state.topics.map(topic => {
+                                return (
+                                    <option key={topic.slug}>{topic.slug}</option>
+                                )
+                            })}
+                        </select>
+                    </label>
+                </div>
                 <div>
                     {userInfo.isLoggedIn ? <Link to="/"><p>Hello, {userInfo.user.username}</p></Link> : <Link to="/"><p>Sign-in</p></Link>}
                 </div>
