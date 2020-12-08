@@ -8,7 +8,7 @@ const ArticleCard = ({ articleData }) => {
     return (
         <li>
             <div>
-                <p><Link to={`/${articleData.topic}/articles`}>{articleData.topic}</Link>. Posted by <Link to={`/users/${articleData.author}/articles`}>{articleData.author}</Link> at {moment(articleData.created_at).fromNow()}</p>
+                <p><Link to={`/${articleData.topic}/articles`}>{articleData.topic}</Link>. Posted by <Link to={`/users/${articleData.author}/articles`}>{articleData.author}</Link> {moment(articleData.created_at).fromNow()}</p>
                 <p>{articleData.votes}</p>
             </div>
 
