@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getSingleArticle } from '../api';
 import { Link } from '@reach/router';
 import moment from 'moment';
+import CommentsList from './CommentsList';
 
 class SingleArticle extends Component {
     state = {
@@ -18,6 +19,7 @@ class SingleArticle extends Component {
 
     render() {
         const { article } = this.state;
+        const { article_id } = this.props;
 
         return (
             <div>
@@ -43,6 +45,7 @@ class SingleArticle extends Component {
 
                 <section>
                     <h3>Comments Here</h3>
+                    <CommentsList articleId={article_id} />
                 </section>
             </div>
 

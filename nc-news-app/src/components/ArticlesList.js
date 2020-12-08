@@ -12,8 +12,8 @@ class ArticlesList extends Component {
 
     componentDidMount() {
         const { topic, author, username } = this.props;
-        console.log(topic, author, username)
-        getArticles(topic, username).then((articles) => {
+
+        getArticles(topic).then((articles) => {
             this.setState({ articles, isLoading: false });
         });
     };

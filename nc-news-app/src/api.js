@@ -28,3 +28,11 @@ export const getSingleArticle = (article_id) => {
             return data.article
         })
 };
+
+export const getArticleComments = (article_id) => {
+    return ncNewsApi.get(`/articles/${article_id}/comments`)
+        .then(({ data }) => {
+            // console.log(data.comments)
+            return data.comments
+        })
+};
