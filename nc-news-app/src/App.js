@@ -23,8 +23,8 @@ class App extends Component {
         <Header userInfo={this.state} />
         <Router>
           <ArticlesList path="/" />
-          <ArticlesList path="/articles/:topic" />
-          <ArticlesList path="/articles/:author" />
+          <ArticlesList path="/:topic/articles" />
+          <ArticlesList path="/users/:username/articles" />
           <TopicsList path="/topics" />
           <UsersList path="/:username" />
         </Router>
