@@ -6,6 +6,11 @@ import TopicsList from './components/TopicsList';
 import UsersList from './components/UsersList';
 import SingleArticle from './components/SingleArticle';
 import ErrorMessage from './components/ErrorMessage';
+import styled from 'styled-components';
+
+const StyledContainer = styled.div`
+min-width: 400px;
+`
 
 class App extends Component {
   state = {
@@ -21,7 +26,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <StyledContainer>
         <Header userInfo={this.state} />
         <Router>
           <ArticlesList path="/" />
@@ -32,7 +37,7 @@ class App extends Component {
           <UsersList path="/users/:username" />
           <ErrorMessage default errorMessage="Page not found!" />
         </Router>
-      </div>
+      </StyledContainer>
     );
   }
 }
