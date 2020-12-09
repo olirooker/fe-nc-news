@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getArticles } from '../api';
 import ArticleCard from './ArticleCard';
+import ErrorMessage from './ErrorMessage';
 import Loading from './Loading';
 
 
@@ -8,6 +9,8 @@ class ArticlesList extends Component {
     state = {
         articles: [],
         isLoading: true,
+        hasError: false,
+        errorMessage: '',
     };
 
     componentDidMount() {
@@ -15,7 +18,15 @@ class ArticlesList extends Component {
         console.log(topic)
         getArticles(topic, username).then((articles) => {
             this.setState({ articles, isLoading: false });
-        });
+        })
+            .catch((err) => {
+                const { response: { status, statusText } } = err;
+                this.setState({
+                    hasError: true,
+                    errorMessage: `Article not found ${status}. ${statusText}`,
+                    isLoading: false,
+                })
+            })
     };
 
     componentDidUpdate(prevProps) {
@@ -32,26 +43,28 @@ class ArticlesList extends Component {
     };
 
     render() {
-        const { articles, isLoading } = this.state;
+        const { articles, isLoading, hasError, errorMessage } = this.state;
         const { topic, author, username } = this.props;
 
-        return (
-            <main>
-                <h1>{topic || author || username || 'Articles List'}</h1>
-                <p>Articles List - Filter section here (votes, date, etc)</p>
-                {isLoading ? (
-                    <Loading />
-                ) : (
-                        <ul>
-                            {articles.map(article => {
-                                return (
-                                    <ArticleCard articleData={article} key={article.article_id} />
-                                )
-                            })}
-                        </ul>
-                    )}
-            </main>
-        );
+        if (isLoading) {
+            return <Loading />
+        } else if (hasError) {
+            return <ErrorMessage errorMessage={errorMessage} />
+        } else {
+            return (
+                <main>
+                    <h1>{topic || author || username || 'Articles List'}</h1>
+                    <p>Articles List - Filter section here (votes, date, etc)</p>
+                    <ul>
+                        {articles.map(article => {
+                            return (
+                                <ArticleCard articleData={article} key={article.article_id} />
+                            )
+                        })}
+                    </ul>
+                </main>
+            );
+        }
     }
 }
 

@@ -1,11 +1,12 @@
+import { Link } from '@reach/router';
 import React from 'react';
 
-const TopicCard = () => {
+const TopicCard = ({ topicData }) => {
     return (
-        <div>
-            <h2>Topic Card</h2>
-            <p>Topic Card - individual topic card</p>
-        </div>
+        <li>
+            <Link to={`/${topicData.slug}/articles`}><h3>{topicData.slug}</h3></Link>
+            <p>{topicData.description}</p>
+        </li>
     )
 };
 

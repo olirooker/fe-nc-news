@@ -1,16 +1,37 @@
 import React, { Component } from 'react';
+import { getTopics } from '../api';
+import Loading from './Loading';
 import TopicCard from './TopicCard';
 
 class TopicsList extends Component {
-    state = {};
+    state = {
+        topics: [],
+        isLoading: true,
+    };
+
+    componentDidMount() {
+        getTopics().then((topics) => {
+            this.setState({ topics, isLoading: false });
+        });
+    }
 
     render() {
+        const { topics, isLoading } = this.state;
         return (
-            <div>
+            <main>
                 <h1>Topics List</h1>
-                <p>Topics List - List of topic cards</p>
-                <TopicCard />
-            </div>
+                {isLoading ? (
+                    <Loading />
+                ) : (
+                        <ul>
+                            {topics.map(topic => {
+                                return (
+                                    <TopicCard topicData={topic} key={topic.slug} />
+                                )
+                            })}
+                        </ul>
+                    )}
+            </main>
         );
     }
 }
