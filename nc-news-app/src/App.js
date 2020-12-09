@@ -8,8 +8,14 @@ import SingleArticle from './components/SingleArticle';
 import ErrorMessage from './components/ErrorMessage';
 import styled from 'styled-components';
 
+const AppContainer = styled.div`
+margin: 0 auto;
+padding: 0;
+`
 const StyledContainer = styled.div`
+margin: 0 auto;
 min-width: 400px;
+max-width: 800px;
 `
 
 class App extends Component {
@@ -26,18 +32,20 @@ class App extends Component {
 
   render() {
     return (
-      <StyledContainer>
+      <AppContainer>
         <Header userInfo={this.state} />
-        <Router>
-          <ArticlesList path="/" />
-          <ArticlesList path="/:topic/articles" />
-          <ArticlesList path="/users/:username/articles" />
-          <SingleArticle path="/articles/:article_id" />
-          <TopicsList path="/topics" />
-          <UsersList path="/users/:username" />
-          <ErrorMessage default errorMessage="Page not found!" />
-        </Router>
-      </StyledContainer>
+        <StyledContainer>
+          <Router>
+            <ArticlesList path="/" />
+            <ArticlesList path="/:topic/articles" />
+            <ArticlesList path="/users/:username/articles" />
+            <SingleArticle path="/articles/:article_id" />
+            <TopicsList path="/topics" />
+            <UsersList path="/users/:username" />
+            <ErrorMessage default errorMessage="Page not found!" />
+          </Router>
+        </StyledContainer>
+      </AppContainer>
     );
   }
 }
