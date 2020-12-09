@@ -13,6 +13,8 @@ class Header extends Component {
         });
     };
 
+    // this will need a componentDidUpdate to check for changes in the props
+
     // sign in and create account components go here?
 
     render() {

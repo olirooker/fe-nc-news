@@ -13,9 +13,20 @@ class ArticlesList extends Component {
     componentDidMount() {
         const { topic, author, username } = this.props;
 
-        getArticles(topic).then((articles) => {
+        getArticles(topic, username).then((articles) => {
             this.setState({ articles, isLoading: false });
         });
+    };
+
+    componentDidUpdate(prevProps, prevState) {
+        const newTopic = prevProps.topic !== this.props.topic;
+        const newUsername = prevProps.username !== this.props.username;
+
+        if (newTopic || newUsername) {
+            getArticles(newTopic, newUsername).then((articles) => {
+                this.setState({ articles });
+            });
+        }
     };
 
     // componentDidUpdate for the drop down list in the nav? for when the props change.

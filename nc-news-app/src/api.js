@@ -11,10 +11,11 @@ export const getTopics = () => {
         })
 };
 
-export const getArticles = (topic) => {
+export const getArticles = (topic, username) => {
     return ncNewsApi.get('/articles', {
         params: {
             topic: topic,
+            author: username,
         }
     })
         .then(({ data }) => {
