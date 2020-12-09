@@ -8,13 +8,23 @@ class SingleArticle extends Component {
     state = {
         article: {},
         isLoading: true,
+        hasError: false,
+        errorMessage: '',
     };
 
     componentDidMount() {
         const { article_id } = this.props
         getSingleArticle(article_id).then(article => {
             this.setState({ article: article })
-        });
+        })
+        // .catch((err) => {
+        //     console.log(err);
+        //     const {response: {status, statusText}} = err;
+        //     this.setState({
+        //         hasError: true,
+        //         errorMessage: `Article not found ${status}. ${statusText}`
+        //     })
+        // })
     };
 
     render() {
