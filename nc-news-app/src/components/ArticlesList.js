@@ -3,6 +3,12 @@ import { getArticles } from '../api';
 import ArticleCard from './ArticleCard';
 import ErrorMessage from './ErrorMessage';
 import Loading from './Loading';
+import styled from 'styled-components';
+
+const FilterQueries = styled.div`
+margin: 1rem 0;
+background-color: white;
+`
 
 
 class ArticlesList extends Component {
@@ -52,8 +58,10 @@ class ArticlesList extends Component {
         } else {
             return (
                 <main>
-                    <h1>{topic || author || username || 'Articles List'}</h1>
-                    <p>Articles List - Filter section here (votes, date, etc)</p>
+                    {/* <h1>{topic || author || username || 'Articles List'}</h1> */}
+                    <FilterQueries>
+                        <p>Articles List - Filter section here (votes, date, etc)</p>
+                    </FilterQueries>
                     <ul>
                         {articles.map(article => {
                             return (

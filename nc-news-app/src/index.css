@@ -9,15 +9,43 @@ html, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, 
   font-weight: 400;
 }
 
+html {
+  font-size: 75%;
+  scroll-behavior: smooth;
+}
+
+/* 1200px / 16px = 75em */
+@media (max-width: 75em) {
+  html {
+    font-size: 70%;
+  }
+}
+
+/* 980px / 16px = 61.25em */
+@media (max-width: 61.25em) {
+  html {
+    font-size: 65%;
+  }
+}
+
+/* 480px / 16px = 30em */
+@media (max-width: 30em) {
+  html {
+    font-size: 55%;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family:  'Lato', 'Roboto', 'Helvetica Neue', sans-serif;
   font-weight: 400;
+  font-size: 1.8rem; /* 18px */
+  line-height: 1.4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: lightgray;
+  background-color: #DAE0E6;
 }
 
 h1, h2, h3, h4, h5, h6 {

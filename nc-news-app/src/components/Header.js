@@ -14,7 +14,7 @@ grid-template-areas: 'logo dropdown signin';
 align-items: center;
 justify-items: center;
 background-color: white;
-
+box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
 `
 const StyledLogo = styled.div`
     border: 1px solid black;
