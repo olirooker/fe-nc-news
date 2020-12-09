@@ -5,6 +5,7 @@ import ArticlesList from './components/ArticlesList';
 import TopicsList from './components/TopicsList';
 import UsersList from './components/UsersList';
 import SingleArticle from './components/SingleArticle';
+import ErrorMessage from './components/ErrorMessage';
 
 class App extends Component {
   state = {
@@ -28,7 +29,8 @@ class App extends Component {
           <ArticlesList path="/users/:username/articles" />
           <SingleArticle path="/articles/:article_id" />
           <TopicsList path="/topics" />
-          <UsersList path="/:username" />
+          <UsersList path="/users/:username" />
+          <ErrorMessage default errorMessage="Page not found!" />
         </Router>
       </div>
     );

@@ -13,20 +13,10 @@ class Header extends Component {
         });
     };
 
-    componentDidUpdate() {
-        // console.log(this.props.topic)
-
-    };
-
-    // this will need a componentDidUpdate to check for changes in the props
-
     // sign in and create account components go here?
 
     render() {
         const { userInfo } = this.props
-        console.log(this.props.topic)
-        // console.log(userInfo.user.username, '<<<<< user obj')
-        // console.log(userInfo.isLoggedIn, '<<<<< logged in status')
 
         return (
             <header>
