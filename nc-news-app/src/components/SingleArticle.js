@@ -5,6 +5,7 @@ import moment from 'moment';
 import CommentsList from './CommentsList';
 import Loading from './Loading';
 import ErrorMessage from './ErrorMessage';
+import Vote from './Vote';
 
 class SingleArticle extends Component {
     state = {
@@ -46,7 +47,7 @@ class SingleArticle extends Component {
                     <section>
                         <div>
                             <p><Link to={`/${article.topic}/articles`}>{article.topic}</Link>. Posted by <Link to={`/users/${article.author}/articles`}>{article.author}</Link> {moment(article.created_at).fromNow()}</p>
-                            <p>{article.votes}</p>
+                            <Vote votes={article.votes} article_id={article_id} />
                         </div>
 
                         <div>
