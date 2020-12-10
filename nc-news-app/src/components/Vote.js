@@ -13,33 +13,54 @@ const VotesContainer = styled.div`
 
 class Vote extends Component {
     state = {
-        upVote: false,
-        downVote: false,
-        voteChange: 0,
         hasError: false,
         errorMessage: '',
+        hasVotedUp: false,
+        hasVotedDown: false,
+        voteChange: 0,
     };
 
     handleClick = (value) => {
         const { article_id, comment_id } = this.props;
-
-
+        console.log(article_id, 'article id');
+        console.log(article_id, 'comment id');
+        console.log(value, 'value')
 
         updateArticleVote(article_id, value)
+            .catch((err) => {
+                const { response: { status, statusText } } = err;
+                this.setState({
+                    hasError: true,
+                    errorMessage: `Unable to vote ... ${status}. ${statusText}`,
+                    hasVotedUp: false,
+                    hasVotedDown: false,
+                    voteChange: 0,
+                })
+            })
+
+        if (value > 0) {
+            this.setState((currentState) => {
+                return { voteChange: currentState.voteChange + value, hasVotedUp: true }
+            })
+        } else {
+            this.setState((currentState) => {
+                return { voteChange: currentState.voteChange + value, hasVotedDown: true }
+            })
+        }
     };
 
     render() {
         const { votes } = this.props;
-        const { hasVoted, voteChange, hasError, errorMessage } = this.state;
+        const { hasError, errorMessage, hasVotedUp, hasVotedDown, voteChange } = this.state;
 
         if (hasError) {
             return <ErrorMessage errorMessage={errorMessage} />
         } else {
             return (
                 <VotesContainer>
-                    <button onClick={() => { this.handleClick(1) }} disabled={hasVoted}>up</button>
+                    <button onClick={() => { this.handleClick(1) }} disabled={hasVotedUp}>up</button>
                     <p>{votes + voteChange}</p>
-                    <button onClick={() => { this.handleClick(-1) }} disabled={hasVoted}>down</button>
+                    <button onClick={() => { this.handleClick(-1) }} disabled={hasVotedDown}>down</button>
                 </VotesContainer>
             );
         }
