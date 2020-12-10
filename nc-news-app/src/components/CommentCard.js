@@ -9,7 +9,7 @@ const CommentCard = ({ commentData }) => {
         <li>
             <div>
                 <p>Posted by <Link to={`/users/${commentData.author}/articles`}>{commentData.author}</Link>, {moment(commentData.created_at).fromNow()}</p>
-                <Vote votes={commentData.votes} article_id={commentData.article_id} />
+                <Vote votes={commentData.votes} article_id={commentData.comment_id} />
             </div>
 
             <div>

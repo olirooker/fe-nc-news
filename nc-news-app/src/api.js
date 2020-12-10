@@ -45,10 +45,18 @@ export const getArticleComments = (article_id, order, sort_by) => {
         })
 };
 
-export const updateVote = (article_id, num) => {
+export const updateArticleVote = (article_id, num) => {
     return ncNewsApi.patch(`/articles/${article_id}`, { inc_votes: num })
         .then(({ data }) => {
             return data.article
+        })
+};
+
+export const updateCommentVote = (comment_id, num) => {
+    return ncNewsApi.patch(`/comments/${comment_id}`, { inc_votes: num })
+        .then(({ data }) => {
+            console.log(data)
+            return data.comment
         })
 };
 

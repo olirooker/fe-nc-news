@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { updateVote } from '../api';
+import { updateArticleVote, updateCommentVote } from '../api';
 import ErrorMessage from './ErrorMessage';
 import styled from 'styled-components';
 
@@ -13,36 +13,33 @@ const VotesContainer = styled.div`
 
 class Vote extends Component {
     state = {
-        hasVotedUp: false,
-        hasVotedDown: false,
+        upVote: false,
+        downVote: false,
         voteChange: 0,
         hasError: false,
         errorMessage: '',
     };
 
-    handleClick = (num) => {
-        const { article_id } = this.props;
-        updateVote(article_id, num).then((article) => {
-            if (num > 0) {
-                this.setState({ voteChange: num, hasVotedUp: true })
-            } else {
-                this.setState({ voteChange: num, hasVotedDown: true })
-            }
-        })
+    handleClick = (value) => {
+        const { article_id, comment_id } = this.props;
+
+
+
+        updateArticleVote(article_id, value)
     };
 
     render() {
         const { votes } = this.props;
-        const { hasVotedUp, hasVotedDown, voteChange, hasError, errorMessage } = this.state;
+        const { hasVoted, voteChange, hasError, errorMessage } = this.state;
 
         if (hasError) {
             return <ErrorMessage errorMessage={errorMessage} />
         } else {
             return (
                 <VotesContainer>
-                    <button onClick={() => { this.handleClick(1) }} disabled={hasVotedUp}>up</button>
+                    <button onClick={() => { this.handleClick(1) }} disabled={hasVoted}>up</button>
                     <p>{votes + voteChange}</p>
-                    <button onClick={() => { this.handleClick(-1) }} disabled={hasVotedDown}>down</button>
+                    <button onClick={() => { this.handleClick(-1) }} disabled={hasVoted}>down</button>
                 </VotesContainer>
             );
         }
