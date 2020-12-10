@@ -4,17 +4,17 @@ import { getTopics } from '../api';
 import styled from 'styled-components';
 
 const StyledHeader = styled.header`
-margin: 0 auto;
-padding: 35px 0;
-width: 100vw;
-min-width: inherit;
-display: grid;
-grid-template-rows: repeat(1fr);
-grid-template-areas: 'logo dropdown signin';
-align-items: center;
-justify-items: center;
-background-color: white;
-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+    margin: 0 auto;
+    padding: 35px 0;
+    width: 100vw;
+    min-width: inherit;
+    display: grid;
+    grid-template-rows: repeat(1fr);
+    grid-template-areas: 'logo dropdown signin';
+    align-items: center;
+    justify-items: center;
+    background-color: white;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
 `
 const StyledLogo = styled.div`
     border: 1px solid black;
@@ -60,12 +60,12 @@ class Header extends Component {
                 </StyledLogo>
                 <StyledNav>
                     <label>
-                        <select defaultValue="" onChange={(event) => { navigate(`/${event.target.value}/articles`) }}>
+                        <select defaultValue="" onChange={(event) => { navigate(event.target.value) }}>
                             <option key="topic-placeholder" disabled={true} value="">Select a topic</option>
-                            {/* <option key="all-topics" value="">all topics</option> */}
+                            <option key="all-topics" value="/">all topics</option>
                             {this.state.topics.map(topic => {
                                 return (
-                                    <option key={topic.slug}>{topic.slug}</option>
+                                    <option key={topic.slug} value={`/${topic.slug}/articles`}>{topic.slug}</option>
                                 )
                             })}
                         </select>
