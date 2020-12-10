@@ -10,17 +10,19 @@ margin: 1rem 0;
 background-color: white;
 `
 
-
 class ArticlesList extends Component {
     state = {
         articles: [],
         isLoading: true,
         hasError: false,
         errorMessage: '',
+        // sort_by: 'created_at',
+        // order: 'desc'
     };
 
     componentDidMount() {
-        const { topic, author, username } = this.props;
+        const { topic, username } = this.props;
+
         getArticles(topic, username).then((articles) => {
             this.setState({ articles, isLoading: false });
         })
@@ -38,7 +40,6 @@ class ArticlesList extends Component {
         const { topic, username } = this.props;
         const newTopic = prevProps.topic !== this.props.topic;
         const newUsername = prevProps.username !== this.props.username;
-        // const newUri = prevProps.uri !== this.props.uri
 
         if (newTopic || newUsername) {
             getArticles(topic, username).then((articles) => {
@@ -49,7 +50,7 @@ class ArticlesList extends Component {
 
     render() {
         const { articles, isLoading, hasError, errorMessage } = this.state;
-        const { topic, author, username } = this.props;
+        // const { topic, author, username } = this.props;
 
         if (isLoading) {
             return <Loading />

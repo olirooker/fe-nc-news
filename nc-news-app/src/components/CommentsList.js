@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { getArticleComments } from '../api';
+import { getArticleComments, postComment } from '../api';
+import CommentAdder from './CommentAdder';
 import CommentCard from './CommentCard';
 import Loading from './Loading';
 
@@ -17,13 +18,28 @@ class CommentsList extends Component {
         });
     };
 
+    addComment = (commentToAdd) => {
+        const { articleId } = this.props;
+
+        postComment(commentToAdd, articleId).then((newComment) => {
+            this.setState(currState => {
+                return {
+                    comments: [newComment, ...currState.comments],
+                };
+            });
+        });
+    };
+
     render() {
         const { comments, isLoading } = this.state;
-        const { articleId } = this.props;
+        // const { articleId } = this.props;
 
         return (
             <section>
                 <h4>Comments List</h4>
+                <section>
+                    <CommentAdder addComment={this.addComment} />
+                </section>
                 <p>Comment list - queries here - sort_by and order</p>
                 {isLoading ? (
                     <Loading />

@@ -61,10 +61,6 @@ class SingleArticle extends Component {
                     </section>
 
                     <section>
-                        <h3>Comment Adder Here</h3>
-                    </section>
-
-                    <section>
                         <CommentsList articleId={article_id} />
                     </section>
                 </main>

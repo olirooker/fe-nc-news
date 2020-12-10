@@ -59,7 +59,7 @@ const ArticleCard = ({ articleData }) => {
 
             <StyledInteractions>
                 <StyledVotes>
-                    <Vote votes={articleData.votes} />
+                    <Vote votes={articleData.votes} article_id={articleData.article_id} />
                 </StyledVotes>
                 <StyledComments>
                     <Link to={`/articles/${articleData.article_id}/comments`}><p>{articleData.comment_count}</p></Link>
