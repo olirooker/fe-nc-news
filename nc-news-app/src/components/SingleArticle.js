@@ -6,6 +6,16 @@ import CommentsList from './CommentsList';
 import Loading from './Loading';
 import ErrorMessage from './ErrorMessage';
 import Vote from './Vote';
+import styled from "styled-components";
+
+const SingleArticleContainer = styled.section`
+    margin: 1.5rem 0;
+    padding: 5px 10px;
+    background-color: white;
+    border: 1px solid lightgrey;
+    box-shadow: 3px 6px 8px #888888;
+    border-left: 5px solid green;
+`
 
 class SingleArticle extends Component {
     state = {
@@ -44,7 +54,7 @@ class SingleArticle extends Component {
         } else {
             return (
                 <main>
-                    <section>
+                    <SingleArticleContainer>
                         <div>
                             <p><Link to={`/${article.topic}/articles`}>{article.topic}</Link>. Posted by <Link to={`/users/${article.author}/articles`}>{article.author}</Link> {moment(article.created_at).fromNow()}</p>
                             <Vote votes={article.votes} article_id={article_id} />
@@ -58,7 +68,7 @@ class SingleArticle extends Component {
                         <div>
                             <Link to={`/articles/${article.article_id}/comments`}><p>{article.comment_count}</p></Link>
                         </div>
-                    </section>
+                    </SingleArticleContainer>
 
                     <section>
                         <CommentsList articleId={article_id} />

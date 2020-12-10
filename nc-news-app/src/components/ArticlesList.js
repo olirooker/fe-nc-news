@@ -4,6 +4,16 @@ import ArticleCard from './ArticleCard';
 import ErrorMessage from './ErrorMessage';
 import Loading from './Loading';
 import Query from './Query';
+import styled from 'styled-components';
+
+const StyledHeader = styled.h1`
+    margin: 1.5rem 0;
+    padding: 5px 10px;
+    background-color: white;
+    border: 1px solid lightgrey;
+    box-shadow: 3px 6px 8px #888888;
+    text-align: center;
+`
 
 class ArticlesList extends Component {
     state = {
@@ -56,7 +66,7 @@ class ArticlesList extends Component {
 
     render() {
         const { articles, isLoading, hasError, errorMessage } = this.state;
-        // const { topic, author, username } = this.props;
+        const { topic, username } = this.props;
 
         if (isLoading) {
             return <Loading />
@@ -65,7 +75,7 @@ class ArticlesList extends Component {
         } else {
             return (
                 <main>
-                    {/* <h1>{topic || author || username || 'Articles List'}</h1> */}
+                    <StyledHeader>{topic || username || 'Articles List'}</StyledHeader>
                     <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />
                     <ul>
                         {articles.map(article => {

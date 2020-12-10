@@ -60,7 +60,6 @@ class CommentsList extends Component {
 
         return (
             <section>
-                <h4>Comments List</h4>
                 <section>
                     <CommentAdder addComment={this.addComment} />
                 </section>
