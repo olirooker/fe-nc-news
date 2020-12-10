@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { updateArticleVote, updateCommentVote } from '../api';
+import { upVoteArticle, downVoteArticle } from '../api';
 import ErrorMessage from './ErrorMessage';
 import styled from 'styled-components';
 
@@ -17,37 +17,99 @@ class Vote extends Component {
         errorMessage: '',
         hasVotedUp: false,
         hasVotedDown: false,
+        hasVoted: false,
         voteChange: 0,
     };
 
-    handleClick = (value) => {
+    handleUpVoteClick = () => {
         const { article_id, comment_id } = this.props;
-        console.log(article_id, 'article id');
-        console.log(article_id, 'comment id');
-        console.log(value, 'value')
+        const { hasVotedUp } = this.state;
 
-        updateArticleVote(article_id, value)
-            .catch((err) => {
+        if (!hasVotedUp) {
+            upVoteArticle(article_id).catch((err) => {
                 const { response: { status, statusText } } = err;
                 this.setState({
-                    hasError: true,
-                    errorMessage: `Unable to vote ... ${status}. ${statusText}`,
-                    hasVotedUp: false,
-                    hasVotedDown: false,
-                    voteChange: 0,
+                    hasError: true, errorMessage: `Unable to vote ... ${status}. ${statusText}`, hasVotedUp: false, hasVotedDown: false, voteChange: 0,
                 })
             })
-
-        if (value > 0) {
             this.setState((currentState) => {
-                return { voteChange: currentState.voteChange + value, hasVotedUp: true }
+                return { voteChange: currentState.voteChange + 1, hasVotedUp: !currentState.hasVotedUp }
             })
         } else {
+            downVoteArticle(article_id).catch((err) => {
+                const { response: { status, statusText } } = err;
+                this.setState({
+                    hasError: true, errorMessage: `Unable to vote ... ${status}. ${statusText}`, hasVotedUp: false, hasVotedDown: false, voteChange: 0,
+                })
+            })
             this.setState((currentState) => {
-                return { voteChange: currentState.voteChange + value, hasVotedDown: true }
+                return { voteChange: currentState.voteChange - 1, hasVotedUp: !currentState.hasVotedUp }
             })
         }
     };
+
+    handleDownVoteClick = () => {
+        const { article_id, comment_id } = this.props;
+        const { hasVotedDown } = this.state;
+
+        if (!hasVotedDown) {
+            downVoteArticle(article_id).catch((err) => {
+                const { response: { status, statusText } } = err;
+                this.setState({
+                    hasError: true, errorMessage: `Unable to vote ... ${status}. ${statusText}`, hasVotedUp: false, hasVotedDown: false, voteChange: 0,
+                })
+            })
+            this.setState((currentState) => {
+                return { voteChange: currentState.voteChange - 1, hasVotedDown: !currentState.hasVotedDown }
+            })
+        } else {
+            upVoteArticle(article_id).catch((err) => {
+                const { response: { status, statusText } } = err;
+                this.setState({
+                    hasError: true, errorMessage: `Unable to vote ... ${status}. ${statusText}`, hasVotedUp: false, hasVotedDown: false, voteChange: 0,
+                })
+            })
+            this.setState((currentState) => {
+                return { voteChange: currentState.voteChange + 1, hasVotedDown: !currentState.hasVotedDown }
+            })
+        }
+    };
+
+
+
+    // this.setState((currentState) => {
+    //     return { hasVotedUp: !currentState.hasVotedUp }
+    // }, () => {
+    //     if (this.state.hasVotedUp === true) {
+    //         upVoteArticle(article_id)
+    //     } else {
+    //         downVoteArticle(article_id)
+    //     }
+    // })
+
+
+    // updateArticleVote(article_id, value)
+    //     .catch((err) => {
+    //         const { response: { status, statusText } } = err;
+    //         this.setState({
+    //             hasError: true,
+    //             errorMessage: `Unable to vote ... ${status}. ${statusText}`,
+    //             hasVotedUp: false,
+    //             hasVotedDown: false,
+    //             voteChange: 0,
+    //         })
+    //     })
+
+    // if (value > 0) {
+    //     this.setState((currentState) => {
+    //         return { voteChange: currentState.voteChange + value, hasVotedUp: true }
+    //     })
+    // } else {
+    //     this.setState((currentState) => {
+    //         return { voteChange: currentState.voteChange + value, hasVotedDown: true }
+    //     })
+    // }
+    // };
 
     render() {
         const { votes } = this.props;
@@ -58,9 +120,9 @@ class Vote extends Component {
         } else {
             return (
                 <VotesContainer>
-                    <button onClick={() => { this.handleClick(1) }} disabled={hasVotedUp}>up</button>
+                    <button onClick={this.handleUpVoteClick} disabled={hasVotedDown}>up</button>
                     <p>{votes + voteChange}</p>
-                    <button onClick={() => { this.handleClick(-1) }} disabled={hasVotedDown}>down</button>
+                    <button onClick={this.handleDownVoteClick} disabled={hasVotedUp}>down</button>
                 </VotesContainer>
             );
         }
