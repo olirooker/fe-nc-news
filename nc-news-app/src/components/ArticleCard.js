@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from '@reach/router';
 import moment from 'moment';
 import styled from 'styled-components';
+import Vote from './Vote';
 
 const StyledCard = styled.div`
     margin: 1.5rem 0;
@@ -58,7 +59,7 @@ const ArticleCard = ({ articleData }) => {
 
             <StyledInteractions>
                 <StyledVotes>
-                    <p>{articleData.votes}</p>
+                    <Vote votes={articleData.votes} />
                 </StyledVotes>
                 <StyledComments>
                     <Link to={`/articles/${articleData.article_id}/comments`}><p>{articleData.comment_count}</p></Link>

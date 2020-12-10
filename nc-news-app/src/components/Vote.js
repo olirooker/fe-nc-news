@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import { updateVote } from '../api';
 import ErrorMessage from './ErrorMessage';
+import styled from 'styled-components';
+
+const VotesContainer = styled.div`
+    display: grid;
+    grid-template-rows: repeat(1fr);
+    grid-template-areas: 'upvote num downvote';
+    align-items: center;
+    justify-items: center;
+`
 
 class Vote extends Component {
     state = {
@@ -30,11 +39,11 @@ class Vote extends Component {
             return <ErrorMessage errorMessage={errorMessage} />
         } else {
             return (
-                <div>
+                <VotesContainer>
                     <button onClick={() => { this.handleClick(1) }} disabled={hasVotedUp}>up</button>
                     <p>{votes + voteChange}</p>
                     <button onClick={() => { this.handleClick(-1) }} disabled={hasVotedDown}>down</button>
-                </div>
+                </VotesContainer>
             );
         }
     }
