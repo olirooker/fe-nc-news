@@ -61,8 +61,16 @@ export const downVoteArticle = (article_id) => {
     // })
 };
 
-export const updateCommentVote = (comment_id, value) => {
-    return ncNewsApi.patch(`/comments/${comment_id}`, { inc_votes: value })
+export const upVoteComment = (comment_id) => {
+    return ncNewsApi.patch(`/comments/${comment_id}`, { inc_votes: 1 })
+    // .then(({ data }) => {
+    //     // console.log(data)
+    //     return data.comment
+    // })
+};
+
+export const downVoteComment = (comment_id) => {
+    return ncNewsApi.patch(`/comments/${comment_id}`, { inc_votes: -1 })
     // .then(({ data }) => {
     //     // console.log(data)
     //     return data.comment
