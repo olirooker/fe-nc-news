@@ -3,11 +3,14 @@ import { getArticleComments, postComment } from '../api';
 import CommentAdder from './CommentAdder';
 import CommentCard from './CommentCard';
 import Loading from './Loading';
+import Query from './Query';
 
 class CommentsList extends Component {
     state = {
         comments: [],
         isLoading: true,
+        order: 'desc',
+        sort_by: 'created_at',
     }
 
     componentDidMount() {
@@ -16,6 +19,19 @@ class CommentsList extends Component {
         getArticleComments(articleId).then((comments) => {
             this.setState({ comments, isLoading: false })
         });
+    };
+
+    componentDidUpdate(currState) {
+        const { articleId } = this.props;
+        const { order, sort_by } = this.state;
+        const newOrder = currState.order !== this.state.order;
+        const newSort = currState.sort_by !== this.state.sort_by;
+
+        if (newOrder || newSort) {
+            getArticleComments(articleId, order, sort_by).then((comments) => {
+                this.setState({ comments });
+            });
+        }
     };
 
     addComment = (commentToAdd) => {
@@ -30,6 +46,14 @@ class CommentsList extends Component {
         });
     };
 
+    changeOrder = (newOrder) => {
+        this.setState({ order: newOrder });
+    };
+
+    changeSort = (newSort) => {
+        this.setState({ sort_by: newSort });
+    };
+
     render() {
         const { comments, isLoading } = this.state;
         // const { articleId } = this.props;
@@ -40,7 +64,7 @@ class CommentsList extends Component {
                 <section>
                     <CommentAdder addComment={this.addComment} />
                 </section>
-                <p>Comment list - queries here - sort_by and order</p>
+                <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />
                 {isLoading ? (
                     <Loading />
                 ) : (

@@ -62,6 +62,7 @@ class Header extends Component {
                     <label>
                         <select defaultValue="" onChange={(event) => { navigate(`/${event.target.value}/articles`) }}>
                             <option key="topic-placeholder" disabled={true} value="">Select a topic</option>
+                            {/* <option key="all-topics" value="">all topics</option> */}
                             {this.state.topics.map(topic => {
                                 return (
                                     <option key={topic.slug}>{topic.slug}</option>

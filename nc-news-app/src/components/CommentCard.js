@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from '@reach/router';
 import moment from 'moment';
+import Vote from './Vote';
 
 const CommentCard = ({ commentData }) => {
     return (
@@ -8,7 +9,7 @@ const CommentCard = ({ commentData }) => {
         <li>
             <div>
                 <p>Posted by <Link to={`/users/${commentData.author}/articles`}>{commentData.author}</Link>, {moment(commentData.created_at).fromNow()}</p>
-                <p>{commentData.votes}</p>
+                <Vote votes={commentData.votes} article_id={commentData.article_id} />
             </div>
 
             <div>

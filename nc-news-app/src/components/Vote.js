@@ -18,7 +18,7 @@ class Vote extends Component {
         voteChange: 0,
         hasError: false,
         errorMessage: '',
-    }
+    };
 
     handleClick = (num) => {
         const { article_id } = this.props;

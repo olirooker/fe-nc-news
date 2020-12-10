@@ -11,13 +11,13 @@ export const getTopics = () => {
         })
 };
 
-export const getArticles = (topic, username, sort_by, order) => {
+export const getArticles = (topic, username, order, sort_by) => {
     return ncNewsApi.get('/articles', {
         params: {
             topic: topic,
             author: username,
-            sort_by,
             order,
+            sort_by,
         }
     })
         .then(({ data }) => {
@@ -32,8 +32,13 @@ export const getSingleArticle = (article_id) => {
         })
 };
 
-export const getArticleComments = (article_id) => {
-    return ncNewsApi.get(`/articles/${article_id}/comments`)
+export const getArticleComments = (article_id, order, sort_by) => {
+    return ncNewsApi.get(`/articles/${article_id}/comments`, {
+        params: {
+            order,
+            sort_by,
+        }
+    })
         .then(({ data }) => {
             // console.log(data.comments)
             return data.comments

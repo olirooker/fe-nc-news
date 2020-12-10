@@ -3,12 +3,7 @@ import { getArticles } from '../api';
 import ArticleCard from './ArticleCard';
 import ErrorMessage from './ErrorMessage';
 import Loading from './Loading';
-import styled from 'styled-components';
-
-const FilterQueries = styled.div`
-margin: 1rem 0;
-background-color: white;
-`
+import Query from './Query';
 
 class ArticlesList extends Component {
     state = {
@@ -16,8 +11,8 @@ class ArticlesList extends Component {
         isLoading: true,
         hasError: false,
         errorMessage: '',
-        // sort_by: 'created_at',
-        // order: 'desc'
+        order: 'desc',
+        sort_by: 'created_at',
     };
 
     componentDidMount() {
@@ -36,16 +31,27 @@ class ArticlesList extends Component {
             })
     };
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, currState) {
         const { topic, username } = this.props;
+        const { order, sort_by } = this.state;
         const newTopic = prevProps.topic !== this.props.topic;
         const newUsername = prevProps.username !== this.props.username;
+        const newOrder = currState.order !== this.state.order;
+        const newSort = currState.sort_by !== this.state.sort_by;
 
-        if (newTopic || newUsername) {
-            getArticles(topic, username).then((articles) => {
+        if (newTopic || newUsername || newOrder || newSort) {
+            getArticles(topic, username, order, sort_by).then((articles) => {
                 this.setState({ articles });
             });
         }
+    };
+
+    changeOrder = (newOrder) => {
+        this.setState({ order: newOrder });
+    };
+
+    changeSort = (newSort) => {
+        this.setState({ sort_by: newSort });
     };
 
     render() {
@@ -60,9 +66,7 @@ class ArticlesList extends Component {
             return (
                 <main>
                     {/* <h1>{topic || author || username || 'Articles List'}</h1> */}
-                    <FilterQueries>
-                        <p>Articles List - Filter section here (votes, date, etc)</p>
-                    </FilterQueries>
+                    <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />
                     <ul>
                         {articles.map(article => {
                             return (

@@ -1,31 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 
-class Query extends Component {
-    state = {
-        sort_by: 'created_at',
-        order: 'desc',
-    }
+const StyledQueries = styled.div`
+margin: 1rem 0;
+background-color: white;
+`
 
-    handleChange = () => {
-
+const Query = ({ changeOrder, changeSort }) => {
+    const handleOrderChange = (event) => {
+        const newOrder = event.target.value;
+        changeOrder(newOrder);
     };
 
+    const handleSortChange = (event) => {
+        const newSort = event.target.value;
+        changeSort(newSort);
+    };
 
-    render() {
-        return (
-            <section>
-                <select onChange={this.handleChange}>
-                    <option value="asc"></option>
-                    <option value="desc"></option>
-                </select>
+    return (
+        <StyledQueries>
+            <select defaultValue="" onChange={handleOrderChange}>
+                <option key="order-placeholder" disabled={true} value="">Order by:</option>
+                <option value="asc">asc</option>
+                <option value="desc">desc</option>
+            </select>
 
-                <select onChange={this.handleChange}>
-                    <option value=""></option>
-                    <option value=""></option>
-                </select>
-            </section>
-        );
-    }
+            <select defaultValue="" onChange={handleSortChange}>
+                <option key="sort-placeholder" disabled={true} value="">Sort by:</option>
+                <option value="votes">Votes</option>
+                <option value="created_at">Time</option>
+            </select>
+        </StyledQueries>
+    );
 }
 
 export default Query;
