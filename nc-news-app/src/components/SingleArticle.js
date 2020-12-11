@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { getSingleArticle } from '../api';
-import { Link } from '@reach/router';
+import { deleteArticle, getSingleArticle } from '../api';
+import { Link, navigate } from '@reach/router';
 import moment from 'moment';
 import CommentsList from './CommentsList';
 import Loading from './Loading';
@@ -23,6 +23,7 @@ class SingleArticle extends Component {
         isLoading: true,
         hasError: false,
         errorMessage: '',
+        username: 'jessjelly',
     };
 
     componentDidMount() {
@@ -43,8 +44,40 @@ class SingleArticle extends Component {
             })
     };
 
+    componentDidUpdate(currentState) {
+        const { articleId } = this.props;
+        const { username } = this.state;
+        const newArticle = currentState.article !== this.state.article;
+
+
+        if (newArticle) {
+            // navigate(`/users/${username}/articles`)
+        }
+    };
+
+    handleClick = (event) => {
+        const { article_id } = this.state.article;
+        const { username } = this.state;
+        const { removeArticle } = this.props;
+        // console.log(article_id);
+
+        event.preventDefault();
+        deleteArticle(article_id).then((article) => {
+            this.setState({ article: {}, })
+            navigate(`/users/${username}/articles`)
+        })
+            .catch((err) => {
+                const { response: { status, statusText } } = err;
+                console.dir(err);
+                this.setState({
+                    hasError: true,
+                    errorMessage: `Unable to delete article ... ${status}. ${statusText}`,
+                })
+            })
+    };
+
     render() {
-        const { article, isLoading, hasError, errorMessage } = this.state;
+        const { article, isLoading, hasError, errorMessage, username } = this.state;
         const { article_id } = this.props;
 
         if (isLoading) {
@@ -67,6 +100,9 @@ class SingleArticle extends Component {
 
                         <div>
                             <Link to={`/articles/${article.article_id}/comments`}><p>{article.comment_count}</p></Link>
+                        </div>
+                        <div>
+                            {article.author === username ? <button onClick={this.handleClick}>Delete Article</button> : <p hidden>cannot delete</p>}
                         </div>
                     </SingleArticleContainer>
 

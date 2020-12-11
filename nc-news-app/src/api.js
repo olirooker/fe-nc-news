@@ -90,3 +90,11 @@ export const postArticle = (newArticle) => {
             return data.article
         })
 };
+
+export const deleteComment = (comment_id) => {
+    return ncNewsApi.delete(`/comments/${comment_id}`)
+};
+
+export const deleteArticle = (article_id) => {
+    return ncNewsApi.delete(`/article/${article_id}`)
+};
