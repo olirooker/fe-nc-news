@@ -83,3 +83,10 @@ export const postComment = (newComment, article_id) => {
             return data.comment
         })
 };
+
+export const postArticle = (newArticle) => {
+    return ncNewsApi.post(`/articles`, newArticle)
+        .then(({ data }) => {
+            console.log(data)
+        })
+};

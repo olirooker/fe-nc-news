@@ -20,8 +20,10 @@ max-width: 800px;
 
 class App extends Component {
   state = {
-    user: {},
-    isLoggedIn: false,
+    user: {
+      username: 'jessjelly',
+    },
+    isLoggedIn: true,
   };
 
   // Maybe doesn't make a request for user info until user clicks sign-in

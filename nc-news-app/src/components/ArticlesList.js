@@ -5,6 +5,7 @@ import ErrorMessage from './ErrorMessage';
 import Loading from './Loading';
 import Query from './Query';
 import styled from 'styled-components';
+import ArticleAdder from './ArticleAdder';
 
 const StyledHeader = styled.h1`
     margin: 1.5rem 0;
@@ -64,6 +65,10 @@ class ArticlesList extends Component {
         this.setState({ sort_by: newSort });
     };
 
+    addArticle = () => {
+
+    };
+
     render() {
         const { articles, isLoading, hasError, errorMessage } = this.state;
         const { topic, username } = this.props;
@@ -76,6 +81,7 @@ class ArticlesList extends Component {
             return (
                 <main>
                     <StyledHeader>{topic || username || 'Articles List'}</StyledHeader>
+                    <ArticleAdder addArticle={this.addArticle} />
                     <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />
                     <ul>
                         {articles.map(article => {
@@ -88,6 +94,6 @@ class ArticlesList extends Component {
             );
         }
     }
-}
+};
 
 export default ArticlesList;
