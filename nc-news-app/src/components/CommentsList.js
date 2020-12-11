@@ -14,30 +14,32 @@ class CommentsList extends Component {
     }
 
     componentDidMount() {
-        const { articleId } = this.props;
+        const { article_id } = this.props;
 
-        getArticleComments(articleId).then((comments) => {
+        getArticleComments(article_id).then((comments) => {
             this.setState({ comments, isLoading: false })
         });
     };
 
-    componentDidUpdate(currentState) {
-        const { articleId } = this.props;
+    componentDidUpdate(prevProps, prevState) {
+        const { article_id } = this.props;
         const { order, sort_by } = this.state;
-        const newOrder = currentState.order !== this.state.order;
-        const newSort = currentState.sort_by !== this.state.sort_by;
+        const newOrder = prevState.order !== this.state.order;
+        const newSort = prevState.sort_by !== this.state.sort_by;
+
+        console.log('hello')
 
         if (newOrder || newSort) {
-            getArticleComments(articleId, order, sort_by).then((comments) => {
+            getArticleComments(article_id, order, sort_by).then((comments) => {
                 this.setState({ comments });
             });
         }
     };
 
     addComment = (commentToAdd) => {
-        const { articleId } = this.props;
+        const { article_id } = this.props;
 
-        postComment(commentToAdd, articleId).then((newComment) => {
+        postComment(commentToAdd, article_id).then((newComment) => {
             this.setState(currentState => {
                 return {
                     comments: [newComment, ...currentState.comments],
@@ -60,7 +62,7 @@ class CommentsList extends Component {
 
     render() {
         const { comments, isLoading } = this.state;
-        // const { articleId } = this.props;
+        // const { article_id } = this.props;
 
         return (
             <section>

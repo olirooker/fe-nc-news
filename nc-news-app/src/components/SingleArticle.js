@@ -44,26 +44,26 @@ class SingleArticle extends Component {
             })
     };
 
-    componentDidUpdate(currentState) {
-        const { articleId } = this.props;
+    componentDidUpdate(prevProps, prevState) {
+        const { article_id } = this.props;
         const { username } = this.state;
-        const newArticle = currentState.article !== this.state.article;
+        // const newArticle = prevProps.article !== this.props.article;
 
+        console.log('hello')
 
-        if (newArticle) {
-            // navigate(`/users/${username}/articles`)
-        }
+        // if (newArticle) {
+        //     // navigate(`/users/${username}/articles`)
+        // }
     };
 
     handleClick = (event) => {
         const { article_id } = this.state.article;
         const { username } = this.state;
         const { removeArticle } = this.props;
-        // console.log(article_id);
+        console.log(article_id);
 
-        event.preventDefault();
         deleteArticle(article_id).then((article) => {
-            this.setState({ article: {}, })
+            // this.setState({ article: {}, }) setState isDeleted true
             navigate(`/users/${username}/articles`)
         })
             .catch((err) => {
@@ -79,6 +79,8 @@ class SingleArticle extends Component {
     render() {
         const { article, isLoading, hasError, errorMessage, username } = this.state;
         const { article_id } = this.props;
+
+        // if isDeleted true load delete message with options to Link to other places.
 
         if (isLoading) {
             return <Loading />
@@ -107,7 +109,7 @@ class SingleArticle extends Component {
                     </SingleArticleContainer>
 
                     <section>
-                        <CommentsList articleId={article_id} />
+                        <CommentsList article_id={article_id} />
                     </section>
                 </main>
 

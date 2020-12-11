@@ -27,7 +27,6 @@ class CommentCard extends Component {
         // const { removeComment } = this.props;
 
         console.log(comment_id)
-        event.preventDefault();
         deleteComment(comment_id).then((comment) => {
             // removeComment(comment_id)
         })
