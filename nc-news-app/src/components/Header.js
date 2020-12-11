@@ -15,23 +15,22 @@ const StyledHeader = styled.header`
     justify-items: center;
     background-color: white;
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
 `
 const StyledLogo = styled.div`
-    border: 1px solid black;
     margin: 0 auto;
     padding: 0;
     grid-area: logo;
 `
 
 const StyledNav = styled.div`
-    border: 1px solid black;
     margin: 0 auto;
     padding: 0;
     grid-area: dropdown;
 `
 
 const StyledSignIn = styled.div`
-    border: 1px solid black;
     margin: 0 auto;
     padding: 0;
     grid-area: signin;

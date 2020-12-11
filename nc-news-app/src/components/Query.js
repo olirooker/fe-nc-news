@@ -2,8 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledQueries = styled.div`
-margin: 1rem 0;
-background-color: white;
+    margin: 1.5rem 0;
+    padding: 5px 10px;
+    background-color: white;
+    border: 1px solid lightgrey;
+    box-shadow: 3px 6px 8px #888888;
+    border-left: 5px solid yellowgreen;
 `
 
 const Query = ({ changeOrder, changeSort }) => {

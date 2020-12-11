@@ -16,6 +16,7 @@ const StyledContainer = styled.div`
 margin: 0 auto;
 min-width: 400px;
 max-width: 800px;
+margin-top: 105px;
 `
 
 class App extends Component {
