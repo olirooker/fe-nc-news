@@ -82,7 +82,7 @@ class SingleArticle extends Component {
                             <div>
                                 <p>This article has been deleted! Go to:</p>
                                 <Link to={`/users/${username}/articles`}>My articles</Link>
-                                <Link to="/articles">All topics</Link>
+                                <Link to="/">All topics</Link>
                             </div>
                         ) : (
                                 <div>

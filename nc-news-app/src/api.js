@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const ncNewsApi = axios.create({
-    baseURL: 'https://ncoders-news-api.herokuapp.com/api',
+    // baseURL: 'https://ncoders-news-api.herokuapp.com/api',
+    baseURL: 'https://olis-nc-news-api.herokuapp.com/api',
 });
 
 export const getTopics = () => {
@@ -21,6 +22,7 @@ export const getArticles = (topic, username, order, sort_by) => {
         }
     })
         .then(({ data }) => {
+            console.log(data)
             return data.articles
         })
 };
