@@ -88,7 +88,7 @@ class ArticlesList extends Component {
                     <ul>
                         {articles.map(article => {
                             return (
-                                <ArticleCard articleData={article} key={article.article_id} />
+                                <ArticleCard article={article} key={article.article_id} />
                             )
                         })}
                     </ul>

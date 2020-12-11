@@ -43,26 +43,24 @@ const StyledComments = styled.div`
     grid-area: comments;
 `
 
-const ArticleCard = ({ articleData }) => {
-    // console.log(moment(articleData.created_at).fromNow())
-    // console.log(articleData.body)
+const ArticleCard = ({ article }) => {
     return (
         <StyledCard>
             <div>
-                <Text><Link to={`/${articleData.topic}/articles`}>{articleData.topic}</Link>. Posted by <Link to={`/users/${articleData.author}/articles`}>{articleData.author}</Link>, {moment(articleData.created_at).fromNow()}</Text>
+                <Text><Link to={`/${article.topic}/articles`}>{article.topic}</Link>. Posted by <Link to={`/users/${article.author}/articles`}>{article.author}</Link>, {moment(article.created_at).fromNow()}</Text>
             </div>
 
             <div>
-                <Link to={`/articles/${articleData.article_id}`} style={{ textDecoration: 'none' }}><Title>{articleData.title}</Title></Link>
-                <Link to={`/articles/${articleData.article_id}`}><p>{articleData.body}</p></Link>
+                <Link to={`/articles/${article.article_id}`} style={{ textDecoration: 'none' }}><Title>{article.title}</Title></Link>
+                <Link to={`/articles/${article.article_id}`}><p>{article.body}</p></Link>
             </div>
 
             <StyledInteractions>
                 <StyledVotes>
-                    <Vote votes={articleData.votes} article_id={articleData.article_id} />
+                    <Vote votes={article.votes} article_id={article.article_id} />
                 </StyledVotes>
                 <StyledComments>
-                    <Link to={`/articles/${articleData.article_id}/comments`}><p>{articleData.comment_count}</p></Link>
+                    <Link to={`/articles/${article.article_id}/comments`}><p>{article.comment_count}</p></Link>
                 </StyledComments>
             </StyledInteractions>
         </StyledCard >
