@@ -42,13 +42,13 @@ class ArticlesList extends Component {
             })
     };
 
-    componentDidUpdate(prevProps, currState) {
+    componentDidUpdate(prevProps, currentState) {
         const { topic, username } = this.props;
         const { order, sort_by } = this.state;
         const newTopic = prevProps.topic !== this.props.topic;
         const newUsername = prevProps.username !== this.props.username;
-        const newOrder = currState.order !== this.state.order;
-        const newSort = currState.sort_by !== this.state.sort_by;
+        const newOrder = currentState.order !== this.state.order;
+        const newSort = currentState.sort_by !== this.state.sort_by;
 
         if (newTopic || newUsername || newOrder || newSort) {
             getArticles(topic, username, order, sort_by).then((articles) => {
