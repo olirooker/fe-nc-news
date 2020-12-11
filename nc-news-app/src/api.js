@@ -40,41 +40,24 @@ export const getArticleComments = (article_id, order, sort_by) => {
         }
     })
         .then(({ data }) => {
-            // console.log(data.comments)
             return data.comments
         })
 };
 
 export const upVoteArticle = (article_id) => {
     return ncNewsApi.patch(`/articles/${article_id}`, { inc_votes: 1 })
-    // .then(({ data }) => {
-    //     // console.log(data)
-    //     return data.article
-    // })
 };
 
 export const downVoteArticle = (article_id) => {
     return ncNewsApi.patch(`/articles/${article_id}`, { inc_votes: -1 })
-    // .then(({ data }) => {
-    //     // console.log(data)
-    //     return data.article
-    // })
 };
 
 export const upVoteComment = (comment_id) => {
     return ncNewsApi.patch(`/comments/${comment_id}`, { inc_votes: 1 })
-    // .then(({ data }) => {
-    //     // console.log(data)
-    //     return data.comment
-    // })
 };
 
 export const downVoteComment = (comment_id) => {
     return ncNewsApi.patch(`/comments/${comment_id}`, { inc_votes: -1 })
-    // .then(({ data }) => {
-    //     // console.log(data)
-    //     return data.comment
-    // })
 };
 
 export const postComment = (newComment, article_id) => {
@@ -97,7 +80,4 @@ export const deleteComment = (comment_id) => {
 
 export const deleteArticle = (article_id) => {
     return ncNewsApi.delete(`/articles/${article_id}`)
-    // .then(({ data }) => {
-    //     console.log(data.article)
-    // })
 };
