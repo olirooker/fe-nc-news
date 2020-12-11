@@ -71,7 +71,7 @@ class Header extends Component {
                     </label>
                 </StyledNav>
                 <StyledSignIn>
-                    {userInfo.isLoggedIn ? <p>Hello, <Link to="/">{userInfo.user.username}</Link></p> : <Link to="/"><p>Sign-in</p></Link>}
+                    {userInfo.isLoggedIn ? <p>Hello, <Link to={`/users/${userInfo.user.username}/articles`}>{userInfo.user.username}</Link></p> : <Link to="/"><p>Sign-in</p></Link>}
                 </StyledSignIn>
             </StyledHeader>
         );
