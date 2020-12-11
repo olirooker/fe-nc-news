@@ -27,7 +27,7 @@ class CommentsList extends Component {
         const newOrder = prevState.order !== this.state.order;
         const newSort = prevState.sort_by !== this.state.sort_by;
 
-        console.log('hello')
+        console.log('hello', 'cDU in Comments List')
 
         if (newOrder || newSort) {
             getArticleComments(article_id, order, sort_by).then((comments) => {
@@ -57,7 +57,15 @@ class CommentsList extends Component {
     };
 
     removeComment = (comment_id) => {
-
+        this.setState(previousState => {
+            const newComments = previousState.comments.filter(comment => {
+                return comment.comment_id !== comment_id;
+            })
+            const newState = {
+                comments: newComments,
+            };
+            return newState;
+        })
     };
 
     render() {

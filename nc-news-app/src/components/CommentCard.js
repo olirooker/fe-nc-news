@@ -24,11 +24,11 @@ class CommentCard extends Component {
 
     handleClick = (event) => {
         const { comment_id } = this.props.commentData;
-        // const { removeComment } = this.props;
+        const { removeComment } = this.props;
 
         console.log(comment_id)
         deleteComment(comment_id).then((comment) => {
-            // removeComment(comment_id)
+            removeComment(comment_id)
         })
             .catch((err) => {
                 const { response: { status, statusText } } = err;
