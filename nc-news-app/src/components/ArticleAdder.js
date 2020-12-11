@@ -24,10 +24,14 @@ class ArticleAdder extends Component {
         this.setState({ [name]: value });
     };
 
-    // handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     postArticle()
-    // };
+    handleSubmit = (event) => {
+        const { addArticle } = this.props
+        event.preventDefault();
+        postArticle(this.state).then((article) => {
+            addArticle(article);
+            this.setState({ body: '', title: '', topic: '', });
+        });
+    };
 
     render() {
         return (

@@ -65,8 +65,10 @@ class ArticlesList extends Component {
         this.setState({ sort_by: newSort });
     };
 
-    addArticle = () => {
-
+    addArticle = (newArticle) => {
+        this.setState((currentState) => {
+            return { articles: [newArticle, ...currentState.articles] }
+        })
     };
 
     render() {
