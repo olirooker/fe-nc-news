@@ -16,7 +16,7 @@ export const getArticles = (topic, username, order, sort_by) => {
     return ncNewsApi.get('/articles', {
         params: {
             topic: topic,
-            author: username,
+            username: username,
             order,
             sort_by,
         }
