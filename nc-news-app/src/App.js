@@ -37,7 +37,7 @@ class App extends Component {
   render() {
     return (
       <AppContainer>
-        <Header userInfo={this.state} />
+        <Header userInfo={this.state.user} />
         <StyledContainer>
           <Router>
             <ArticlesList path="/" />

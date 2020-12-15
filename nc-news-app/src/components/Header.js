@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const StyledHeader = styled.header`
     margin: 0 auto;
-    padding: 35px 0;
+    padding: 25px 0;
     width: 100vw;
     min-width: inherit;
     display: grid;
@@ -23,17 +23,26 @@ const StyledLogo = styled.div`
     padding: 0;
     grid-area: logo;
 `
-
 const StyledNav = styled.div`
     margin: 0 auto;
     padding: 0;
     grid-area: dropdown;
 `
-
 const StyledSignIn = styled.div`
     margin: 0 auto;
     padding: 0;
     grid-area: signin;
+`
+const StyledUserContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`
+const StyledAvatar = styled.img`
+    height: 4rem;
+    width: auto;
+    border-radius: 50%;
+    margin-left: 10px;
 `
 
 class Header extends Component {
@@ -50,7 +59,7 @@ class Header extends Component {
     // sign in and create account components go here?
 
     render() {
-        const { userInfo } = this.props
+        const { username, name, avatar_url } = this.props.userInfo
 
         return (
             <StyledHeader>
@@ -71,7 +80,14 @@ class Header extends Component {
                     </label>
                 </StyledNav>
                 <StyledSignIn>
-                    {userInfo.isLoggedIn ? <p>Hello, <Link to={`/users/${userInfo.user.username}/articles`}>{userInfo.user.username}</Link></p> : <Link to="/"><p>Sign-in</p></Link>}
+                    {username ? (
+                        <StyledUserContainer>
+                            <p>Hello, <Link to={`/users/${username}/articles`}>{username}</Link></p>
+                            <StyledAvatar src={avatar_url} alt="Your profile avatar" />
+                        </StyledUserContainer>
+                    ) : (
+                            <Link to="/"><p>Sign-in</p></Link>
+                        )}
                 </StyledSignIn>
             </StyledHeader>
         );
