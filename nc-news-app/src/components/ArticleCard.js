@@ -41,6 +41,12 @@ const StyledComments = styled.div`
     margin: 0 auto;
     padding: 0;
     grid-area: comments;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`
+const CommentIcon = styled.i`
+    margin-left: 10px;
 `
 
 const ArticleCard = ({ article }) => {
@@ -60,7 +66,7 @@ const ArticleCard = ({ article }) => {
                     <Vote votes={article.votes} article_id={article.article_id} />
                 </StyledVotes>
                 <StyledComments>
-                    <Link to={`/articles/${article.article_id}/comments`}><p>{article.comment_count}</p></Link>
+                    <Link to={`/articles/${article.article_id}/comments`}><p>{article.comment_count}</p></Link><CommentIcon className="fa fa-comment"></CommentIcon>
                 </StyledComments>
             </StyledInteractions>
         </StyledCard >
