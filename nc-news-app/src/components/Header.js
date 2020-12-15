@@ -22,6 +22,7 @@ const StyledLogo = styled.div`
     margin: 0 auto;
     padding: 0;
     grid-area: logo;
+    font-size: 3rem;
 `
 const StyledNav = styled.div`
     margin: 0 auto;
@@ -60,6 +61,7 @@ class Header extends Component {
 
     render() {
         const { username, name, avatar_url } = this.props.userInfo
+        const { signOut } = this.props;
 
         return (
             <StyledHeader>
@@ -84,9 +86,14 @@ class Header extends Component {
                         <StyledUserContainer>
                             <p>Hello, <Link to={`/users/${username}/articles`}>{username}</Link></p>
                             <StyledAvatar src={avatar_url} alt="Your profile avatar" />
+                            <button onClick={signOut}>Sign Out</button>
                         </StyledUserContainer>
                     ) : (
-                            <Link to="/"><p>Sign-in</p></Link>
+                            <div>
+                                <button onClick={(event) => { navigate('/signin') }}>Sign In</button>
+                                <button>Create Account</button>
+                                {/* <Link to="/signin"><p>Sign-in</p></Link> */}
+                            </div>
                         )}
                 </StyledSignIn>
             </StyledHeader>

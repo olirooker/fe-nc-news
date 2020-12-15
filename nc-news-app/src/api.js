@@ -83,3 +83,11 @@ export const deleteComment = (comment_id) => {
 export const deleteArticle = (article_id) => {
     return ncNewsApi.delete(`/articles/${article_id}`)
 };
+
+export const getUser = (username) => {
+    return ncNewsApi.get(`/users/${username}`)
+        .then(({ data }) => {
+            // console.log(data)
+            return data.user
+        })
+}
