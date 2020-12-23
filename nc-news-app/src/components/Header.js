@@ -57,8 +57,6 @@ class Header extends Component {
         });
     };
 
-    // sign in and create account components go here?
-
     render() {
         const { username, name, avatar_url } = this.props.userInfo
         const { signOut } = this.props;
