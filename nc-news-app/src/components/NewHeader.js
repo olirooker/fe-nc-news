@@ -86,12 +86,7 @@ const NavUserSignedIn = styled.button`
     outline: none;
   }
 `;
-const MenuOpen = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-const MenuClosed = styled.div`
+const UserMenu = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -103,6 +98,27 @@ const UserAvatar = styled.img`
 `;
 const UserWelcome = styled.p`
   margin: 10px;
+`;
+const DropDownContainer = styled.div`
+  /* left: -100px;
+  top: -100px; */
+`;
+const DropDownList = styled.ul`
+  padding: 1rem;
+  margin: 0;
+  background: #ffffff;
+  border: 2px solid #e5e5e5;
+  box-sizing: border-box;
+  color: #3faffa;
+  font-size: 1.3rem;
+  font-weight: 500;
+  &:first-child {
+    padding-top: 0.8rem;
+  }
+`;
+const ListItem = styled.li`
+  list-style: none;
+  padding: 0.8rem 0;
 `;
 
 class NewHeader extends Component {
@@ -156,19 +172,24 @@ class NewHeader extends Component {
           </TopicsDropDown>
           {username ? (
             <NavUserSignedIn type="button" onClick={this.handleUserMenu}>
-              {isOpen ? (
-                <MenuOpen>
-                  <UserAvatar src={avatar_url} alt="Your profile avatar" />
-                  <UserWelcome>Hello, {username}</UserWelcome>
+              <UserMenu>
+                <UserAvatar src={avatar_url} alt="Your profile avatar" />
+                <UserWelcome>Hello, {username}</UserWelcome>
+                {isOpen ? (
                   <i className="fa fa-chevron-up"></i>
-                </MenuOpen>
-              ) : (
-                <MenuClosed>
-                  <UserAvatar src={avatar_url} alt="Your profile avatar" />
-                  <UserWelcome>Hello, {username}</UserWelcome>
+                ) : (
                   <i className="fa fa-chevron-down"></i>
-                </MenuClosed>
-              )}{" "}
+                )}
+              </UserMenu>
+
+              {isOpen && (
+                <DropDownContainer>
+                  <DropDownList>
+                    <ListItem>My Articles</ListItem>
+                    <ListItem>Sign Out</ListItem>
+                  </DropDownList>
+                </DropDownContainer>
+              )}
             </NavUserSignedIn>
           ) : (
             <NavUserSignedOut>
