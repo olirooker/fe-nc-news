@@ -9,6 +9,7 @@ import ErrorMessage from "./components/ErrorMessage";
 import SignIn from "./components/SignIn";
 import styled from "styled-components";
 import { getUser } from "./api";
+import NewHeader from "./components/NewHeader";
 
 const AppContainer = styled.div`
   margin: 0 auto;
@@ -18,7 +19,7 @@ const StyledContainer = styled.div`
   margin: 0 auto;
   min-width: 400px;
   max-width: 800px;
-  margin-top: 105px;
+  /* margin-top: 105px; */
 `;
 class App extends Component {
   state = {
@@ -42,7 +43,7 @@ class App extends Component {
   render() {
     return (
       <AppContainer>
-        <Header userInfo={this.state.user} signOut={this.signOut} />
+        <NewHeader user={this.state.user} signOut={this.signOut} />
         <StyledContainer>
           <Router>
             <ArticlesList path="/" />

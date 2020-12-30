@@ -69,7 +69,7 @@ class Header extends Component {
   }
 
   render() {
-    const { username, name, avatar_url } = this.props.userInfo;
+    const { username, name, avatar_url } = this.props.user;
     const { signOut } = this.props;
 
     return (
