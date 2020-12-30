@@ -8,9 +8,14 @@ const Nav = styled.nav`
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
   height: 80px;
   display: flex;
-  justify-content: space-between;
-  padding: 0.5rem calc((100vw - 1000px) / 2);
+  align-content: center;
+  padding: 0.5rem 3rem;
   z-index: 1;
+`;
+const NavContainer = styled.div`
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
 `;
 const NavLink = styled(Link)`
   color: #333;
@@ -76,10 +81,12 @@ const CreateAccountBtn = styled(Link)`
   }
 `;
 const NavUserSignedIn = styled.button`
-  display: flex;
+  position: relative;
+  display: inline-block;
   align-items: center;
   background: none;
   border: none;
+  font-size: 1.6rem;
   cursor: pointer;
 
   &:focus {
@@ -99,26 +106,39 @@ const UserAvatar = styled.img`
 const UserWelcome = styled.p`
   margin: 10px;
 `;
-const DropDownContainer = styled.div`
-  /* left: -100px;
-  top: -100px; */
-`;
 const DropDownList = styled.ul`
-  padding: 1rem;
-  margin: 0;
+  position: absolute;
+  width: 100%;
   background: #ffffff;
-  border: 2px solid #e5e5e5;
+  border: 1px solid #e5e5e5;
   box-sizing: border-box;
-  color: #3faffa;
   font-size: 1.3rem;
   font-weight: 500;
-  &:first-child {
-    padding-top: 0.8rem;
-  }
 `;
-const ListItem = styled.li`
-  list-style: none;
-  padding: 0.8rem 0;
+const DropDownItem = styled.button`
+  display: block;
+  padding: 2.6rem;
+  background: none;
+  border: none;
+  border-top: 1px solid #e5e5e5;
+  width: 100%;
+  font-size: 1.6rem;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  &:hover {
+    background: orangered;
+  }
+  &:focus {
+    outline: none;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 4rem 0;
+    font-size: 2.2rem;
+  }
 `;
 
 class NewHeader extends Component {
@@ -133,11 +153,33 @@ class NewHeader extends Component {
     });
   }
 
-  handleUserMenu = (event) => {
+  toggleMenu = (event) => {
+    event.preventDefault();
     this.setState((currentState) => {
       return { isOpen: !currentState.isOpen };
-    });
+    }, console.log("toggle"));
   };
+
+  //   openMenu = (event) => {
+  //     event.preventDefault();
+  //     console.log("open menu");
+
+  //     this.setState({ isOpen: true }, () => {
+  //       document.addEventListener("click", () => {
+  //         this.closeMenu();
+  //       });
+  //     });
+  //   };
+
+  //   closeMenu = (event) => {
+  //     console.log("close menu");
+  //     console.log(event.target, "event target");
+  //     if (!this.dropDown.current.contains(event.target)) {
+  //       this.setState({ isOpen: false }, () => {
+  //         document.removeEventListener("click", this.closeMenu);
+  //       });
+  //     }
+  //   };
 
   render() {
     const { username, avatar_url } = this.props.user;
@@ -145,33 +187,38 @@ class NewHeader extends Component {
     return (
       <div>
         <Nav>
-          <NavLink to="/">NC News</NavLink>
-          <TopicsDropDown>
-            <label>
-              <select
-                defaultValue=""
-                onChange={(event) => {
-                  navigate(event.target.value);
-                }}
-              >
-                <option key="topic-placeholder" disabled={true} value="">
-                  Select a topic
-                </option>
-                <option key="all-topics" value="/">
-                  all topics
-                </option>
-                {this.state.topics.map((topic) => {
-                  return (
-                    <option key={topic.slug} value={`/${topic.slug}/articles`}>
-                      {topic.slug}
-                    </option>
-                  );
-                })}
-              </select>
-            </label>
-          </TopicsDropDown>
+          <NavContainer>
+            <NavLink to="/">NC News</NavLink>
+            <TopicsDropDown>
+              <label>
+                <select
+                  defaultValue=""
+                  onChange={(event) => {
+                    navigate(event.target.value);
+                  }}
+                >
+                  <option key="topic-placeholder" disabled={true} value="">
+                    Select a topic
+                  </option>
+                  <option key="all-topics" value="/">
+                    all topics
+                  </option>
+                  {this.state.topics.map((topic) => {
+                    return (
+                      <option
+                        key={topic.slug}
+                        value={`/${topic.slug}/articles`}
+                      >
+                        {topic.slug}
+                      </option>
+                    );
+                  })}
+                </select>
+              </label>
+            </TopicsDropDown>
+          </NavContainer>
           {username ? (
-            <NavUserSignedIn type="button" onClick={this.handleUserMenu}>
+            <NavUserSignedIn onClick={this.toggleMenu}>
               <UserMenu>
                 <UserAvatar src={avatar_url} alt="Your profile avatar" />
                 <UserWelcome>Hello, {username}</UserWelcome>
@@ -181,15 +228,14 @@ class NewHeader extends Component {
                   <i className="fa fa-chevron-down"></i>
                 )}
               </UserMenu>
-
-              {isOpen && (
-                <DropDownContainer>
+              {/* {isOpen ? (
+                <div>
                   <DropDownList>
-                    <ListItem>My Articles</ListItem>
-                    <ListItem>Sign Out</ListItem>
+                    <DropDownItem>My Articles</DropDownItem>
+                    <DropDownItem>Sign Out</DropDownItem>
                   </DropDownList>
-                </DropDownContainer>
-              )}
+                </div>
+              ) : null} */}
             </NavUserSignedIn>
           ) : (
             <NavUserSignedOut>
@@ -198,6 +244,29 @@ class NewHeader extends Component {
             </NavUserSignedOut>
           )}
         </Nav>
+        {isOpen ? (
+          <div>
+            <DropDownList>
+              <DropDownItem
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                <i className="fa fa-home"></i> Home
+              </DropDownItem>
+              <DropDownItem
+                onClick={() => {
+                  navigate(`/users/${username}/articles`);
+                }}
+              >
+                <i className="fa fa-newspaper-o"></i> My Articles
+              </DropDownItem>
+              <DropDownItem>
+                <i className="fa fa-sign-out"></i> Sign Out
+              </DropDownItem>
+            </DropDownList>
+          </div>
+        ) : null}
       </div>
     );
   }
