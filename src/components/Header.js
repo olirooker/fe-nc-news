@@ -250,11 +250,11 @@ class Header extends Component {
             <DropDownList>
               <DropDownItem
                 onClick={() => {
-                  navigate("/");
+                  navigate(`/users/${username}`);
                   this.toggleMenu();
                 }}
               >
-                <i className="fa fa-home"></i> Home
+                <i className="fa fa-home"></i> My Account
               </DropDownItem>
               <DropDownItem
                 onClick={() => {
