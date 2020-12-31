@@ -154,7 +154,7 @@ class NewHeader extends Component {
   }
 
   toggleMenu = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     this.setState((currentState) => {
       return { isOpen: !currentState.isOpen };
     }, console.log("toggle"));
@@ -183,6 +183,7 @@ class NewHeader extends Component {
 
   render() {
     const { username, avatar_url } = this.props.user;
+    const { signOut } = this.props;
     const { isOpen } = this.state;
     return (
       <div>
@@ -250,6 +251,7 @@ class NewHeader extends Component {
               <DropDownItem
                 onClick={() => {
                   navigate("/");
+                  this.toggleMenu();
                 }}
               >
                 <i className="fa fa-home"></i> Home
@@ -257,11 +259,17 @@ class NewHeader extends Component {
               <DropDownItem
                 onClick={() => {
                   navigate(`/users/${username}/articles`);
+                  this.toggleMenu();
                 }}
               >
                 <i className="fa fa-newspaper-o"></i> My Articles
               </DropDownItem>
-              <DropDownItem>
+              <DropDownItem
+                onClick={() => {
+                  signOut();
+                  this.toggleMenu();
+                }}
+              >
                 <i className="fa fa-sign-out"></i> Sign Out
               </DropDownItem>
             </DropDownList>
