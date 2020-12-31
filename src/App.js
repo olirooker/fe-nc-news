@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { navigate, Router } from "@reach/router";
-import Header from "./components/Header";
 import ArticlesList from "./components/ArticlesList";
 import TopicsList from "./components/TopicsList";
 import UsersList from "./components/UsersList";
