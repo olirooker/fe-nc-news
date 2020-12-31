@@ -141,7 +141,7 @@ const DropDownItem = styled.button`
   }
 `;
 
-class NewHeader extends Component {
+class Header extends Component {
   state = {
     topics: [],
     isOpen: false,
@@ -280,4 +280,4 @@ class NewHeader extends Component {
   }
 }
 
-export default NewHeader;
+export default Header;

@@ -8,7 +8,7 @@ import ErrorMessage from "./components/ErrorMessage";
 import SignIn from "./components/SignIn";
 import styled from "styled-components";
 import { getUser } from "./api";
-import NewHeader from "./components/NewHeader";
+import Header from "./components/Header";
 
 const AppContainer = styled.div`
   margin: 0 auto;
@@ -42,7 +42,7 @@ class App extends Component {
   render() {
     return (
       <AppContainer>
-        <NewHeader user={this.state.user} signOut={this.signOut} />
+        <Header user={this.state.user} signOut={this.signOut} />
         <StyledContainer>
           <Router>
             <ArticlesList path="/" />
