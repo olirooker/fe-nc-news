@@ -50,7 +50,6 @@ class SingleArticle extends Component {
 
   handleClick = (event) => {
     const { article_id } = this.state.article;
-    const { username } = this.state;
 
     deleteArticle(article_id)
       .then(() => {
