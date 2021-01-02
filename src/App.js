@@ -47,7 +47,7 @@ class App extends Component {
           <Router>
             <ArticlesList path="/" />
             <SignIn path="/signin" authenticateUser={this.authenticateUser} />
-            <ArticlesList path="/:topic/articles" />
+            <ArticlesList path="/:topic/articles" user={this.state.user} />
             <ArticlesList path="/users/:username/articles" />
             <SingleArticle path="/articles/:article_id" />
             <TopicsList path="/topics" />

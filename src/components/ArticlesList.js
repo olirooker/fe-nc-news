@@ -76,7 +76,7 @@ class ArticlesList extends Component {
 
   render() {
     const { articles, isLoading, hasError, errorMessage } = this.state;
-    const { topic, username } = this.props;
+    const { topic, username, user } = this.props;
 
     if (isLoading) {
       return <Loading />;
@@ -86,7 +86,7 @@ class ArticlesList extends Component {
       return (
         <main>
           <StyledHeader>{topic || username || "Home"}</StyledHeader>
-          <ArticleAdder addArticle={this.addArticle} />
+          <ArticleAdder addArticle={this.addArticle} user={user} />
           <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />
           <ul>
             {articles.map((article) => {
