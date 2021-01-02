@@ -5,22 +5,26 @@ import styled from "styled-components";
 import Vote from "./Vote";
 
 const StyledCard = styled.div`
-  margin: 1.5rem 0;
-  padding: 5px 10px;
+  margin: 1.8rem 0;
+  padding: 2rem;
+  padding-top: 1.6rem;
   background-color: white;
   border: 1px solid #b5bdc4;
   border-radius: 1rem;
-  box-shadow: 3px 6px 8px #888888;
+  box-shadow: 1.5px 3px 4px #888888;
+
+  @media screen and (max-width: 600px) {
+    border-radius: 0rem;
+  }
 `;
 const PostDetailsContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 0.2rem;
 `;
 const UserAvatar = styled.div`
   margin-right: 8px;
   padding: 25px;
-  background: grey;
+  background: #b5bdc4;
   border-radius: 50%;
 `;
 const PostDetails = styled.p`
@@ -29,7 +33,7 @@ const PostDetails = styled.p`
 const Author = styled(Link)`
   font-size: 1.8rem;
   font-weight: 600;
-  color: #333;
+  color: #202428;
   text-decoration: none;
   cursor: pointer;
 `;
@@ -43,36 +47,36 @@ const Title = styled(Link)`
   font-size: 2.6rem;
   font-weight: 600;
   text-decoration: none;
-  color: #262626;
-  padding-bottom: 10px;
+  color: #202428;
+  margin-bottom: 1rem;
 `;
 const Topic = styled(Link)`
   text-decoration: none;
   color: white;
   padding: 5px;
-  background: purple;
+  background: #3b49df;
   border-radius: 5px;
 `;
 const Reactions = styled.div`
+  margin-top: 2rem;
   display: flex;
   align-items: flex-start;
 `;
-const Votes = styled.div`
-  margin: 0 auto;
-  padding: 0;
-  display: flex;
-  align-items: center;
-`;
+const Votes = styled.div``;
 const Comments = styled.div`
-  margin: 0 auto;
+  margin-left: 3rem;
+  /* margin: 0 auto;
   padding: 0;
   display: flex;
-  align-items: center;
-  /* grid-area: comments; */
-  /* flex-direction: row; */
+  align-items: center; */
 `;
 const CommentIcon = styled.i`
-  margin-left: 10px;
+  margin-right: 10px;
+  color: #363d44;
+`;
+const CommentNumber = styled(Link)`
+  text-decoration: none;
+  color: #363d44;
 `;
 // const UserIcon = styled.div`
 //   margin: 0;
@@ -102,7 +106,9 @@ const ArticleCard = ({ article }) => {
         </PostDetails>
       </PostDetailsContainer>
       <Title to={`/articles/${article.article_id}`}>{article.title}</Title>
-      <Topic to={`/${article.topic}/articles`}>#{article.topic}</Topic>
+      <Topic to={`/${article.topic}/articles`} className={article.topic}>
+        #{article.topic}
+      </Topic>
       {/* <Link to={`/articles/${article.article_id}`}>
           <p>{article.body}</p>
         </Link> */}
@@ -112,10 +118,10 @@ const ArticleCard = ({ article }) => {
           <Vote votes={article.votes} article_id={article.article_id} />
         </Votes>
         <Comments>
-          <Link to={`/articles/${article.article_id}`}>
-            {article.comment_count}
-          </Link>
           <CommentIcon className="fa fa-comment"></CommentIcon>
+          <CommentNumber to={`/articles/${article.article_id}`}>
+            {article.comment_count}
+          </CommentNumber>
         </Comments>
       </Reactions>
       {/* </div> */}
