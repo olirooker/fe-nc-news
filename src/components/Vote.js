@@ -17,6 +17,19 @@ const VotesContainer = styled.div`
   /* justify-items: center; */
 `;
 
+const VoteNumber = styled.p`
+  color: #363d44;
+`;
+
+const VoteUp = styled.button`
+  &:active {
+  }
+`;
+const VoteDown = styled.button`
+  &:active {
+  }
+`;
+
 class Vote extends Component {
   state = {
     hasError: false,
@@ -253,13 +266,13 @@ class Vote extends Component {
     } else {
       return (
         <VotesContainer>
-          <button onClick={this.handleUpVoteClick} disabled={hasVotedDown}>
+          <VoteUp onClick={this.handleUpVoteClick} disabled={hasVotedDown}>
             up
-          </button>
-          <p>{votes + voteChange}</p>
-          <button onClick={this.handleDownVoteClick} disabled={hasVotedUp}>
+          </VoteUp>
+          <VoteNumber>{votes + voteChange}</VoteNumber>
+          <VoteDown onClick={this.handleDownVoteClick} disabled={hasVotedUp}>
             down
-          </button>
+          </VoteDown>
         </VotesContainer>
       );
     }

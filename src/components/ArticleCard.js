@@ -7,7 +7,7 @@ import Vote from "./Vote";
 const StyledCard = styled.div`
   margin: 1.8rem 0;
   padding: 2rem;
-  padding-top: 1.6rem;
+  padding-top: 1.4rem;
   background-color: white;
   border: 1px solid #b5bdc4;
   border-radius: 1rem;
