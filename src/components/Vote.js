@@ -19,13 +19,25 @@ const VotesContainer = styled.div`
 
 const VoteNumber = styled.p`
   color: #363d44;
+  margin: 0 1rem;
 `;
 
 const VoteUp = styled.button`
+  border: none;
+  padding: 12px;
+  &:hover {
+    background-color: green;
+  }
   &:active {
   }
 `;
 const VoteDown = styled.button`
+  background-color: green;
+  border: none;
+  padding: 12px;
+  &:hover {
+    background-color: #ff3232;
+  }
   &:active {
   }
 `;
@@ -266,13 +278,15 @@ class Vote extends Component {
     } else {
       return (
         <VotesContainer>
-          <VoteUp onClick={this.handleUpVoteClick} disabled={hasVotedDown}>
-            up
-          </VoteUp>
+          <VoteUp
+            onClick={this.handleUpVoteClick}
+            disabled={hasVotedDown}
+          ></VoteUp>
           <VoteNumber>{votes + voteChange}</VoteNumber>
-          <VoteDown onClick={this.handleDownVoteClick} disabled={hasVotedUp}>
-            down
-          </VoteDown>
+          <VoteDown
+            onClick={this.handleDownVoteClick}
+            disabled={hasVotedUp}
+          ></VoteDown>
         </VotesContainer>
       );
     }

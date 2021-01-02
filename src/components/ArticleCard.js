@@ -21,7 +21,7 @@ const PostDetailsContainer = styled.div`
   display: flex;
   align-items: center;
 `;
-const UserAvatar = styled.div`
+const UserAvatar = styled.img`
   margin-right: 8px;
   padding: 25px;
   background: #b5bdc4;
