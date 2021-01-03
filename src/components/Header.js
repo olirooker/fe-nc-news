@@ -22,6 +22,7 @@ const NavLink = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
+  margin-right: 3rem;
   padding: 0 1rem;
   height: 100%;
   cursor: pointer;
@@ -40,8 +41,22 @@ const TopicsDropDown = styled.div`
   align-items: center;
   /* margin-right: -24px; */
 
-  @media screen and (max-width: 580px) {
+  @media screen and (max-width: 680px) {
     display: none;
+  }
+`;
+const DropDownSelect = styled.select`
+  padding: 0.5rem;
+  border-radius: 5px;
+  width: 30rem;
+  font-size: 1.6rem;
+  cursor: pointer;
+  /* display: flex;
+  align-items: center;
+  justify-content: space-between; */
+
+  @media screen and (max-width: 800px) {
+    width: 20rem;
   }
 `;
 const NavUserSignedOut = styled.div`
@@ -201,7 +216,7 @@ class Header extends Component {
             <NavLink to="/">NC News</NavLink>
             <TopicsDropDown>
               <label>
-                <select
+                <DropDownSelect
                   defaultValue=""
                   onChange={(event) => {
                     navigate(event.target.value);
@@ -223,7 +238,7 @@ class Header extends Component {
                       </option>
                     );
                   })}
-                </select>
+                </DropDownSelect>
               </label>
             </TopicsDropDown>
           </NavContainer>
