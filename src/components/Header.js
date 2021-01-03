@@ -31,6 +31,9 @@ const NavLink = styled(Link)`
   text-transform: uppercase;
   letter-spacing: 2px;
   white-space: nowrap;
+  background: -webkit-linear-gradient(180deg, #264653, #2a9d8f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
   &:hover {
     color: black;
@@ -153,7 +156,7 @@ const DropDownItem = styled.button`
   }
 
   &:hover {
-    background: orangered;
+    background: #eef0f1;
   }
   &:focus {
     outline: none;
