@@ -25,6 +25,11 @@ const NavLink = styled(Link)`
   padding: 0 1rem;
   height: 100%;
   cursor: pointer;
+  font-size: 3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  white-space: nowrap;
 
   &:hover {
     color: black;
@@ -35,7 +40,7 @@ const TopicsDropDown = styled.div`
   align-items: center;
   /* margin-right: -24px; */
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 580px) {
     display: none;
   }
 `;
@@ -45,21 +50,23 @@ const NavUserSignedOut = styled.div`
 `;
 const SignInBtn = styled(Link)`
   border-radius: 4px;
-  background: #256ce1;
+  background: none;
   margin-right: 3px;
   padding: 10px 22px;
-  color: #fff;
+  color: #256ce1;
   font-size: 1.4rem;
-  border: 1px solid #256ce1;
+  font-weight: 600;
+  border: none;
   outline: none;
   cursor: pointer;
   transition: all 300ms ease-in-out;
   text-decoration: none;
+  white-space: nowrap;
 
   &:hover {
     transition: all 300ms ease-in-out;
-    background: #fff;
-    color: #010606;
+    background: #dddddd;
+    color: #333;
   }
 `;
 const CreateAccountBtn = styled(Link)`
@@ -69,15 +76,17 @@ const CreateAccountBtn = styled(Link)`
   padding: 10px 22px;
   color: #fff;
   font-size: 1.4rem;
+  font-weight: 600;
   border: 1px solid #256ce1;
   outline: none;
   transition: all 300ms ease-in-out;
   text-decoration: none;
+  white-space: nowrap;
 
   &:hover {
     transition: all 300ms ease-in-out;
     background: #fff;
-    color: #010606;
+    color: #256ce1;
   }
 `;
 const NavUserSignedIn = styled.button`
