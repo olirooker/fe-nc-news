@@ -3,6 +3,7 @@ import { Link } from "@reach/router";
 import moment from "moment";
 import styled from "styled-components";
 import Vote from "./Vote";
+import userAvatar from "../assets/nc-avatar-01.svg";
 
 const StyledCard = styled.div`
   margin: 1.8rem 0;
@@ -23,8 +24,10 @@ const PostDetailsContainer = styled.div`
 `;
 const UserAvatar = styled.img`
   margin-right: 8px;
-  padding: 25px;
-  background: #b5bdc4;
+  height: 50px;
+  width: auto;
+  /* padding: 25px; */
+  /* background: #b5bdc4; */
   border-radius: 50%;
 `;
 const PostDetails = styled.p`
@@ -54,7 +57,8 @@ const Topic = styled(Link)`
   text-decoration: none;
   color: white;
   padding: 5px;
-  background: #3b49df;
+  /* background: #3b49df; */
+  /* background: #264653; */
   border-radius: 5px;
 `;
 const Reactions = styled.div`
@@ -97,7 +101,7 @@ const ArticleCard = ({ article }) => {
         {moment(article.created_at).fromNow()}
       </Text> */}
       <PostDetailsContainer>
-        <UserAvatar></UserAvatar>
+        <UserAvatar src={userAvatar}></UserAvatar>
         <PostDetails>
           <Author to={`/users/${article.author}/articles`}>
             {article.author}
