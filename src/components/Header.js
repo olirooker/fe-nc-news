@@ -54,6 +54,7 @@ const DropDownSelect = styled.select`
   width: 30rem;
   font-size: 1.6rem;
   cursor: pointer;
+  border-color: lightgrey;
   /* display: flex;
   align-items: center;
   justify-content: space-between; */
