@@ -30,7 +30,7 @@ const UserAvatar = styled.img`
   /* background: #b5bdc4; */
   border-radius: 50%;
 `;
-const PostDetails = styled.p`
+const PostDetails = styled.div`
   padding: 8px 0;
 `;
 const Author = styled(Link)`
@@ -40,7 +40,7 @@ const Author = styled(Link)`
   text-decoration: none;
   cursor: pointer;
 `;
-const Time = styled.p`
+const Time = styled.div`
   font-size: 1.6rem;
   font-weight: 400;
   color: grey;
