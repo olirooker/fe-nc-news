@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "@reach/router";
-import moment from "moment";
-import styled from "styled-components";
-import Vote from "./Vote";
-import userAvatar from "../assets/nc-avatar-01.svg";
+import React from 'react';
+import { Link } from '@reach/router';
+import moment from 'moment';
+import styled from 'styled-components';
+import Vote from './Vote';
+import userAvatar from '../assets/nc-avatar-01.svg';
 
 const StyledCard = styled.div`
   margin: 1.8rem 0;
@@ -122,7 +122,7 @@ const ArticleCard = ({ article }) => {
           <Vote votes={article.votes} article_id={article.article_id} />
         </Votes>
         <Comments>
-          <CommentIcon className="fa fa-comment"></CommentIcon>
+          <CommentIcon className='fa fa-comment'></CommentIcon>
           <CommentNumber to={`/articles/${article.article_id}`}>
             {article.comment_count}
           </CommentNumber>

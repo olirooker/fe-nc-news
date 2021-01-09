@@ -1,16 +1,19 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   upVoteArticle,
   downVoteArticle,
   upVoteComment,
   downVoteComment,
-} from "../api";
-import ErrorMessage from "./ErrorMessage";
-import styled from "styled-components";
+} from '../api';
+import ErrorMessage from './ErrorMessage';
+import styled from 'styled-components';
+import heartNotClicked from '../assets/heart-normal-01.svg';
+import heartClicked from '../assets/heart-active-01.svg';
 
 const VotesContainer = styled.div`
   display: flex;
   align-items: center;
+  /* outline: 1px solid red; */
   /* display: grid;
     grid-template-rows: repeat(1fr);
     grid-template-areas: 'upvote num downvote'; */
@@ -24,28 +27,42 @@ const VoteNumber = styled.p`
 
 const VoteUp = styled.button`
   border: none;
-  padding: 12px;
-  &:hover {
-    background-color: green;
-  }
-  &:active {
+  cursor: pointer;
+  width: auto;
+  height: auto;
+  background: none;
+  /* outline: solid green 1px; */
+  &:focus {
+    outline: none;
   }
 `;
 const VoteDown = styled.button`
-  background-color: green;
   border: none;
-  padding: 12px;
-  &:hover {
-    background-color: #ff3232;
+  cursor: pointer;
+  width: auto;
+  height: auto;
+  background: none;
+  outline: solid green 1px;
+  &:focus {
+    outline: none;
   }
-  &:active {
-  }
+`;
+const HeartClicked = styled.img`
+  height: 25px;
+  width: auto;
+  transition: all 500ms ease-in-out;
+`;
+
+const HeartNotClicked = styled.img`
+  height: 25px;
+  width: auto;
+  transition: all 500ms ease-in-out;
 `;
 
 class Vote extends Component {
   state = {
     hasError: false,
-    errorMessage: "",
+    errorMessage: '',
     hasVotedUp: false,
     hasVotedDown: false,
     hasVoted: false,
@@ -278,15 +295,17 @@ class Vote extends Component {
     } else {
       return (
         <VotesContainer>
-          <VoteUp
-            onClick={this.handleUpVoteClick}
-            disabled={hasVotedDown}
-          ></VoteUp>
+          <VoteUp onClick={this.handleUpVoteClick} disabled={hasVotedDown}>
+            {hasVotedUp ? (
+              <HeartClicked src={heartClicked} />
+            ) : (
+              <HeartNotClicked src={heartNotClicked} />
+            )}
+          </VoteUp>
           <VoteNumber>{votes + voteChange}</VoteNumber>
-          <VoteDown
-            onClick={this.handleDownVoteClick}
-            disabled={hasVotedUp}
-          ></VoteDown>
+          <VoteDown onClick={this.handleDownVoteClick} disabled={hasVotedUp}>
+            {hasVotedDown ? <></> : <></>}
+          </VoteDown>
         </VotesContainer>
       );
     }
