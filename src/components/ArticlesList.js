@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { getArticles } from "../api";
-import ArticleCard from "./ArticleCard";
-import ErrorMessage from "./ErrorMessage";
-import Loading from "./Loading";
-import Query from "./Query";
-import styled from "styled-components";
-import ArticleAdder from "./ArticleAdder";
+import React, { Component } from 'react';
+import { getArticles } from '../api';
+import ArticleCard from './ArticleCard';
+import ErrorMessage from './ErrorMessage';
+import Loading from './Loading';
+import Query from './Query';
+import styled from 'styled-components';
+import ArticleAdder from './ArticleAdder';
 
 const StyledHeader = styled.h1`
   margin: 1.5rem 0;
@@ -21,9 +21,9 @@ class ArticlesList extends Component {
     articles: [],
     isLoading: true,
     hasError: false,
-    errorMessage: "",
-    order: "desc",
-    sort_by: "created_at",
+    errorMessage: '',
+    order: 'desc',
+    sort_by: 'created_at',
   };
 
   componentDidMount() {
@@ -85,7 +85,7 @@ class ArticlesList extends Component {
     } else {
       return (
         <main>
-          <StyledHeader>{topic || username || "Home"}</StyledHeader>
+          <StyledHeader>{topic || username || 'Home'}</StyledHeader>
           <ArticleAdder addArticle={this.addArticle} user={user} />
           <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />
           <ul>

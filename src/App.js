@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { navigate, Router } from "@reach/router";
-import ArticlesList from "./components/ArticlesList";
-import TopicsList from "./components/TopicsList";
-import UsersList from "./components/UsersList";
-import SingleArticle from "./components/SingleArticle";
-import ErrorMessage from "./components/ErrorMessage";
-import SignIn from "./components/SignIn";
-import styled from "styled-components";
-import { getUser } from "./api";
-import Header from "./components/Header";
+import React, { Component } from 'react';
+import { navigate, Router } from '@reach/router';
+import ArticlesList from './components/ArticlesList';
+import TopicsList from './components/TopicsList';
+import UsersList from './components/UsersList';
+import SingleArticle from './components/SingleArticle';
+import ErrorMessage from './components/ErrorMessage';
+import SignIn from './components/SignIn';
+import styled from 'styled-components';
+import { getUser } from './api';
+import Header from './components/Header';
 
 const AppContainer = styled.div`
   margin: 0 auto;
@@ -27,14 +27,13 @@ class App extends Component {
 
   authenticateUser = (username) => {
     getUser(username).then((user) => {
-      // console.log(user)
       this.setState({ user: user });
     });
   };
 
   signOut = () => {
     this.setState({ user: {} });
-    navigate("/");
+    navigate('/');
   };
 
   // cDU to see if the state changes then re render
@@ -45,14 +44,17 @@ class App extends Component {
         <Header user={this.state.user} signOut={this.signOut} />
         <StyledContainer>
           <Router>
-            <ArticlesList path="/" />
-            <SignIn path="/signin" authenticateUser={this.authenticateUser} />
-            <ArticlesList path="/:topic/articles" user={this.state.user} />
-            <ArticlesList path="/users/:username/articles" />
-            <SingleArticle path="/articles/:article_id" />
-            <TopicsList path="/topics" />
-            <UsersList path="/users/:username" />
-            <ErrorMessage default errorMessage="Page not found!" />
+            <ArticlesList path='/' user={this.state.user} />
+            <SignIn path='/signin' authenticateUser={this.authenticateUser} />
+            <ArticlesList path='/:topic/articles' user={this.state.user} />
+            <ArticlesList
+              path='/users/:username/articles'
+              user={this.state.user}
+            />
+            <SingleArticle path='/articles/:article_id' />
+            <TopicsList path='/topics' />
+            <UsersList path='/users/:username' />
+            <ErrorMessage default errorMessage='Page not found!' />
           </Router>
         </StyledContainer>
       </AppContainer>
