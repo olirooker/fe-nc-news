@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link, navigate } from '@reach/router';
 import { getTopics } from '../api';
 import styled from 'styled-components';
+import SignInButton from './SignInButton';
+import CreateAccountButton from './CreateAccountButton';
 
 const Nav = styled.nav`
   background: #fff;
@@ -66,47 +68,6 @@ const DropDownSelect = styled.select`
 const NavUserSignedOut = styled.div`
   display: flex;
   align-items: center;
-`;
-const SignInBtn = styled(Link)`
-  border-radius: 4px;
-  background: none;
-  margin-right: 3px;
-  padding: 10px 22px;
-  color: #256ce1;
-  font-size: 1.4rem;
-  font-weight: 600;
-  border: 1px solid #256ce1;
-  outline: none;
-  cursor: pointer;
-  transition: all 300ms ease-in-out;
-  text-decoration: none;
-  white-space: nowrap;
-
-  &:hover {
-    transition: all 300ms ease-in-out;
-    background: #256ce1;
-    color: white;
-  }
-`;
-const CreateAccountBtn = styled(Link)`
-  border-radius: 4px;
-  background: #256ce1;
-  margin-left: 3px;
-  padding: 10px 22px;
-  color: #fff;
-  font-size: 1.4rem;
-  font-weight: 600;
-  border: 1px solid #256ce1;
-  outline: none;
-  transition: all 300ms ease-in-out;
-  text-decoration: none;
-  white-space: nowrap;
-
-  &:hover {
-    transition: all 300ms ease-in-out;
-    background: #fff;
-    color: #256ce1;
-  }
 `;
 const NavUserSignedIn = styled.button`
   position: relative;
@@ -268,8 +229,8 @@ class Header extends Component {
             </NavUserSignedIn>
           ) : (
             <NavUserSignedOut>
-              <SignInBtn to='/signin'>Sign In</SignInBtn>
-              <CreateAccountBtn to='/signin'>Create Account</CreateAccountBtn>
+              <SignInButton />
+              <CreateAccountButton />
             </NavUserSignedOut>
           )}
         </Nav>

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { postArticle } from "../api";
-import styled from "styled-components";
-import ErrorMessage from "./ErrorMessage";
+import React, { Component } from 'react';
+import { postArticle } from '../api';
+import styled from 'styled-components';
+import ErrorMessage from './ErrorMessage';
 
 const StyledArticleAdder = styled.section`
   margin: 1.5rem 0;
@@ -14,12 +14,12 @@ const StyledArticleAdder = styled.section`
 
 class ArticleAdder extends Component {
   state = {
-    body: "",
-    username: "jessjelly",
-    title: "",
-    topic: "",
+    body: '',
+    username: 'jessjelly',
+    title: '',
+    topic: '',
     hasError: false,
-    errorMessage: "",
+    errorMessage: '',
   };
 
   handleChange = (event) => {
@@ -33,7 +33,7 @@ class ArticleAdder extends Component {
     postArticle(this.state)
       .then((article) => {
         addArticle(article);
-        this.setState({ body: "", title: "", topic: "" });
+        this.setState({ body: '', title: '', topic: '' });
       })
       .catch((err) => {
         const {
@@ -60,11 +60,11 @@ class ArticleAdder extends Component {
             <label>
               Topic:
               <input
-                type="text"
-                name="topic"
-                id="topic"
+                type='text'
+                name='topic'
+                id='topic'
                 value={this.state.topic}
-                placeholder="Which topic do you want to post about?"
+                placeholder='Which topic do you want to post about?'
                 onChange={this.handleChange}
                 required
               />
@@ -72,11 +72,11 @@ class ArticleAdder extends Component {
             <label>
               Title:
               <input
-                type="text"
-                name="title"
-                id="title"
+                type='text'
+                name='title'
+                id='title'
                 value={this.state.title}
-                placeholder="Post title"
+                placeholder='Post title'
                 onChange={this.handleChange}
                 required
               />
@@ -84,17 +84,17 @@ class ArticleAdder extends Component {
             <label>
               Body:
               <textarea
-                type="text"
-                name="body"
-                id="body"
-                resize="none"
+                type='text'
+                name='body'
+                id='body'
+                resize='none'
                 value={this.state.body}
-                placeholder="Add your comment"
+                placeholder='Add your comment'
                 onChange={this.handleChange}
                 required
               ></textarea>
             </label>
-            <button type="submit">Post</button>
+            <button type='submit'>Post</button>
           </form>
         )}
       </StyledArticleAdder>
