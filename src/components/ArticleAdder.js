@@ -39,8 +39,8 @@ const PostArticleButton = styled.button`
   }
 `;
 const UserSignedOut = styled.div`
-  display: flex;
-  justify-content: center;
+  display: block;
+  text-align: center;
   margin: 3rem;
 `;
 const ButtonContainer = styled.div`
@@ -49,9 +49,50 @@ const ButtonContainer = styled.div`
   margin: 3rem;
 `;
 const UserSignedIn = styled.div`
-  /* display: flex;
-  align-items: center; */
-  margin: 3rem;
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+`;
+const Label = styled.label`
+  display: block;
+  width: 50vw;
+  font-size: 1.6rem;
+  font-weight: 500;
+`;
+const Input = styled.input`
+  width: stretch;
+  padding: 1rem;
+  border: 1px solid #b5bdc4;
+  border-radius: 4px;
+  margin: 0.4rem 0 1rem 0;
+`;
+const BodyTextarea = styled.textarea`
+  min-width: stretch;
+  max-width: stretch;
+  padding: 1rem;
+  border: 1px solid #b5bdc4;
+  border-radius: 4px;
+`;
+const PostButton = styled.button`
+  border-radius: 4px;
+  background: #256ce1;
+  padding: 10px 22px;
+  margin-top: 1rem;
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border: 1px solid #256ce1;
+  outline: none;
+  transition: all 300ms ease-in-out;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:hover {
+    transition: all 300ms ease-in-out;
+    background: #fff;
+    color: #256ce1;
+  }
 `;
 
 class ArticleAdder extends Component {
@@ -113,9 +154,9 @@ class ArticleAdder extends Component {
           user.username ? (
             <UserSignedIn>
               <form onSubmit={this.handleSubmit}>
-                <label>
+                <Label>
                   Topic:
-                  <input
+                  <Input
                     type='text'
                     name='topic'
                     id='topic'
@@ -124,33 +165,33 @@ class ArticleAdder extends Component {
                     onChange={this.handleChange}
                     required
                   />
-                </label>
-                <label>
+                </Label>
+                <Label>
                   Title:
-                  <input
+                  <Input
                     type='text'
                     name='title'
                     id='title'
                     value={this.state.title}
-                    placeholder='Post title'
+                    placeholder='Post Title'
                     onChange={this.handleChange}
                     required
                   />
-                </label>
-                <label>
+                </Label>
+                <Label>
                   Body:
-                  <textarea
+                  <BodyTextarea
                     type='text'
                     name='body'
                     id='body'
                     resize='none'
                     value={this.state.body}
-                    placeholder='Add your comment'
+                    placeholder='Add your comment...'
                     onChange={this.handleChange}
                     required
-                  ></textarea>
-                </label>
-                <button type='submit'>Post</button>
+                  ></BodyTextarea>
+                </Label>
+                <PostButton type='submit'>Post</PostButton>
               </form>
             </UserSignedIn>
           ) : (
