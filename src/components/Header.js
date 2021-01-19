@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Link, navigate } from "@reach/router";
-import { getTopics } from "../api";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import { Link, navigate } from '@reach/router';
+import { getTopics } from '../api';
+import styled from 'styled-components';
 
 const Nav = styled.nav`
   background: #fff;
@@ -75,7 +75,7 @@ const SignInBtn = styled(Link)`
   color: #256ce1;
   font-size: 1.4rem;
   font-weight: 600;
-  border: none;
+  border: 1px solid #256ce1;
   outline: none;
   cursor: pointer;
   transition: all 300ms ease-in-out;
@@ -84,8 +84,8 @@ const SignInBtn = styled(Link)`
 
   &:hover {
     transition: all 300ms ease-in-out;
-    background: #dddddd;
-    color: #333;
+    background: #256ce1;
+    color: white;
   }
 `;
 const CreateAccountBtn = styled(Link)`
@@ -185,7 +185,7 @@ class Header extends Component {
     // event.preventDefault();
     this.setState((currentState) => {
       return { isOpen: !currentState.isOpen };
-    }, console.log("toggle"));
+    }, console.log('toggle'));
   };
 
   //   openMenu = (event) => {
@@ -217,19 +217,19 @@ class Header extends Component {
       <div>
         <Nav>
           <NavContainer>
-            <NavLink to="/">NC News</NavLink>
+            <NavLink to='/'>NC News</NavLink>
             <TopicsDropDown>
               <label>
                 <DropDownSelect
-                  defaultValue=""
+                  defaultValue=''
                   onChange={(event) => {
                     navigate(event.target.value);
                   }}
                 >
-                  <option key="topic-placeholder" disabled={true} value="">
+                  <option key='topic-placeholder' disabled={true} value=''>
                     Select a topic
                   </option>
-                  <option key="all-topics" value="/">
+                  <option key='all-topics' value='/'>
                     all topics
                   </option>
                   {this.state.topics.map((topic) => {
@@ -249,12 +249,12 @@ class Header extends Component {
           {username ? (
             <NavUserSignedIn onClick={this.toggleMenu}>
               <UserMenu>
-                <UserAvatar src={avatar_url} alt="Your profile avatar" />
+                <UserAvatar src={avatar_url} alt='Your profile avatar' />
                 <UserWelcome>Hello, {username}</UserWelcome>
                 {isOpen ? (
-                  <i className="fa fa-chevron-up"></i>
+                  <i className='fa fa-chevron-up'></i>
                 ) : (
-                  <i className="fa fa-chevron-down"></i>
+                  <i className='fa fa-chevron-down'></i>
                 )}
               </UserMenu>
               {/* {isOpen ? (
@@ -268,8 +268,8 @@ class Header extends Component {
             </NavUserSignedIn>
           ) : (
             <NavUserSignedOut>
-              <SignInBtn to="/signin">Sign In</SignInBtn>
-              <CreateAccountBtn to="/signin">Create Account</CreateAccountBtn>
+              <SignInBtn to='/signin'>Sign In</SignInBtn>
+              <CreateAccountBtn to='/signin'>Create Account</CreateAccountBtn>
             </NavUserSignedOut>
           )}
         </Nav>
@@ -282,7 +282,7 @@ class Header extends Component {
                   this.toggleMenu();
                 }}
               >
-                <i className="fa fa-home"></i> My Account
+                <i className='fa fa-home'></i> My Account
               </DropDownItem>
               <DropDownItem
                 onClick={() => {
@@ -290,7 +290,7 @@ class Header extends Component {
                   this.toggleMenu();
                 }}
               >
-                <i className="fa fa-newspaper-o"></i> My Articles
+                <i className='fa fa-newspaper-o'></i> My Articles
               </DropDownItem>
               <DropDownItem
                 onClick={() => {
@@ -298,7 +298,7 @@ class Header extends Component {
                   this.toggleMenu();
                 }}
               >
-                <i className="fa fa-sign-out"></i> Sign Out
+                <i className='fa fa-sign-out'></i> Sign Out
               </DropDownItem>
             </DropDownList>
           </div>
