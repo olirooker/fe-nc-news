@@ -6,14 +6,29 @@ import Loading from './Loading';
 import Query from './Query';
 import styled from 'styled-components';
 import ArticleAdder from './ArticleAdder';
+import homeImage from '../assets/pexels-tim-samuel-5835414.jpg';
 
-const StyledHeader = styled.h1`
+const Header = styled.div`
   margin: 1.5rem 0;
   padding: 5px 10px;
-  background-color: white;
-  border: 1px solid lightgrey;
+  background-image: url(${homeImage});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-color: black; */
+  /* border: 1px solid lightgrey; */
   box-shadow: 3px 6px 8px #888888;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  height: 20rem;
+`;
+const Title = styled.div`
+  color: white;
+  font-size: 6rem;
+  display: flex;
+  align-items: center;
+  text-shadow: 4px 4px 4px #000000;
+  /* text-align: center; */
 `;
 
 class ArticlesList extends Component {
@@ -85,7 +100,9 @@ class ArticlesList extends Component {
     } else {
       return (
         <main>
-          <StyledHeader>{topic || username || 'Home'}</StyledHeader>
+          <Header>
+            <Title>{topic || username || 'NC News'}</Title>
+          </Header>
           <ArticleAdder addArticle={this.addArticle} user={user} />
           <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />
           <ul>
