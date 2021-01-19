@@ -7,31 +7,34 @@ import {
 } from '../api';
 import ErrorMessage from './ErrorMessage';
 import styled from 'styled-components';
-import heartNotClicked from '../assets/heart-normal-01.svg';
-import heartClicked from '../assets/heart-active-01.svg';
+import { FaHeart, FaHeartBroken } from 'react-icons/fa';
 
 const VotesContainer = styled.div`
   display: flex;
   align-items: center;
-  /* outline: 1px solid red; */
-  /* display: grid;
-    grid-template-rows: repeat(1fr);
-    grid-template-areas: 'upvote num downvote'; */
   /* justify-items: center; */
+  padding: 0;
+  margin: 0;
 `;
 
 const VoteNumber = styled.p`
   color: #363d44;
-  margin: 0 1rem;
+  margin: 0 2rem;
+  /* outline: solid green 1px; */
 `;
 
 const VoteUp = styled.button`
+  display: block;
   border: none;
   cursor: pointer;
-  width: auto;
-  height: auto;
   background: none;
   /* outline: solid green 1px; */
+  font-size: 2.4rem;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-content: center;
+
   &:focus {
     outline: none;
   }
@@ -39,24 +42,17 @@ const VoteUp = styled.button`
 const VoteDown = styled.button`
   border: none;
   cursor: pointer;
-  width: auto;
-  height: auto;
   background: none;
-  outline: solid green 1px;
+  /* outline: solid green 1px; */
+  font-size: 2.4rem;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-content: center;
+
   &:focus {
     outline: none;
   }
-`;
-const HeartClicked = styled.img`
-  height: 25px;
-  width: auto;
-  transition: all 500ms ease-in-out;
-`;
-
-const HeartNotClicked = styled.img`
-  height: 25px;
-  width: auto;
-  transition: all 500ms ease-in-out;
 `;
 
 class Vote extends Component {
@@ -297,14 +293,18 @@ class Vote extends Component {
         <VotesContainer>
           <VoteUp onClick={this.handleUpVoteClick} disabled={hasVotedDown}>
             {hasVotedUp ? (
-              <HeartClicked src={heartClicked} />
+              <FaHeart color='red' />
             ) : (
-              <HeartNotClicked src={heartNotClicked} />
+              <FaHeart color='lightgrey' />
             )}
           </VoteUp>
           <VoteNumber>{votes + voteChange}</VoteNumber>
           <VoteDown onClick={this.handleDownVoteClick} disabled={hasVotedUp}>
-            {hasVotedDown ? <></> : <></>}
+            {hasVotedDown ? (
+              <FaHeartBroken color='red' />
+            ) : (
+              <FaHeartBroken color='lightgrey' />
+            )}
           </VoteDown>
         </VotesContainer>
       );
