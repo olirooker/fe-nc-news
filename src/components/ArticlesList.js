@@ -101,7 +101,11 @@ class ArticlesList extends Component {
       return (
         <main>
           <Header>
-            <Title>{topic || username || 'NC News'}</Title>
+            <Title>
+              {(topic && topic[0].toUpperCase() + topic.slice(1)) ||
+                username ||
+                'NC News'}
+            </Title>
           </Header>
           <ArticleAdder addArticle={this.addArticle} user={user} />
           <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />
