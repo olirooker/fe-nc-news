@@ -186,7 +186,7 @@ class ArticleAdder extends Component {
                     id='body'
                     resize='none'
                     value={this.state.body}
-                    placeholder='Add your comment...'
+                    placeholder='Article body...'
                     onChange={this.handleChange}
                     required
                   ></BodyTextarea>
