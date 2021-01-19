@@ -199,7 +199,7 @@ class Header extends Component {
                         key={topic.slug}
                         value={`/${topic.slug}/articles`}
                       >
-                        {topic.slug}
+                        {topic.slug[0].toUpperCase() + topic.slug.slice(1)}
                       </option>
                     );
                   })}
