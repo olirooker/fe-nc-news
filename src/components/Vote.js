@@ -11,7 +11,9 @@ import { FaHeart, FaHeartBroken } from 'react-icons/fa';
 
 const VotesContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
+  /* align-items: center; */
   /* justify-items: center; */
   padding: 0;
   margin: 0;
@@ -19,7 +21,7 @@ const VotesContainer = styled.div`
 
 const VoteNumber = styled.p`
   color: #363d44;
-  margin: 0 2rem;
+  margin: 2rem 0;
   /* outline: solid green 1px; */
 `;
 
@@ -301,7 +303,7 @@ class Vote extends Component {
           <VoteNumber>{votes + voteChange}</VoteNumber>
           <VoteDown onClick={this.handleDownVoteClick} disabled={hasVotedUp}>
             {hasVotedDown ? (
-              <FaHeartBroken color='red' />
+              <FaHeartBroken color='darkred' />
             ) : (
               <FaHeartBroken color='lightgrey' />
             )}
