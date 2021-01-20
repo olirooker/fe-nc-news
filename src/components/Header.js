@@ -35,6 +35,7 @@ const NavLink = styled(Link)`
   white-space: nowrap;
   background: -webkit-linear-gradient(180deg, #264653, #2a9d8f);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 
   &:hover {
