@@ -70,6 +70,11 @@ const NavUserSignedOut = styled.div`
   display: flex;
   align-items: center;
 `;
+const MobileHide = styled.div`
+  @media screen and (max-width: 450px) {
+    display: none;
+  }
+`;
 const NavUserSignedIn = styled.button`
   position: relative;
   display: inline-block;
@@ -231,7 +236,9 @@ class Header extends Component {
           ) : (
             <NavUserSignedOut>
               <SignInButton />
-              <CreateAccountButton />
+              <MobileHide>
+                <CreateAccountButton />
+              </MobileHide>
             </NavUserSignedOut>
           )}
         </Nav>

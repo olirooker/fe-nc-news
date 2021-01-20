@@ -1,19 +1,18 @@
-import axios from "axios";
+import axios from 'axios';
 
 const ncNewsApi = axios.create({
-  // baseURL: 'https://ncoders-news-api.herokuapp.com/api',
-  baseURL: "https://olis-nc-news-api.herokuapp.com/api",
+  baseURL: 'https://olis-nc-news-api.herokuapp.com/api',
 });
 
 export const getTopics = () => {
-  return ncNewsApi.get("/topics").then(({ data }) => {
+  return ncNewsApi.get('/topics').then(({ data }) => {
     return data.topics;
   });
 };
 
 export const getArticles = (topic, username, order, sort_by) => {
   return ncNewsApi
-    .get("/articles", {
+    .get('/articles', {
       params: {
         topic: topic,
         username: username,
@@ -22,7 +21,6 @@ export const getArticles = (topic, username, order, sort_by) => {
       },
     })
     .then(({ data }) => {
-      console.log(data);
       return data.articles;
     });
 };

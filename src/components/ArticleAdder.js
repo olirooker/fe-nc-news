@@ -142,7 +142,7 @@ class ArticleAdder extends Component {
   render() {
     const { hasError, errorMessage, buttonPress } = this.state;
     const { user } = this.props;
-    console.log(user);
+
     return (
       <StyledArticleAdder>
         <PostArticleButton onClick={this.handleButtonPress}>
