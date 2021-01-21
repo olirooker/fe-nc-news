@@ -18,8 +18,9 @@ const CreateAccountBtn = styled(Link)`
 
   &:hover {
     transition: all 300ms ease-in-out;
-    background: #fff;
-    color: #256ce1;
+    background: #259ce1;
+    border: 1px solid #259ce1;
+    color: white;
   }
 `;
 

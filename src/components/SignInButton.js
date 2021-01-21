@@ -19,8 +19,8 @@ const SignInBtn = styled(Link)`
 
   &:hover {
     transition: all 300ms ease-in-out;
-    background: #256ce1;
-    color: white;
+    background: #e8e8e8;
+    /* color: white; */
   }
 `;
 
