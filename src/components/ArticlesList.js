@@ -15,8 +15,6 @@ const Header = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  /* background-color: black; */
-  /* border: 1px solid lightgrey; */
   box-shadow: 3px 6px 8px #888888;
   display: flex;
   justify-content: center;

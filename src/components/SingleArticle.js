@@ -1,20 +1,34 @@
-import React, { Component } from "react";
-import { deleteArticle, getSingleArticle } from "../api";
-import { Link } from "@reach/router";
-import moment from "moment";
-import CommentsList from "./CommentsList";
-import Loading from "./Loading";
-import ErrorMessage from "./ErrorMessage";
-import Vote from "./Vote";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import { deleteArticle, getSingleArticle } from '../api';
+import { Link } from '@reach/router';
+import moment from 'moment';
+import CommentsList from './CommentsList';
+import Loading from './Loading';
+import ErrorMessage from './ErrorMessage';
+import Vote from './Vote';
+import styled from 'styled-components';
 
 const SingleArticleContainer = styled.section`
-  margin: 1.5rem 0;
-  padding: 5px 10px;
+  margin: 1.8rem 0;
+  padding: 2rem;
+  padding-top: 1.4rem;
   background-color: white;
-  border: 1px solid lightgrey;
-  box-shadow: 3px 6px 8px #888888;
-  border-left: 5px solid green;
+  border: 1px solid #b5bdc4;
+  border-radius: 1rem;
+  box-shadow: 1.5px 3px 4px #888888;
+  display: grid;
+  grid-template-columns: auto 40px;
+  grid-template-areas: 'content reactions';
+
+  @media screen and (max-width: 600px) {
+    border-radius: 0rem;
+  }
+`;
+const Title = styled.h2`
+  font-size: 3.6rem;
+  font-weight: 600;
+  color: #202428;
+  margin-bottom: 3rem;
 `;
 
 class SingleArticle extends Component {
@@ -22,8 +36,8 @@ class SingleArticle extends Component {
     article: {},
     isLoading: true,
     hasError: false,
-    errorMessage: "",
-    username: "jessjelly",
+    errorMessage: '',
+    username: 'jessjelly',
     isDeleted: false,
   };
 
@@ -94,7 +108,7 @@ class SingleArticle extends Component {
               <div>
                 <p>This article has been deleted! Go to:</p>
                 <Link to={`/users/${username}/articles`}>My articles</Link>
-                <Link to="/">All topics</Link>
+                <Link to='/'>All topics</Link>
               </div>
             ) : (
               <div>
@@ -103,17 +117,17 @@ class SingleArticle extends Component {
                     <Link to={`/${article.topic}/articles`}>
                       {article.topic}
                     </Link>
-                    . Posted by{" "}
+                    . Posted by{' '}
                     <Link to={`/users/${article.author}/articles`}>
                       {article.author}
-                    </Link>{" "}
+                    </Link>{' '}
                     {moment(article.created_at).fromNow()}
                   </p>
                   <Vote votes={article.votes} article_id={article_id} />
                 </div>
 
                 <div>
-                  <h2>{article.title}</h2>
+                  <Title>{article.title}</Title>
                   <p>{article.body}</p>
                 </div>
 
