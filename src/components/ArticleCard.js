@@ -3,52 +3,59 @@ import { Link } from '@reach/router';
 import moment from 'moment';
 import Vote from './Vote';
 import userAvatar from '../assets/nc-avatar-01.svg';
-import style from './styles/article.module.css';
+import articleStyle from './styles/article.module.css';
+import cardStyle from './styles/card.module.css';
 
 const ArticleCard = ({ article }) => {
   let topicClass;
-  if (article.topic === 'cooking') topicClass = style.topicCooking;
-  else if (article.topic === 'football') topicClass = style.topicFootball;
-  else if (article.topic === 'coding') topicClass = style.topicCoding;
-  else topicClass = style.topic;
+  if (article.topic === 'cooking') topicClass = articleStyle.topicCooking;
+  else if (article.topic === 'football')
+    topicClass = articleStyle.topicFootball;
+  else if (article.topic === 'coding') topicClass = articleStyle.topicCoding;
+  else topicClass = articleStyle.topic;
 
   return (
-    <div className={style.articleCard}>
-      <div className={style.articleDetailsContainer}>
-        <div className={style.postDetailsContainer}>
+    <div className={cardStyle.articleCard}>
+      <div className={articleStyle.articleDetailsContainer}>
+        <div className={articleStyle.postDetailsContainer}>
           <img
-            className={style.userAvatar}
+            className={articleStyle.userAvatar}
             src={userAvatar}
             alt='user avatar'
           />
-          <div className={style.postDetails}>
+          <div className={articleStyle.postDetails}>
             <Link
               to={`/users/${article.author}/articles`}
-              className={style.author}
+              className={articleStyle.author}
             >
               {article.author}
             </Link>
-            <p className={style.time}>{moment(article.created_at).fromNow()}</p>
+            <p className={articleStyle.time}>
+              {moment(article.created_at).fromNow()}
+            </p>
           </div>
         </div>
-        <Link to={`/articles/${article.article_id}`} className={style.title}>
+        <Link
+          to={`/articles/${article.article_id}`}
+          className={articleStyle.title}
+        >
           {article.title}
         </Link>
-        <div className={style.tagsContainer}>
+        <div className={articleStyle.tagsContainer}>
           <Link to={`/${article.topic}/articles`} className={topicClass}>
             #{article.topic}
           </Link>
           <Link
             to={`/articles/${article.article_id}`}
-            className={style.comments}
+            className={articleStyle.comments}
           >
             {article.comment_count} Comments
           </Link>
         </div>
       </div>
 
-      <div className={style.reactions}>
-        <div className={style.votes}>
+      <div className={articleStyle.reactions}>
+        <div className={articleStyle.votes}>
           <Vote votes={article.votes} article_id={article.article_id} />
         </div>
       </div>

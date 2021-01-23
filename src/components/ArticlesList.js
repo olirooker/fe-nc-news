@@ -5,7 +5,7 @@ import ErrorMessage from './ErrorMessage';
 import Loading from './Loading';
 import Query from './Query';
 import ArticleAdder from './ArticleAdder';
-import style from './styles/article.module.css';
+import bannerStyle from './styles/banner.module.css';
 
 class ArticlesList extends Component {
   state = {
@@ -70,11 +70,11 @@ class ArticlesList extends Component {
     const { topic, username, user } = this.props;
 
     let bannerClass;
-    if (topic === 'cooking') bannerClass = style.cookingBanner;
-    else if (topic === 'football') bannerClass = style.footballBanner;
-    else if (topic === 'coding') bannerClass = style.codingBanner;
-    else if (username) bannerClass = style.usernameBanner;
-    else bannerClass = style.articlesBanner;
+    if (topic === 'cooking') bannerClass = bannerStyle.cookingBanner;
+    else if (topic === 'football') bannerClass = bannerStyle.footballBanner;
+    else if (topic === 'coding') bannerClass = bannerStyle.codingBanner;
+    else if (username) bannerClass = bannerStyle.usernameBanner;
+    else bannerClass = bannerStyle.articlesBanner;
 
     if (isLoading) {
       return <Loading />;
@@ -84,7 +84,7 @@ class ArticlesList extends Component {
       return (
         <main>
           <div className={bannerClass}>
-            <div className={style.pageTitle}>
+            <div className={bannerStyle.pageTitle}>
               {(topic && topic[0].toUpperCase() + topic.slice(1)) ||
                 username ||
                 'NC News'}

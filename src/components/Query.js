@@ -1,24 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const Queries = styled.div`
-  margin: 1.8rem 0;
-  padding: 0.8rem;
-  background-color: white;
-  border: 1px solid #b5bdc4;
-  border-radius: 1rem;
-  box-shadow: 1.5px 3px 4px #888888;
-  display: flex;
-  justify-content: space-between;
-`;
-const DropDownSelect = styled.select`
-  padding: 0.5rem;
-  border-radius: 5px;
-  width: 49%;
-  font-size: 1.6rem;
-  cursor: pointer;
-  border-color: lightgrey;
-`;
+import cardStyle from './styles/card.module.css';
+import dropDownStyle from './styles/dropDownStyle.module.css';
 
 const Query = ({ changeOrder, changeSort }) => {
   const handleOrderChange = (event) => {
@@ -32,24 +14,32 @@ const Query = ({ changeOrder, changeSort }) => {
   };
 
   return (
-    <Queries>
-      <DropDownSelect defaultValue='' onChange={handleOrderChange}>
+    <div className={cardStyle.queries}>
+      <select
+        className={dropDownStyle.dropDown}
+        defaultValue=''
+        onChange={handleOrderChange}
+      >
         <option key='order-placeholder' disabled={true} value=''>
           Order by:
         </option>
         <option value='asc'>Asc</option>
         <option value='desc'>Desc</option>
-      </DropDownSelect>
+      </select>
 
-      <DropDownSelect defaultValue='' onChange={handleSortChange}>
+      <select
+        className={dropDownStyle.dropDown}
+        defaultValue=''
+        onChange={handleSortChange}
+      >
         <option key='sort-placeholder' disabled={true} value=''>
           Sort by:
         </option>
         <option value='votes'>Votes</option>
         <option value='created_at'>Date Posted</option>
         <option value='comment_count'>Comments</option>
-      </DropDownSelect>
-    </Queries>
+      </select>
+    </div>
   );
 };
 

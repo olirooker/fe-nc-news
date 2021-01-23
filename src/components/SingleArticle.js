@@ -6,8 +6,9 @@ import CommentsList from './CommentsList';
 import Loading from './Loading';
 import ErrorMessage from './ErrorMessage';
 import Vote from './Vote';
-import style from './styles/article.module.css';
 import userAvatar from '../assets/nc-avatar-01.svg';
+import articleStyle from './styles/article.module.css';
+import cardStyle from './styles/card.module.css';
 
 class SingleArticle extends Component {
   state = {
@@ -75,10 +76,11 @@ class SingleArticle extends Component {
     const { article_id } = this.props;
 
     let topicClass;
-    if (article.topic === 'cooking') topicClass = style.topicCooking;
-    else if (article.topic === 'football') topicClass = style.topicFootball;
-    else if (article.topic === 'coding') topicClass = style.topicCoding;
-    else topicClass = style.topic;
+    if (article.topic === 'cooking') topicClass = articleStyle.topicCooking;
+    else if (article.topic === 'football')
+      topicClass = articleStyle.topicFootball;
+    else if (article.topic === 'coding') topicClass = articleStyle.topicCoding;
+    else topicClass = articleStyle.topic;
 
     if (isLoading) {
       return <Loading />;
@@ -87,7 +89,7 @@ class SingleArticle extends Component {
     } else {
       return (
         <main>
-          <div className={style.card}>
+          <div className={cardStyle.card}>
             {isDeleted ? (
               <div>
                 <p>This article has been deleted! Go to:</p>
@@ -95,29 +97,29 @@ class SingleArticle extends Component {
                 <Link to='/'>All topics</Link>
               </div>
             ) : (
-              <div className={style.singleCard}>
-                <div className={style.articleDetailsContainer}>
-                  <div className={style.postDetailsContainer}>
+              <div className={cardStyle.singleCard}>
+                <div className={articleStyle.articleDetailsContainer}>
+                  <div className={articleStyle.postDetailsContainer}>
                     <img
-                      className={style.userAvatar}
+                      className={articleStyle.userAvatar}
                       src={userAvatar}
                       alt='user avatar'
                     />
-                    <div className={style.postDetails}>
+                    <div className={articleStyle.postDetails}>
                       <Link
                         to={`/users/${article.author}/articles`}
-                        className={style.author}
+                        className={articleStyle.author}
                       >
                         {article.author}
                       </Link>
-                      <p className={style.time}>
+                      <p className={articleStyle.time}>
                         {moment(article.created_at).fromNow()}
                       </p>
                     </div>
                   </div>
-                  <h2 className={style.title}>{article.title}</h2>
-                  <p className={style.body}>{article.body}</p>
-                  <div className={style.tagsContainer}>
+                  <h2 className={articleStyle.title}>{article.title}</h2>
+                  <p className={articleStyle.body}>{article.body}</p>
+                  <div className={articleStyle.tagsContainer}>
                     <Link
                       to={`/${article.topic}/articles`}
                       className={topicClass}
@@ -126,15 +128,15 @@ class SingleArticle extends Component {
                     </Link>
                     <Link
                       to={`/articles/${article.article_id}`}
-                      className={style.comments}
+                      className={articleStyle.comments}
                     >
                       {article.comment_count} Comments
                     </Link>
                   </div>
                 </div>
 
-                <div className={style.singleArticleReactions}>
-                  <div className={style.votes}>
+                <div className={articleStyle.singleArticleReactions}>
+                  <div className={articleStyle.votes}>
                     <Vote
                       votes={article.votes}
                       article_id={article.article_id}
