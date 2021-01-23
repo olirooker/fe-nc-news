@@ -84,7 +84,7 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
-  font-family: "Lato", "Roboto", "Helvetica Neue", sans-serif;
+  font-family: 'Lato', 'Roboto', 'Helvetica Neue', sans-serif;
   font-weight: 400;
 }
 
@@ -118,7 +118,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Lato", "Roboto", "Helvetica Neue", sans-serif;
+  font-family: 'Lato', 'Roboto', 'Helvetica Neue', sans-serif;
   font-weight: 400;
   font-size: 1.8rem; /* 18px */
   line-height: 1.4;
@@ -134,19 +134,19 @@ h4,
 h5,
 h6 {
   /* font-family: 'Lora', serif; */
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   text-decoration: none;
 }
 
-.cooking {
-  background: #2a9d8f;
+a:link {
+  text-decoration: none;
 }
 
-.football {
-  background: #e9c46a;
+a:active {
+  text-decoration: none;
 }
 
-.coding {
-  background: #e76f51;
+a:visited {
+  text-decoration: none;
 }

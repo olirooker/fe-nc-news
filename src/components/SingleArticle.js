@@ -6,30 +6,31 @@ import CommentsList from './CommentsList';
 import Loading from './Loading';
 import ErrorMessage from './ErrorMessage';
 import Vote from './Vote';
-import styled from 'styled-components';
+import style from './styles/article.module.css';
+import userAvatar from '../assets/nc-avatar-01.svg';
 
-const SingleArticleContainer = styled.section`
-  margin: 1.8rem 0;
-  padding: 2rem;
-  padding-top: 1.4rem;
-  background-color: white;
-  border: 1px solid #b5bdc4;
-  border-radius: 1rem;
-  box-shadow: 1.5px 3px 4px #888888;
-  display: grid;
-  grid-template-columns: auto 40px;
-  grid-template-areas: 'content reactions';
+// const SingleArticleContainer = styled.section`
+//   margin: 1.8rem 0;
+//   padding: 2rem;
+//   padding-top: 1.4rem;
+//   background-color: white;
+//   border: 1px solid #b5bdc4;
+//   border-radius: 1rem;
+//   box-shadow: 1.5px 3px 4px #888888;
+//   display: grid;
+//   grid-template-columns: auto 40px;
+//   grid-template-areas: 'content reactions';
 
-  @media screen and (max-width: 600px) {
-    border-radius: 0rem;
-  }
-`;
-const Title = styled.h2`
-  font-size: 3.6rem;
-  font-weight: 600;
-  color: #202428;
-  margin-bottom: 3rem;
-`;
+//   @media screen and (max-width: 600px) {
+//     border-radius: 0rem;
+//   }
+// `;
+// const Title = styled.h2`
+//   font-size: 3.6rem;
+//   font-weight: 600;
+//   color: #202428;
+//   margin-bottom: 3rem;
+// `;
 
 class SingleArticle extends Component {
   state = {
@@ -96,6 +97,12 @@ class SingleArticle extends Component {
     } = this.state;
     const { article_id } = this.props;
 
+    let topicClass;
+    if (article.topic === 'cooking') topicClass = style.topicCooking;
+    else if (article.topic === 'football') topicClass = style.topicFootball;
+    else if (article.topic === 'coding') topicClass = style.topicCoding;
+    else topicClass = style.topic;
+
     if (isLoading) {
       return <Loading />;
     } else if (hasError) {
@@ -103,7 +110,7 @@ class SingleArticle extends Component {
     } else {
       return (
         <main>
-          <SingleArticleContainer>
+          <div className={style.card}>
             {isDeleted ? (
               <div>
                 <p>This article has been deleted! Go to:</p>
@@ -111,31 +118,53 @@ class SingleArticle extends Component {
                 <Link to='/'>All topics</Link>
               </div>
             ) : (
-              <div>
-                <div>
-                  <p>
-                    <Link to={`/${article.topic}/articles`}>
-                      {article.topic}
+              <div className={style.singleCard}>
+                <div className={style.articleDetailsContainer}>
+                  <div className={style.postDetailsContainer}>
+                    <img
+                      className={style.userAvatar}
+                      src={userAvatar}
+                      alt='user avatar'
+                    />
+                    <div className={style.postDetails}>
+                      <Link
+                        to={`/users/${article.author}/articles`}
+                        className={style.author}
+                      >
+                        {article.author}
+                      </Link>
+                      <p className={style.time}>
+                        {moment(article.created_at).fromNow()}
+                      </p>
+                    </div>
+                  </div>
+                  <h2 className={style.title}>{article.title}</h2>
+                  <p className={style.body}>{article.body}</p>
+                  <div className={style.tagsContainer}>
+                    <Link
+                      to={`/${article.topic}/articles`}
+                      className={topicClass}
+                    >
+                      #{article.topic}
                     </Link>
-                    . Posted by{' '}
-                    <Link to={`/users/${article.author}/articles`}>
-                      {article.author}
-                    </Link>{' '}
-                    {moment(article.created_at).fromNow()}
-                  </p>
-                  <Vote votes={article.votes} article_id={article_id} />
+                    <Link
+                      to={`/articles/${article.article_id}`}
+                      className={style.comments}
+                    >
+                      {article.comment_count} Comments
+                    </Link>
+                  </div>
                 </div>
 
-                <div>
-                  <Title>{article.title}</Title>
-                  <p>{article.body}</p>
+                <div className={style.reactions}>
+                  <div className={style.votes}>
+                    <Vote
+                      votes={article.votes}
+                      article_id={article.article_id}
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <Link to={`/articles/${article.article_id}/comments`}>
-                    <p>{article.comment_count}</p>
-                  </Link>
-                </div>
                 <div>
                   {article.author === username ? (
                     <button onClick={this.handleClick}>Delete Article</button>
@@ -145,7 +174,7 @@ class SingleArticle extends Component {
                 </div>
               </div>
             )}
-          </SingleArticleContainer>
+          </div>
 
           <section>
             <CommentsList article_id={article_id} />

@@ -4,30 +4,29 @@ import ArticleCard from './ArticleCard';
 import ErrorMessage from './ErrorMessage';
 import Loading from './Loading';
 import Query from './Query';
-import styled from 'styled-components';
 import ArticleAdder from './ArticleAdder';
-import homeImage from '../assets/pexels-tim-samuel-5835414.jpg';
+import style from './styles/article.module.css';
 
-const Header = styled.div`
-  margin: 1.5rem 0;
-  padding: 5px 10px;
-  background-image: url(${homeImage});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  box-shadow: 3px 6px 8px #888888;
-  display: flex;
-  justify-content: center;
-  height: 20rem;
-`;
-const Title = styled.div`
-  color: white;
-  font-size: 6rem;
-  display: flex;
-  align-items: center;
-  text-shadow: 4px 4px 4px #000000;
-  /* text-align: center; */
-`;
+// const Header = styled.div`
+//   margin: 1.5rem 0;
+//   padding: 5px 10px;
+//   background-image: url(${homeImage});
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   box-shadow: 3px 6px 8px #888888;
+//   display: flex;
+//   justify-content: center;
+//   height: 20rem;
+// `;
+// const Title = styled.div`
+//   color: white;
+//   font-size: 6rem;
+//   display: flex;
+//   align-items: center;
+//   text-shadow: 4px 4px 4px #000000;
+//   /* text-align: center; */
+// `;
 
 class ArticlesList extends Component {
   state = {
@@ -91,6 +90,13 @@ class ArticlesList extends Component {
     const { articles, isLoading, hasError, errorMessage } = this.state;
     const { topic, username, user } = this.props;
 
+    let bannerClass;
+    if (topic === 'cooking') bannerClass = style.articleBanner;
+    else if (topic === 'football') bannerClass = style.articleBanner;
+    else if (topic === 'coding') bannerClass = style.articleBanner;
+    else if (username) bannerClass = style.articleBanner;
+    else bannerClass = style.articleBanner;
+
     if (isLoading) {
       return <Loading />;
     } else if (hasError) {
@@ -98,13 +104,13 @@ class ArticlesList extends Component {
     } else {
       return (
         <main>
-          <Header>
-            <Title>
+          <div className={bannerClass}>
+            <h1 className={style.title}>
               {(topic && topic[0].toUpperCase() + topic.slice(1)) ||
                 username ||
                 'NC News'}
-            </Title>
-          </Header>
+            </h1>
+          </div>
           <ArticleAdder addArticle={this.addArticle} user={user} />
           <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />
           <ul>
