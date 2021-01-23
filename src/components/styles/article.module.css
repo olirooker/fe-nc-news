@@ -1,7 +1,7 @@
 .articlesBanner {
   margin: 1.5rem 0;
   padding: 5px 10px;
-  background-image: 'src/assets/pexels-tim-samuel-5835414.jpg';
+  background-image: url('../../assets/pexels-tim-samuel-5835414.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -13,22 +13,30 @@
 
 .cookingBanner {
   composes: articlesBanner;
-  background-image: 'src/assets/pexels-tim-samuel-5835414.jpg';
+  background-image: url('../../assets/pexels-clem-onojeghuo-175753.jpg');
 }
 
 .footballBanner {
   composes: articlesBanner;
-  background-image: 'src/assets/pexels-tim-samuel-5835414.jpg';
+  background-image: url('../../assets/pexels-tembela-bohle-1884574.jpg');
 }
 
 .codingBanner {
   composes: articlesBanner;
-  background-image: 'src/assets/pexels-tim-samuel-5835414.jpg';
+  background-image: url('../../assets/pexels-lukas-574071.jpg');
 }
 
 .usernameBanner {
   composes: articlesBanner;
-  background-image: 'src/assets/pexels-tim-samuel-5835414.jpg';
+  background-image: url('../../assets/pexels-eberhard-grossgasteiger-844297.jpg');
+}
+
+.pageTitle {
+  color: white;
+  font-size: 6rem;
+  display: flex;
+  align-items: center;
+  text-shadow: 4px 4px 4px #000000;
 }
 
 .card {
@@ -161,7 +169,11 @@
   align-items: center;
   margin: 0 0 0 auto;
   grid-area: reactions;
-  border: 1px solid red;
+}
+
+.singleArticleReactions {
+  composes: reactions;
+  align-items: flex-start;
 }
 
 .comments {

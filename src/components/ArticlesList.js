@@ -7,27 +7,6 @@ import Query from './Query';
 import ArticleAdder from './ArticleAdder';
 import style from './styles/article.module.css';
 
-// const Header = styled.div`
-//   margin: 1.5rem 0;
-//   padding: 5px 10px;
-//   background-image: url(${homeImage});
-//   background-position: center;
-//   background-repeat: no-repeat;
-//   background-size: cover;
-//   box-shadow: 3px 6px 8px #888888;
-//   display: flex;
-//   justify-content: center;
-//   height: 20rem;
-// `;
-// const Title = styled.div`
-//   color: white;
-//   font-size: 6rem;
-//   display: flex;
-//   align-items: center;
-//   text-shadow: 4px 4px 4px #000000;
-//   /* text-align: center; */
-// `;
-
 class ArticlesList extends Component {
   state = {
     articles: [],
@@ -91,11 +70,11 @@ class ArticlesList extends Component {
     const { topic, username, user } = this.props;
 
     let bannerClass;
-    if (topic === 'cooking') bannerClass = style.articleBanner;
-    else if (topic === 'football') bannerClass = style.articleBanner;
-    else if (topic === 'coding') bannerClass = style.articleBanner;
-    else if (username) bannerClass = style.articleBanner;
-    else bannerClass = style.articleBanner;
+    if (topic === 'cooking') bannerClass = style.cookingBanner;
+    else if (topic === 'football') bannerClass = style.footballBanner;
+    else if (topic === 'coding') bannerClass = style.codingBanner;
+    else if (username) bannerClass = style.usernameBanner;
+    else bannerClass = style.articlesBanner;
 
     if (isLoading) {
       return <Loading />;
@@ -105,11 +84,11 @@ class ArticlesList extends Component {
       return (
         <main>
           <div className={bannerClass}>
-            <h1 className={style.title}>
+            <div className={style.pageTitle}>
               {(topic && topic[0].toUpperCase() + topic.slice(1)) ||
                 username ||
                 'NC News'}
-            </h1>
+            </div>
           </div>
           <ArticleAdder addArticle={this.addArticle} user={user} />
           <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />

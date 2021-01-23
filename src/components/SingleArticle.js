@@ -9,29 +9,6 @@ import Vote from './Vote';
 import style from './styles/article.module.css';
 import userAvatar from '../assets/nc-avatar-01.svg';
 
-// const SingleArticleContainer = styled.section`
-//   margin: 1.8rem 0;
-//   padding: 2rem;
-//   padding-top: 1.4rem;
-//   background-color: white;
-//   border: 1px solid #b5bdc4;
-//   border-radius: 1rem;
-//   box-shadow: 1.5px 3px 4px #888888;
-//   display: grid;
-//   grid-template-columns: auto 40px;
-//   grid-template-areas: 'content reactions';
-
-//   @media screen and (max-width: 600px) {
-//     border-radius: 0rem;
-//   }
-// `;
-// const Title = styled.h2`
-//   font-size: 3.6rem;
-//   font-weight: 600;
-//   color: #202428;
-//   margin-bottom: 3rem;
-// `;
-
 class SingleArticle extends Component {
   state = {
     article: {},
@@ -156,7 +133,7 @@ class SingleArticle extends Component {
                   </div>
                 </div>
 
-                <div className={style.reactions}>
+                <div className={style.singleArticleReactions}>
                   <div className={style.votes}>
                     <Vote
                       votes={article.votes}
