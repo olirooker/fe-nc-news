@@ -7,8 +7,10 @@ import Loading from './Loading';
 import ErrorMessage from './ErrorMessage';
 import Vote from './Vote';
 import userAvatar from '../assets/nc-avatar-01.svg';
+import { RiDeleteBin2Line } from 'react-icons/ri';
 import articleStyle from './styles/article.module.css';
 import cardStyle from './styles/card.module.css';
+import buttonStyle from './styles/button.module.css';
 
 class SingleArticle extends Component {
   state = {
@@ -118,7 +120,7 @@ class SingleArticle extends Component {
                     </div>
                   </div>
                   <h2 className={articleStyle.title}>{article.title}</h2>
-                  <p className={articleStyle.body}>{article.body}</p>
+                  <p className={articleStyle.articleBody}>{article.body}</p>
                   <div className={articleStyle.tagsContainer}>
                     <Link
                       to={`/${article.topic}/articles`}
@@ -146,7 +148,12 @@ class SingleArticle extends Component {
 
                 <div>
                   {article.author === username ? (
-                    <button onClick={this.handleClick}>Delete Article</button>
+                    <button
+                      onClick={this.handleClick}
+                      className={buttonStyle.deleteButton}
+                    >
+                      <RiDeleteBin2Line />
+                    </button>
                   ) : (
                     <p hidden>cannot delete</p>
                   )}

@@ -43,8 +43,12 @@
   margin-bottom: 1rem;
 }
 
-.body {
+.articleBody {
   margin-bottom: 3rem;
+}
+
+.commentBody {
+  margin-bottom: 1rem;
 }
 
 .tagsContainer {

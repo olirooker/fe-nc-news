@@ -32,4 +32,17 @@
 }
 
 .deleteButton {
+  composes: postArticleButton;
+  width: auto;
+  background: #d00000;
+  border: 1px solid #d00000;
+  font-size: 2rem;
+  padding: 1.2rem;
+  margin-top: 1.6rem;
+}
+
+.deleteButton:hover {
+  transition: all 200ms ease-in-out;
+  background: #fff;
+  color: #d00000;
 }

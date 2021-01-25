@@ -50,7 +50,10 @@ class CommentCard extends Component {
             <div className={articleStyle.articleDetailsContainer}>
               <div className={articleStyle.postDetailsContainer}>
                 <div className={articleStyle.postDetails}>
-                  <Link to={`/users/${commentData.author}/articles`}>
+                  <Link
+                    to={`/users/${commentData.author}/articles`}
+                    className={articleStyle.author}
+                  >
                     {commentData.author}
                   </Link>
                   <p className={articleStyle.time}>
@@ -58,7 +61,7 @@ class CommentCard extends Component {
                   </p>
                 </div>
               </div>
-              <p className={articleStyle.body}>{commentData.body}</p>
+              <p className={articleStyle.commentBody}>{commentData.body}</p>
             </div>
 
             <div className={articleStyle.reactions}>
