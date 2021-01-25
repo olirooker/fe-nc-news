@@ -18,7 +18,6 @@ class SingleArticle extends Component {
     isLoading: true,
     hasError: false,
     errorMessage: '',
-    username: 'jessjelly',
     isDeleted: false,
   };
 
@@ -29,12 +28,9 @@ class SingleArticle extends Component {
         this.setState({ article, isLoading: false });
       })
       .catch((err) => {
-        // console.dir(err);
         const {
           response: { status, statusText },
         } = err;
-        // console.log(status)
-        // console.log(statusText)
         this.setState({
           hasError: true,
           errorMessage: `Article not found ${status}. ${statusText}`,
@@ -75,7 +71,7 @@ class SingleArticle extends Component {
       username,
       isDeleted,
     } = this.state;
-    const { article_id } = this.props;
+    const { article_id, user } = this.props;
 
     let topicClass;
     if (article.topic === 'cooking') topicClass = articleStyle.topicCooking;
@@ -147,7 +143,7 @@ class SingleArticle extends Component {
                 </div>
 
                 <div>
-                  {article.author === username ? (
+                  {article.author === user.username ? (
                     <button
                       onClick={this.handleClick}
                       className={buttonStyle.deleteButton}
@@ -163,7 +159,7 @@ class SingleArticle extends Component {
           </div>
 
           <section>
-            <CommentsList article_id={article_id} />
+            <CommentsList article_id={article_id} user={user} />
           </section>
         </main>
       );

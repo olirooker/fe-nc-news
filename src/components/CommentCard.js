@@ -38,7 +38,7 @@ class CommentCard extends Component {
   };
 
   render() {
-    const { commentData } = this.props;
+    const { commentData, user } = this.props;
     const { username, hasError, errorMessage } = this.state;
 
     if (hasError) {
@@ -71,7 +71,7 @@ class CommentCard extends Component {
               />
             </div>
             <div>
-              {commentData.author === username ? (
+              {commentData.author === user.username ? (
                 <button
                   onClick={this.handleClick}
                   className={buttonStyle.deleteButton}

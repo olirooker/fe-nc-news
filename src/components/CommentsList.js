@@ -6,92 +6,97 @@ import Loading from './Loading';
 import Query from './Query';
 
 class CommentsList extends Component {
-    state = {
-        comments: [],
-        isLoading: true,
-        order: 'desc',
-        sort_by: 'created_at',
+  state = {
+    comments: [],
+    isLoading: true,
+    order: 'desc',
+    sort_by: 'created_at',
+  };
+
+  componentDidMount() {
+    const { article_id } = this.props;
+
+    getArticleComments(article_id).then((comments) => {
+      this.setState({ comments, isLoading: false });
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { article_id } = this.props;
+    const { order, sort_by } = this.state;
+    const newOrder = prevState.order !== this.state.order;
+    const newSort = prevState.sort_by !== this.state.sort_by;
+
+    console.log('hello', 'cDU in Comments List');
+
+    if (newOrder || newSort) {
+      getArticleComments(article_id, order, sort_by).then((comments) => {
+        this.setState({ comments });
+      });
     }
+  }
 
-    componentDidMount() {
-        const { article_id } = this.props;
+  addComment = (commentToAdd) => {
+    const { article_id } = this.props;
 
-        getArticleComments(article_id).then((comments) => {
-            this.setState({ comments, isLoading: false })
-        });
-    };
+    postComment(commentToAdd, article_id).then((newComment) => {
+      this.setState((currentState) => {
+        return {
+          comments: [newComment, ...currentState.comments],
+        };
+      });
+    });
+  };
 
-    componentDidUpdate(prevProps, prevState) {
-        const { article_id } = this.props;
-        const { order, sort_by } = this.state;
-        const newOrder = prevState.order !== this.state.order;
-        const newSort = prevState.sort_by !== this.state.sort_by;
+  changeOrder = (newOrder) => {
+    this.setState({ order: newOrder });
+  };
 
-        console.log('hello', 'cDU in Comments List')
+  changeSort = (newSort) => {
+    this.setState({ sort_by: newSort });
+  };
 
-        if (newOrder || newSort) {
-            getArticleComments(article_id, order, sort_by).then((comments) => {
-                this.setState({ comments });
-            });
-        }
-    };
+  removeComment = (comment_id) => {
+    this.setState((previousState) => {
+      const newComments = previousState.comments.filter((comment) => {
+        return comment.comment_id !== comment_id;
+      });
+      const newState = {
+        comments: newComments,
+      };
+      return newState;
+    });
+  };
 
-    addComment = (commentToAdd) => {
-        const { article_id } = this.props;
+  render() {
+    const { comments, isLoading } = this.state;
+    const { user } = this.props;
 
-        postComment(commentToAdd, article_id).then((newComment) => {
-            this.setState(currentState => {
-                return {
-                    comments: [newComment, ...currentState.comments],
-                };
-            });
-        });
-    };
-
-    changeOrder = (newOrder) => {
-        this.setState({ order: newOrder });
-    };
-
-    changeSort = (newSort) => {
-        this.setState({ sort_by: newSort });
-    };
-
-    removeComment = (comment_id) => {
-        this.setState(previousState => {
-            const newComments = previousState.comments.filter(comment => {
-                return comment.comment_id !== comment_id;
-            })
-            const newState = {
-                comments: newComments,
-            };
-            return newState;
-        })
-    };
-
-    render() {
-        const { comments, isLoading } = this.state;
-        // const { article_id } = this.props;
-
-        return (
-            <section>
-                <section>
-                    <CommentAdder addComment={this.addComment} />
-                </section>
-                <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />
-                {isLoading ? (
-                    <Loading />
-                ) : (
-                        <ul>
-                            {comments.map(comment => {
-                                return (
-                                    <CommentCard commentData={comment} removeComment={this.removeComment} key={comment.comment_id} />
-                                )
-                            })}
-                        </ul>
-                    )}
-            </section>
-        );
-    }
+    return (
+      <section>
+        <section>
+          <CommentAdder addComment={this.addComment} />
+        </section>
+        <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <ul>
+            {comments.map((comment) => {
+              return (
+                <CommentCard
+                  commentData={comment}
+                  removeComment={this.removeComment}
+                  key={comment.comment_id}
+                  user={user}
+                />
+              );
+            })}
+          </ul>
+        )}
+      </section>
+    );
+  }
 }
 
 export default CommentsList;

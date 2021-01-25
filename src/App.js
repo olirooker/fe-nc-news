@@ -51,7 +51,10 @@ class App extends Component {
               path='/users/:username/articles'
               user={this.state.user}
             />
-            <SingleArticle path='/articles/:article_id' />
+            <SingleArticle
+              path='/articles/:article_id'
+              user={this.state.user}
+            />
             <TopicsList path='/topics' />
             <UsersList path='/users/:username' />
             <ErrorMessage default errorMessage='Page not found!' />
