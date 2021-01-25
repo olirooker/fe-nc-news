@@ -1,25 +1,19 @@
-import React, { Component } from "react";
-import { Link } from "@reach/router";
-import moment from "moment";
-import Vote from "./Vote";
-import styled from "styled-components";
-import { deleteComment } from "../api";
-import ErrorMessage from "./ErrorMessage";
-
-const CommentContainer = styled.div`
-  margin: 1.5rem 0;
-  padding: 5px 10px;
-  background-color: white;
-  border: 1px solid lightgrey;
-  box-shadow: 3px 6px 8px #888888;
-  border-left: 5px solid blue;
-`;
+import React, { Component } from 'react';
+import { Link } from '@reach/router';
+import moment from 'moment';
+import Vote from './Vote';
+import { deleteComment } from '../api';
+import ErrorMessage from './ErrorMessage';
+import { RiDeleteBin2Line } from 'react-icons/ri';
+import cardStyle from './styles/card.module.css';
+import articleStyle from './styles/article.module.css';
+import buttonStyle from './styles/button.module.css';
 
 class CommentCard extends Component {
   state = {
-    username: "jessjelly",
+    username: 'jessjelly',
     hasError: false,
-    errorMessage: "",
+    errorMessage: '',
   };
 
   handleClick = (event) => {
@@ -51,32 +45,42 @@ class CommentCard extends Component {
       return <ErrorMessage errorMessage={errorMessage} />;
     } else {
       return (
-        <CommentContainer>
-          <div>
-            <p>
-              Posted by{" "}
-              <Link to={`/users/${commentData.author}/articles`}>
-                {commentData.author}
-              </Link>
-              , {moment(commentData.created_at).fromNow()}
-            </p>
-            <Vote
-              votes={commentData.votes}
-              comment_id={commentData.comment_id}
-            />
-          </div>
+        <div className={cardStyle.commentCard}>
+          <div className={cardStyle.singleCard}>
+            <div className={articleStyle.articleDetailsContainer}>
+              <div className={articleStyle.postDetailsContainer}>
+                <div className={articleStyle.postDetails}>
+                  <Link to={`/users/${commentData.author}/articles`}>
+                    {commentData.author}
+                  </Link>
+                  <p className={articleStyle.time}>
+                    {moment(commentData.created_at).fromNow()}
+                  </p>
+                </div>
+              </div>
+              <p className={articleStyle.body}>{commentData.body}</p>
+            </div>
 
-          <div>
-            <p>{commentData.body}</p>
+            <div className={articleStyle.reactions}>
+              <Vote
+                votes={commentData.votes}
+                comment_id={commentData.comment_id}
+              />
+            </div>
+            <div>
+              {commentData.author === username ? (
+                <button
+                  onClick={this.handleClick}
+                  className={buttonStyle.deleteButton}
+                >
+                  <RiDeleteBin2Line />
+                </button>
+              ) : (
+                <p hidden>cannot delete</p>
+              )}
+            </div>
           </div>
-          <div>
-            {commentData.author === username ? (
-              <button onClick={this.handleClick}>Delete comment</button>
-            ) : (
-              <p hidden>cannot delete</p>
-            )}
-          </div>
-        </CommentContainer>
+        </div>
       );
     }
   }

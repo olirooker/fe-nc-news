@@ -29,6 +29,23 @@
   padding: 0.8rem;
 }
 
+/* for the CommentCard component */
+
+.commentCard {
+  composes: card;
+  margin: 0;
+  border-radius: 0;
+}
+
+.commentCard:first-child {
+  border-radius: 1rem 1rem 0 0;
+}
+
+.commentCard:last-child {
+  border-radius: 0 0 1rem 1rem;
+  margin-bottom: 5rem;
+}
+
 /* for the CommentAdder component */
 .commentAdderCard {
   composes: card;
