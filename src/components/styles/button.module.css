@@ -1,4 +1,4 @@
-.postArticleButton {
+.fullWidth {
   width: 100%;
   border-radius: 4px;
   background: #256ce1;
@@ -14,14 +14,14 @@
   cursor: pointer;
 }
 
-.postArticleButton:hover {
+.fullWidth:hover {
   transition: all 200ms ease-in-out;
   background: #e5edfa;
   color: #0f326c;
 }
 
 .postButton {
-  composes: postArticleButton;
+  composes: fullWidth;
   margin-top: 1rem;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .deleteButton {
-  composes: postArticleButton;
+  composes: fullWidth;
   width: auto;
   background: #d00000;
   border: 1px solid #d00000;

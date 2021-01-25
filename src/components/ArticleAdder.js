@@ -85,7 +85,7 @@ class ArticleAdder extends Component {
     return (
       <div className={cardStyle.articleAdderCard}>
         <button
-          className={buttonStyle.postArticleButton}
+          className={buttonStyle.fullWidth}
           onClick={this.handleButtonPress}
         >
           Post An Article
