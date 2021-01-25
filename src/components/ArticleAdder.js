@@ -1,99 +1,11 @@
 import React, { Component } from 'react';
 import { postArticle } from '../api';
-import styled from 'styled-components';
 import ErrorMessage from './ErrorMessage';
 import SignInButton from './SignInButton';
 import CreateAccountButton from './CreateAccountButton';
-
-const StyledArticleAdder = styled.section`
-  margin: 1.8rem 0;
-  padding: 0.8rem;
-  background-color: white;
-  border: 1px solid #b5bdc4;
-  border-radius: 1rem;
-  box-shadow: 1.5px 3px 4px #888888;
-
-  @media screen and (max-width: 600px) {
-    border-radius: 0rem;
-  }
-`;
-const PostArticleButton = styled.button`
-  width: 100%;
-  border-radius: 4px;
-  background: #256ce1;
-  padding: 10px 22px;
-  color: #fff;
-  font-size: 1.4rem;
-  font-weight: 600;
-  border: 1px solid #256ce1;
-  outline: none;
-  transition: all 300ms ease-in-out;
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
-
-  &:hover {
-    transition: all 300ms ease-in-out;
-    background: #fff;
-    color: #256ce1;
-  }
-`;
-const UserSignedOut = styled.div`
-  display: block;
-  text-align: center;
-  margin: 3rem;
-`;
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 3rem;
-`;
-const UserSignedIn = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0;
-`;
-const Label = styled.label`
-  display: block;
-  width: 50vw;
-  font-size: 1.6rem;
-  font-weight: 500;
-`;
-const Input = styled.input`
-  width: stretch;
-  padding: 1rem;
-  border: 1px solid #b5bdc4;
-  border-radius: 4px;
-  margin: 0.4rem 0 1rem 0;
-`;
-const BodyTextarea = styled.textarea`
-  min-width: stretch;
-  max-width: stretch;
-  padding: 1rem;
-  border: 1px solid #b5bdc4;
-  border-radius: 4px;
-`;
-const PostButton = styled.button`
-  border-radius: 4px;
-  background: #256ce1;
-  padding: 10px 22px;
-  margin-top: 1rem;
-  color: #fff;
-  font-size: 1.4rem;
-  font-weight: 600;
-  border: 1px solid #256ce1;
-  outline: none;
-  transition: all 300ms ease-in-out;
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
-
-  &:hover {
-    transition: all 300ms ease-in-out;
-    background: #fff;
-    color: #256ce1;
-  }
-`;
+import articleStyle from './styles/article.module.css';
+import cardStyle from './styles/card.module.css';
+import buttonStyle from './styles/button.module.css';
 
 class ArticleAdder extends Component {
   state = {
@@ -144,19 +56,23 @@ class ArticleAdder extends Component {
     const { user } = this.props;
 
     return (
-      <StyledArticleAdder>
-        <PostArticleButton onClick={this.handleButtonPress}>
+      <div className={cardStyle.articleAdderCard}>
+        <button
+          className={buttonStyle.postArticleButton}
+          onClick={this.handleButtonPress}
+        >
           Post An Article
-        </PostArticleButton>
+        </button>
         {hasError ? (
           <ErrorMessage errorMessage={errorMessage} />
         ) : buttonPress ? (
           user.username ? (
-            <UserSignedIn>
+            <div className={articleStyle.userSignedIn}>
               <form onSubmit={this.handleSubmit}>
-                <Label>
+                <label className={articleStyle.adderLabel}>
                   Topic:
-                  <Input
+                  <input
+                    className={articleStyle.adderInput}
                     type='text'
                     name='topic'
                     id='topic'
@@ -165,10 +81,11 @@ class ArticleAdder extends Component {
                     onChange={this.handleChange}
                     required
                   />
-                </Label>
-                <Label>
+                </label>
+                <label className={articleStyle.adderLabel}>
                   Title:
-                  <Input
+                  <input
+                    className={articleStyle.adderInput}
                     type='text'
                     name='title'
                     id='title'
@@ -177,10 +94,11 @@ class ArticleAdder extends Component {
                     onChange={this.handleChange}
                     required
                   />
-                </Label>
-                <Label>
+                </label>
+                <label className={articleStyle.adderLabel}>
                   Body:
-                  <BodyTextarea
+                  <textarea
+                    className={articleStyle.adderTextarea}
                     type='text'
                     name='body'
                     id='body'
@@ -189,25 +107,27 @@ class ArticleAdder extends Component {
                     placeholder='Article body...'
                     onChange={this.handleChange}
                     required
-                  ></BodyTextarea>
-                </Label>
-                <PostButton type='submit'>Post</PostButton>
+                  ></textarea>
+                </label>
+                <button className={buttonStyle.postButton} type='submit'>
+                  Post
+                </button>
               </form>
-            </UserSignedIn>
+            </div>
           ) : (
-            <UserSignedOut>
+            <div className={articleStyle.userSignedOut}>
               <p>
                 You must be signed in to post an article. Please sign in or
                 create an account.
               </p>
-              <ButtonContainer>
+              <div className={articleStyle.buttonContainer}>
                 <SignInButton />
                 <CreateAccountButton />
-              </ButtonContainer>
-            </UserSignedOut>
+              </div>
+            </div>
           )
         ) : null}
-      </StyledArticleAdder>
+      </div>
     );
   }
 }

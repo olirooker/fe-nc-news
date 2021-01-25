@@ -23,15 +23,29 @@
   grid-template-areas: 'content reactions';
 }
 
+/* for the ArticleAdder component */
+.articleAdderCard {
+  composes: card;
+  padding: 0.8rem;
+}
+
+/* for the CommentAdder component */
 .commentAdderCard {
   composes: card;
   margin: 1.5rem 0;
   padding: 5px 10px;
 }
 
+/* for the Queries component */
 .queries {
   composes: card;
   padding: 0.8rem;
   display: flex;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    border-radius: 0rem;
+  }
 }

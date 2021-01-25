@@ -6,9 +6,9 @@ import UsersList from './components/UsersList';
 import SingleArticle from './components/SingleArticle';
 import ErrorMessage from './components/ErrorMessage';
 import SignIn from './components/SignIn';
+import Header from './components/Header';
 import styled from 'styled-components';
 import { getUser } from './api';
-import Header from './components/Header';
 
 const AppContainer = styled.div`
   margin: 0 auto;
