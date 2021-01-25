@@ -197,7 +197,7 @@ class Header extends Component {
                     Select a topic
                   </option>
                   <option key='all-topics' value='/'>
-                    all topics
+                    All Topics
                   </option>
                   {this.state.topics.map((topic) => {
                     return (

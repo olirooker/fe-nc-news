@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.message {
+  text-align: center;
+  font-weight: 600;
+  margin: 3rem 0;
+  font-size: 3rem;
+}
+
+.goBack {
+  width: 20%;
+}
