@@ -132,7 +132,7 @@
   transition: all 200ms ease-in-out;
 }
 
-/* ArticleAdder Component */
+/* ArticleAdder and CommentAdder Components */
 
 .userSignedIn {
   display: flex;

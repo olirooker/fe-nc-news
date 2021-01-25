@@ -11,6 +11,8 @@ class CommentsList extends Component {
     isLoading: true,
     order: 'desc',
     sort_by: 'created_at',
+    hasError: false,
+    errorMessage: '',
   };
 
   componentDidMount() {
@@ -27,8 +29,6 @@ class CommentsList extends Component {
     const newOrder = prevState.order !== this.state.order;
     const newSort = prevState.sort_by !== this.state.sort_by;
 
-    console.log('hello', 'cDU in Comments List');
-
     if (newOrder || newSort) {
       getArticleComments(article_id, order, sort_by).then((comments) => {
         this.setState({ comments });
@@ -39,13 +39,24 @@ class CommentsList extends Component {
   addComment = (commentToAdd) => {
     const { article_id } = this.props;
 
-    postComment(commentToAdd, article_id).then((newComment) => {
-      this.setState((currentState) => {
-        return {
-          comments: [newComment, ...currentState.comments],
-        };
+    postComment(commentToAdd, article_id)
+      .then((newComment) => {
+        this.setState((currentState) => {
+          return {
+            comments: [newComment, ...currentState.comments],
+          };
+        });
+      })
+      .catch((err) => {
+        const {
+          response: { status, statusText },
+        } = err;
+
+        this.setState({
+          hasError: true,
+          errorMessage: `Cannot post comment ... ${status}. ${statusText}`,
+        });
       });
-    });
   };
 
   changeOrder = (newOrder) => {
@@ -75,7 +86,7 @@ class CommentsList extends Component {
     return (
       <section>
         <section>
-          <CommentAdder addComment={this.addComment} />
+          <CommentAdder addComment={this.addComment} user={user} />
         </section>
         <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />
         {isLoading ? (
