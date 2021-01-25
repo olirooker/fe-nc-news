@@ -43,7 +43,12 @@ class ArticleAdder extends Component {
 
     event.preventDefault();
 
-    const newArticle = { body, username: user.username, title, topic };
+    const newArticle = {
+      body,
+      username: user.username,
+      title,
+      topic: topic.toLowerCase(),
+    };
 
     postArticle(newArticle)
       .then((article) => {
