@@ -11,7 +11,6 @@ import buttonStyle from './styles/button.module.css';
 
 class CommentCard extends Component {
   state = {
-    username: 'jessjelly',
     hasError: false,
     errorMessage: '',
   };
@@ -39,7 +38,7 @@ class CommentCard extends Component {
 
   render() {
     const { commentData, user } = this.props;
-    const { username, hasError, errorMessage } = this.state;
+    const { hasError, errorMessage } = this.state;
 
     if (hasError) {
       return <ErrorMessage errorMessage={errorMessage} />;
