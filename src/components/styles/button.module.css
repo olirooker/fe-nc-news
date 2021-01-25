@@ -1,5 +1,4 @@
-.fullWidth {
-  width: 100%;
+.button {
   border-radius: 4px;
   background: #256ce1;
   padding: 10px 22px;
@@ -12,6 +11,21 @@
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
+}
+
+.button:hover {
+  transition: all 200ms ease-in-out;
+  background: #e5edfa;
+  color: #0f326c;
+}
+
+.createAccount {
+  margin-left: 1rem;
+}
+
+.fullWidth {
+  composes: button;
+  width: 100%;
 }
 
 .fullWidth:hover {

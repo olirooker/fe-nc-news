@@ -1,6 +1,6 @@
 import React from 'react';
 import cardStyle from './styles/card.module.css';
-import dropDownStyle from './styles/dropDownStyle.module.css';
+import dropDownStyle from './styles/dropdown.module.css';
 
 const Query = ({ changeOrder, changeSort }) => {
   const handleOrderChange = (event) => {
