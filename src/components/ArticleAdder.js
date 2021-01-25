@@ -6,6 +6,9 @@ import CreateAccountButton from './CreateAccountButton';
 import articleStyle from './styles/article.module.css';
 import cardStyle from './styles/card.module.css';
 import buttonStyle from './styles/button.module.css';
+import iconStyle from './styles/icon.module.css';
+import LoadingButton from './LoadingButton';
+import { TiTick } from 'react-icons/ti';
 
 class ArticleAdder extends Component {
   state = {
@@ -15,12 +18,17 @@ class ArticleAdder extends Component {
     hasError: false,
     errorMessage: '',
     buttonPress: false,
+    postButtonPress: false,
+    postIsLoading: false,
   };
 
   handleButtonPress = (event) => {
     event.preventDefault();
     this.setState((currentState) => {
-      return { buttonPress: !currentState.buttonPress };
+      return {
+        buttonPress: !currentState.buttonPress,
+        postButtonPress: false,
+      };
     });
   };
 
@@ -32,12 +40,24 @@ class ArticleAdder extends Component {
   handleSubmit = (event) => {
     const { addArticle, user } = this.props;
     const { body, title, topic } = this.state;
+
     event.preventDefault();
+
     const newArticle = { body, username: user.username, title, topic };
+
     postArticle(newArticle)
       .then((article) => {
         addArticle(article);
-        this.setState({ body: '', title: '', topic: '' });
+        this.setState({
+          body: '',
+          title: '',
+          topic: '',
+          postButtonPress: true,
+          postIsLoading: true,
+        });
+      })
+      .then(() => {
+        this.setState({ postIsLoading: false });
       })
       .catch((err) => {
         const {
@@ -52,7 +72,14 @@ class ArticleAdder extends Component {
   };
 
   render() {
-    const { hasError, errorMessage, buttonPress } = this.state;
+    const {
+      hasError,
+      errorMessage,
+      buttonPress,
+      postButtonPress,
+      postIsLoading,
+    } = this.state;
+
     const { user } = this.props;
 
     return (
@@ -110,7 +137,15 @@ class ArticleAdder extends Component {
                   ></textarea>
                 </label>
                 <button className={buttonStyle.postButton} type='submit'>
-                  Post
+                  {postButtonPress ? (
+                    postIsLoading ? (
+                      <LoadingButton />
+                    ) : (
+                      <TiTick className={iconStyle.tick} />
+                    )
+                  ) : (
+                    <>Post</>
+                  )}
                 </button>
               </form>
             </div>

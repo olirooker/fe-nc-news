@@ -16,8 +16,8 @@
 
 .postArticleButton:hover {
   transition: all 200ms ease-in-out;
-  background: #fff;
-  color: #256ce1;
+  background: #e5edfa;
+  color: #0f326c;
 }
 
 .postButton {
@@ -27,8 +27,8 @@
 
 .postButton:hover {
   transition: all 200ms ease-in-out;
-  background: #fff;
-  color: #256ce1;
+  background: #e5edfa;
+  color: #0f326c;
 }
 
 .deleteButton {
