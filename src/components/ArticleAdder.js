@@ -3,7 +3,7 @@ import { postArticle } from '../api';
 import ErrorMessage from './ErrorMessage';
 import SignInButton from './SignInButton';
 import CreateAccountButton from './CreateAccountButton';
-import articleStyle from './styles/article.module.css';
+import inputStyle from './styles/input.module.css';
 import cardStyle from './styles/card.module.css';
 import buttonStyle from './styles/button.module.css';
 import iconStyle from './styles/icon.module.css';
@@ -99,12 +99,12 @@ class ArticleAdder extends Component {
           <ErrorMessage errorMessage={errorMessage} />
         ) : buttonPress ? (
           user.username ? (
-            <div className={articleStyle.userSignedIn}>
+            <div className={inputStyle.userSignedIn}>
               <form onSubmit={this.handleSubmit}>
-                <label className={articleStyle.adderLabel}>
+                <label className={inputStyle.adderLabel}>
                   Topic:
                   <input
-                    className={articleStyle.adderInput}
+                    className={inputStyle.adderInput}
                     type='text'
                     name='topic'
                     id='topic'
@@ -114,10 +114,10 @@ class ArticleAdder extends Component {
                     required
                   />
                 </label>
-                <label className={articleStyle.adderLabel}>
+                <label className={inputStyle.adderLabel}>
                   Title:
                   <input
-                    className={articleStyle.adderInput}
+                    className={inputStyle.adderInput}
                     type='text'
                     name='title'
                     id='title'
@@ -127,10 +127,10 @@ class ArticleAdder extends Component {
                     required
                   />
                 </label>
-                <label className={articleStyle.adderLabel}>
+                <label className={inputStyle.adderLabel}>
                   Body:
                   <textarea
-                    className={articleStyle.adderTextarea}
+                    className={inputStyle.adderTextarea}
                     type='text'
                     name='body'
                     id='body'
@@ -155,12 +155,12 @@ class ArticleAdder extends Component {
               </form>
             </div>
           ) : (
-            <div className={articleStyle.userSignedOut}>
+            <div className={inputStyle.userSignedOut}>
               <p>
                 You must be signed in to post an article. Please sign in or
                 create an account.
               </p>
-              <div className={articleStyle.buttonContainer}>
+              <div className={inputStyle.buttonContainer}>
                 <SignInButton />
                 <CreateAccountButton />
               </div>

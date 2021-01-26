@@ -2,7 +2,7 @@ import { navigate } from '@reach/router';
 import React, { Component } from 'react';
 import cardStyle from './styles/card.module.css';
 import buttonStyle from './styles/button.module.css';
-import articleStyle from './styles/article.module.css';
+import inputStyle from './styles/input.module.css';
 
 class SignIn extends Component {
   state = {
@@ -27,7 +27,7 @@ class SignIn extends Component {
   render() {
     return (
       <div className={cardStyle.card}>
-        <div className={articleStyle.signInContainer}>
+        <div className={inputStyle.signInContainer}>
           <form onSubmit={this.handleSubmit}>
             <label>
               Sign in to your account:
@@ -35,7 +35,7 @@ class SignIn extends Component {
               <input
                 type='text'
                 name='username'
-                className={articleStyle.signInInput}
+                className={inputStyle.signInInput}
                 onChange={this.handleChange}
                 value={this.state.username}
               />

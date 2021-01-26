@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SignInButton from './SignInButton';
 import CreateAccountButton from './CreateAccountButton';
-import articleStyle from './styles/article.module.css';
+import inputStyle from './styles/input.module.css';
 import cardStyle from './styles/card.module.css';
 import buttonStyle from './styles/button.module.css';
 
@@ -47,12 +47,12 @@ class CommentAdder extends Component {
 
         {buttonPress ? (
           user.username ? (
-            <div className={articleStyle.userSignedIn}>
+            <div className={inputStyle.userSignedIn}>
               <form onSubmit={this.handleSubmit}>
-                <label className={articleStyle.adderLabel}>
+                <label className={inputStyle.adderLabel}>
                   Add a comment:
                   <textarea
-                    className={articleStyle.adderTextarea}
+                    className={inputStyle.adderTextarea}
                     type='text'
                     name='body'
                     onChange={this.handleChange}
@@ -67,12 +67,12 @@ class CommentAdder extends Component {
               </form>
             </div>
           ) : (
-            <div className={articleStyle.userSignedOut}>
+            <div className={inputStyle.userSignedOut}>
               <p>
                 You must be signed in to post a comment. Please sign in or
                 create an account.
               </p>
-              <div className={articleStyle.buttonContainer}>
+              <div className={inputStyle.buttonContainer}>
                 <SignInButton />
                 <CreateAccountButton />
               </div>
