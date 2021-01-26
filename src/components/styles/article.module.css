@@ -132,5 +132,14 @@
   transition: all 200ms ease-in-out;
 }
 
+.deletedArticleContainer {
+  text-align: center;
+}
+
+.deletedArticleContainer p {
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
 @media screen and (max-width: 600px) {
 }

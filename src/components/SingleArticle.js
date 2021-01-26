@@ -89,10 +89,18 @@ class SingleArticle extends Component {
         <main>
           <div className={cardStyle.card}>
             {isDeleted ? (
-              <div>
+              <div className={articleStyle.deletedArticleContainer}>
                 <p>This article has been deleted! Go to:</p>
-                <Link to={`/users/${username}/articles`}>My articles</Link>
-                <Link to='/'>All topics</Link>
+
+                <Link
+                  to={`/users/${user.username}/articles`}
+                  className={buttonStyle.deletedArticleBtn}
+                >
+                  My articles
+                </Link>
+                <Link to='/' className={buttonStyle.deletedArticleBtn}>
+                  All topics
+                </Link>
               </div>
             ) : (
               <div className={cardStyle.singleCard}>
