@@ -175,5 +175,28 @@
   margin: 3rem;
 }
 
+/* for SignIn Component */
+
+.signInInput {
+  composes: adderInput;
+  width: 30rem;
+}
+
+.signInContainer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.signInContainer p {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.signInContainer span {
+  font-weight: 600;
+}
+
 @media screen and (max-width: 600px) {
 }

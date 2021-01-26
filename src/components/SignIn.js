@@ -1,51 +1,64 @@
 import { navigate } from '@reach/router';
 import React, { Component } from 'react';
-import styled from 'styled-components';
-
-const SignInContainer = styled.section`
-    margin: 1.5rem 0;
-    padding: 5px 10px;
-    background-color: white;
-    border: 1px solid lightgrey;
-    box-shadow: 3px 6px 8px #888888;
-    text-align: center;
-`
+import cardStyle from './styles/card.module.css';
+import buttonStyle from './styles/button.module.css';
+import articleStyle from './styles/article.module.css';
 
 class SignIn extends Component {
-    state = {
-        username: '',
-    };
+  state = {
+    username: '',
+  };
 
-    handleChange = (event) => {
-        const { value, name } = event.target;
-        this.setState({ [name]: value });
-    };
+  handleChange = (event) => {
+    const { value, name } = event.target;
+    this.setState({ [name]: value });
+  };
 
-    handleSubmit = (event) => {
-        const { username } = this.state;
-        const { authenticateUser } = this.props;
+  handleSubmit = (event) => {
+    const { username } = this.state;
+    const { authenticateUser } = this.props;
 
-        event.preventDefault();
-        authenticateUser(username);
-        this.setState({ username: '' })
-        navigate('/')
-    }
+    event.preventDefault();
+    authenticateUser(username);
+    this.setState({ username: '' });
+    navigate('/');
+  };
 
-    render() {
-        return (
-            <SignInContainer>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Sign in to your account:
-                        <br />
-                        <input type="text" name="username" onChange={this.handleChange} value={this.state.username} />
-                        <br />
-                        <button type="submit" onClick={this.handleChange}>Sign In</button>
-                    </label>
-                </form>
-            </SignInContainer>
-        );
-    }
+  render() {
+    return (
+      <div className={cardStyle.card}>
+        <div className={articleStyle.signInContainer}>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Sign in to your account:
+              <br />
+              <input
+                type='text'
+                name='username'
+                className={articleStyle.signInInput}
+                onChange={this.handleChange}
+                value={this.state.username}
+              />
+              <br />
+              <button
+                type='submit'
+                onClick={this.handleChange}
+                className={buttonStyle.button}
+              >
+                Sign In
+              </button>
+            </label>
+          </form>
+          <p>
+            Hello! Thank you for taking the time to have a look at my work!{' '}
+            <br />
+            To make the most of this demo you can sign in using
+            <span> 'tickle122'</span>.
+          </p>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default SignIn;
