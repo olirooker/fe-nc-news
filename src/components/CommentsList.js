@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getArticleComments, postComment } from '../api';
+import { getArticleComments } from '../api';
 import CommentAdder from './CommentAdder';
 import CommentCard from './CommentCard';
 import Loading from './Loading';
@@ -18,9 +18,20 @@ class CommentsList extends Component {
   componentDidMount() {
     const { article_id } = this.props;
 
-    getArticleComments(article_id).then((comments) => {
-      this.setState({ comments, isLoading: false });
-    });
+    getArticleComments(article_id)
+      .then((comments) => {
+        this.setState({ comments, isLoading: false });
+      })
+      .catch((err) => {
+        const {
+          response: { status, statusText },
+        } = err;
+        this.setState({
+          hasError: true,
+          errorMessage: `Comments not found ${status}. ${statusText}`,
+          isLoading: false,
+        });
+      });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -36,27 +47,31 @@ class CommentsList extends Component {
     }
   }
 
-  addComment = (commentToAdd) => {
-    const { article_id } = this.props;
+  addComment = (newComment) => {
+    // const { article_id } = this.props;
 
-    postComment(commentToAdd, article_id)
-      .then((newComment) => {
-        this.setState((currentState) => {
-          return {
-            comments: [newComment, ...currentState.comments],
-          };
-        });
-      })
-      .catch((err) => {
-        const {
-          response: { status, statusText },
-        } = err;
+    this.setState((currentState) => {
+      return { comments: [newComment, ...currentState.comments] };
+    });
 
-        this.setState({
-          hasError: true,
-          errorMessage: `Cannot post comment ... ${status}. ${statusText}`,
-        });
-      });
+    // postComment(commentToAdd, article_id)
+    //   .then((newComment) => {
+    //     this.setState((currentState) => {
+    //       return {
+    //         comments: [newComment, ...currentState.comments],
+    //       };
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     const {
+    //       response: { status, statusText },
+    //     } = err;
+
+    //     this.setState({
+    //       hasError: true,
+    //       errorMessage: `Cannot post comment ... ${status}. ${statusText}`,
+    //     });
+    //   });
   };
 
   changeOrder = (newOrder) => {
@@ -81,12 +96,16 @@ class CommentsList extends Component {
 
   render() {
     const { comments, isLoading } = this.state;
-    const { user } = this.props;
+    const { user, article_id } = this.props;
 
     return (
       <section>
         <section>
-          <CommentAdder addComment={this.addComment} user={user} />
+          <CommentAdder
+            addComment={this.addComment}
+            user={user}
+            article_id={article_id}
+          />
         </section>
         <Query changeOrder={this.changeOrder} changeSort={this.changeSort} />
         {isLoading ? (

@@ -61,3 +61,14 @@
 .signInContainer span {
   font-weight: 600;
 }
+
+/*  for the Query Component */
+
+.dropDown {
+  padding: 0.5rem;
+  border-radius: 5px;
+  width: 49%;
+  font-size: 1.6rem;
+  cursor: pointer;
+  border-color: lightgrey;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import cardStyle from './styles/card.module.css';
-import dropDownStyle from './styles/dropdown.module.css';
+import inputStyle from './styles/input.module.css';
 
 const Query = ({ changeOrder, changeSort }) => {
   const handleOrderChange = (event) => {
@@ -16,7 +16,7 @@ const Query = ({ changeOrder, changeSort }) => {
   return (
     <div className={cardStyle.queries}>
       <select
-        className={dropDownStyle.dropDown}
+        className={inputStyle.dropDown}
         defaultValue=''
         onChange={handleOrderChange}
       >
@@ -28,7 +28,7 @@ const Query = ({ changeOrder, changeSort }) => {
       </select>
 
       <select
-        className={dropDownStyle.dropDown}
+        className={inputStyle.dropDown}
         defaultValue=''
         onChange={handleSortChange}
       >

@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import SignInButton from './SignInButton';
 import CreateAccountButton from './CreateAccountButton';
+import ErrorMessage from './ErrorMessage';
+import { postComment } from '../api';
 import inputStyle from './styles/input.module.css';
 import cardStyle from './styles/card.module.css';
 import buttonStyle from './styles/button.module.css';
+import iconStyle from './styles/icon.module.css';
+import LoadingButton from './LoadingButton';
+import { TiTick } from 'react-icons/ti';
 
 class CommentAdder extends Component {
   state = {
     body: '',
+    hasError: false,
+    errorMessage: '',
     buttonPress: false,
+    postButtonPress: false,
+    postIsLoading: false,
   };
 
   handleChange = (event) => {
@@ -18,22 +27,51 @@ class CommentAdder extends Component {
 
   handleSubmit = (event) => {
     const { body } = this.state;
-    const { addComment, user } = this.props;
+    const { addComment, user, article_id } = this.props;
 
     event.preventDefault();
-    addComment({ body, username: user.username });
-    this.setState({ body: '' });
+
+    const newComment = {
+      body,
+      username: user.username,
+    };
+
+    this.setState({ postButtonPress: true, postIsLoading: true });
+
+    postComment(newComment, article_id)
+      .then((comment) => {
+        addComment(comment);
+        this.setState({
+          body: '',
+          postIsLoading: false,
+        });
+      })
+      .catch((err) => {
+        const {
+          response: { status, statusText },
+        } = err;
+        this.setState({
+          hasError: true,
+          errorMessage: `Cannot post comment ... ${status}. ${statusText}`,
+        });
+      });
   };
 
   handleButtonPress = (event) => {
     event.preventDefault();
     this.setState((currentState) => {
-      return { buttonPress: !currentState.buttonPress };
+      return { buttonPress: !currentState.buttonPress, postButtonPress: false };
     });
   };
 
   render() {
-    const { buttonPress } = this.state;
+    const {
+      hasError,
+      errorMessage,
+      buttonPress,
+      postButtonPress,
+      postIsLoading,
+    } = this.state;
     const { user } = this.props;
 
     return (
@@ -44,8 +82,9 @@ class CommentAdder extends Component {
         >
           Post A Comment
         </button>
-
-        {buttonPress ? (
+        {hasError ? (
+          <ErrorMessage errorMessage={errorMessage} />
+        ) : buttonPress ? (
           user.username ? (
             <div className={inputStyle.userSignedIn}>
               <form onSubmit={this.handleSubmit}>
@@ -62,7 +101,15 @@ class CommentAdder extends Component {
                   ></textarea>
                 </label>
                 <button type='submit' className={buttonStyle.postButton}>
-                  Post
+                  {postButtonPress ? (
+                    postIsLoading ? (
+                      <LoadingButton />
+                    ) : (
+                      <TiTick className={iconStyle.tick} />
+                    )
+                  ) : (
+                    <>Post</>
+                  )}
                 </button>
               </form>
             </div>

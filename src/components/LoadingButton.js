@@ -12,7 +12,7 @@ const LoadingContainer = styled.div`
 const LoadingButton = () => {
   return (
     <LoadingContainer>
-      <ReactLoading type={'spin'} color={'#fff'} height={20} width={20} />
+      <ReactLoading type={'spin'} color={'#0f326c'} height={20} width={20} />
     </LoadingContainer>
   );
 };

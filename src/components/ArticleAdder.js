@@ -50,6 +50,8 @@ class ArticleAdder extends Component {
       topic: topic.toLowerCase(),
     };
 
+    this.setState({ postButtonPress: true, postIsLoading: true });
+
     postArticle(newArticle)
       .then((article) => {
         addArticle(article);
@@ -57,18 +59,13 @@ class ArticleAdder extends Component {
           body: '',
           title: '',
           topic: '',
-          postButtonPress: true,
-          postIsLoading: true,
+          postIsLoading: false,
         });
-      })
-      .then(() => {
-        this.setState({ postIsLoading: false });
       })
       .catch((err) => {
         const {
           response: { status, statusText },
         } = err;
-
         this.setState({
           hasError: true,
           errorMessage: `Cannot post article ... ${status}. ${statusText}`,
