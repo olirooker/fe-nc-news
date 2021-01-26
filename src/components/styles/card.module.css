@@ -61,6 +61,14 @@
   justify-content: space-between;
 }
 
+/* for the ErrorMessage component */
+
+.errorMessageCard {
+  composes: card;
+  box-shadow: none;
+  border: none;
+}
+
 @media screen and (max-width: 600px) {
   .card {
     border-radius: 0rem;
