@@ -82,7 +82,7 @@ class ArticleAdder extends Component {
       postIsLoading,
     } = this.state;
 
-    const { user } = this.props;
+    const { user, topic } = this.props;
 
     return (
       <div className={cardStyle.articleAdderCard}>
