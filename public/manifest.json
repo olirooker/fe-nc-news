@@ -1,6 +1,6 @@
 {
-  "short_name": "NC News | Coding, Cooking and Football, what else?",
-  "name": "Create React App Sample",
+  "short_name": "NC News",
+  "name": "NC News | Coding, cooking and football, what else?",
   "icons": [],
   "start_url": ".",
   "display": "standalone",
