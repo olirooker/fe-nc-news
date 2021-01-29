@@ -68,7 +68,6 @@ class SingleArticle extends Component {
       isLoading,
       hasError,
       errorMessage,
-      username,
       isDeleted,
     } = this.state;
     const { article_id, user } = this.props;
