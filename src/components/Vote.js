@@ -6,56 +6,8 @@ import {
   downVoteComment,
 } from '../api';
 import ErrorMessage from './ErrorMessage';
-import styled from 'styled-components';
 import { FaHeart, FaHeartBroken } from 'react-icons/fa';
-
-const VotesContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* align-items: center; */
-  /* justify-items: center; */
-  padding: 0;
-  margin: 0;
-`;
-
-const VoteNumber = styled.p`
-  color: #363d44;
-  margin: 2rem 0;
-  /* outline: solid green 1px; */
-`;
-
-const VoteUp = styled.button`
-  display: block;
-  border: none;
-  cursor: pointer;
-  background: none;
-  /* outline: solid green 1px; */
-  font-size: 2.4rem;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-content: center;
-
-  &:focus {
-    outline: none;
-  }
-`;
-const VoteDown = styled.button`
-  border: none;
-  cursor: pointer;
-  background: none;
-  /* outline: solid green 1px; */
-  font-size: 2.4rem;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-content: center;
-
-  &:focus {
-    outline: none;
-  }
-`;
+import voteStyle from './styles/vote.module.css';
 
 class Vote extends Component {
   state = {
@@ -292,23 +244,31 @@ class Vote extends Component {
       return <ErrorMessage errorMessage={errorMessage} />;
     } else {
       return (
-        <VotesContainer>
-          <VoteUp onClick={this.handleUpVoteClick} disabled={hasVotedDown}>
+        <div className={voteStyle.votesContainer}>
+          <button
+            className={voteStyle.voteUp}
+            onClick={this.handleUpVoteClick}
+            disabled={hasVotedDown}
+          >
             {hasVotedUp ? (
               <FaHeart color='red' />
             ) : (
               <FaHeart color='lightgrey' />
             )}
-          </VoteUp>
-          <VoteNumber>{votes + voteChange}</VoteNumber>
-          <VoteDown onClick={this.handleDownVoteClick} disabled={hasVotedUp}>
+          </button>
+          <p className={voteStyle.voteNumber}>{votes + voteChange}</p>
+          <button
+            className={voteStyle.voteDown}
+            onClick={this.handleDownVoteClick}
+            disabled={hasVotedUp}
+          >
             {hasVotedDown ? (
               <FaHeartBroken color='darkred' />
             ) : (
               <FaHeartBroken color='lightgrey' />
             )}
-          </VoteDown>
-        </VotesContainer>
+          </button>
+        </div>
       );
     }
   }
