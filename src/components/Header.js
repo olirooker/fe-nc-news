@@ -1,140 +1,9 @@
 import React, { Component } from 'react';
 import { Link, navigate } from '@reach/router';
 import { getTopics } from '../api';
-import styled from 'styled-components';
 import SignInButton from './SignInButton';
 import CreateAccountButton from './CreateAccountButton';
-
-const Nav = styled.nav`
-  background: #fff;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
-  height: 80px;
-  display: flex;
-  align-content: center;
-  padding: 0.5rem 3rem;
-  z-index: 1;
-`;
-const NavContainer = styled.div`
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-`;
-const NavLink = styled(Link)`
-  color: #333;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  margin-right: 3rem;
-  padding: 0 1rem;
-  height: 100%;
-  cursor: pointer;
-  font-size: 3rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  white-space: nowrap;
-  background: -webkit-linear-gradient(180deg, #264653, #2a9d8f);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  &:hover {
-    color: black;
-  }
-`;
-const TopicsDropDown = styled.div`
-  display: flex;
-  align-items: center;
-  /* margin-right: -24px; */
-
-  @media screen and (max-width: 680px) {
-    display: none;
-  }
-`;
-const DropDownSelect = styled.select`
-  padding: 0.5rem;
-  border-radius: 5px;
-  width: 30rem;
-  font-size: 1.6rem;
-  cursor: pointer;
-  border-color: lightgrey;
-  /* display: flex;
-  align-items: center;
-  justify-content: space-between; */
-
-  @media screen and (max-width: 800px) {
-    width: 20rem;
-  }
-`;
-const NavUserSignedOut = styled.div`
-  display: flex;
-  align-items: center;
-`;
-const MobileHide = styled.div`
-  @media screen and (max-width: 450px) {
-    display: none;
-  }
-`;
-const NavUserSignedIn = styled.button`
-  position: relative;
-  display: inline-block;
-  align-items: center;
-  background: none;
-  border: none;
-  font-size: 1.6rem;
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-  }
-`;
-const UserMenu = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-const UserAvatar = styled.img`
-  height: 4rem;
-  width: auto;
-  border-radius: 50%;
-`;
-const UserWelcome = styled.p`
-  margin: 10px;
-`;
-const DropDownList = styled.ul`
-  position: absolute;
-  width: 100%;
-  background: #ffffff;
-  border: 1px solid #e5e5e5;
-  box-sizing: border-box;
-  font-size: 1.3rem;
-  font-weight: 500;
-`;
-const DropDownItem = styled.button`
-  display: block;
-  padding: 2.6rem;
-  background: none;
-  border: none;
-  border-top: 1px solid #e5e5e5;
-  width: 100%;
-  font-size: 1.6rem;
-
-  &:first-child {
-    border-top: none;
-  }
-
-  &:hover {
-    background: #eef0f1;
-  }
-  &:focus {
-    outline: none;
-  }
-
-  @media screen and (max-width: 500px) {
-    padding: 4rem 0;
-    font-size: 2.2rem;
-  }
-`;
+import headerStyle from './styles/header.module.css';
 
 class Header extends Component {
   state = {
@@ -182,12 +51,15 @@ class Header extends Component {
     const { isOpen } = this.state;
     return (
       <div>
-        <Nav>
-          <NavContainer>
-            <NavLink to='/'>NC News</NavLink>
-            <TopicsDropDown>
+        <nav className={headerStyle.nav}>
+          <div className={headerStyle.navContainer}>
+            <Link to='/' className={headerStyle.navLink}>
+              NC News
+            </Link>
+            <div className={headerStyle.topicsDropDown}>
               <label>
-                <DropDownSelect
+                <select
+                  className={headerStyle.dropDownSelect}
                   defaultValue=''
                   onChange={(event) => {
                     navigate(event.target.value);
@@ -209,67 +81,69 @@ class Header extends Component {
                       </option>
                     );
                   })}
-                </DropDownSelect>
+                </select>
               </label>
-            </TopicsDropDown>
-          </NavContainer>
+            </div>
+          </div>
           {username ? (
-            <NavUserSignedIn onClick={this.toggleMenu}>
-              <UserMenu>
-                <UserAvatar src={avatar_url} alt='Your profile avatar' />
-                <UserWelcome>Hello, {username}</UserWelcome>
+            <div
+              className={headerStyle.navUserSignedIn}
+              onClick={this.toggleMenu}
+            >
+              <div className={headerStyle.userMenu}>
+                <img
+                  src={avatar_url}
+                  alt='Your profile avatar'
+                  className={headerStyle.userAvatar}
+                />
+                <p className={headerStyle.userWelcome}>Hello, {username}</p>
                 {isOpen ? (
                   <i className='fa fa-chevron-up'></i>
                 ) : (
                   <i className='fa fa-chevron-down'></i>
                 )}
-              </UserMenu>
-              {/* {isOpen ? (
-                <div>
-                  <DropDownList>
-                    <DropDownItem>My Articles</DropDownItem>
-                    <DropDownItem>Sign Out</DropDownItem>
-                  </DropDownList>
-                </div>
-              ) : null} */}
-            </NavUserSignedIn>
+              </div>
+            </div>
           ) : (
-            <NavUserSignedOut>
+            <div className={headerStyle.navUserSignedOut}>
               <SignInButton />
-              <MobileHide>
+              <div className={headerStyle.mobileHide}>
                 <CreateAccountButton />
-              </MobileHide>
-            </NavUserSignedOut>
+              </div>
+            </div>
           )}
-        </Nav>
+        </nav>
         {isOpen ? (
           <div>
-            <DropDownList>
-              <DropDownItem
+            <div className={headerStyle.dropDownList}>
+              <div
+                className={headerStyle.dropDownItem}
                 onClick={() => {
                   navigate(`/users/${username}`);
                   this.toggleMenu();
                 }}
               >
                 <i className='fa fa-home'></i> My Account
-              </DropDownItem>
-              <DropDownItem
+              </div>
+              <div
+                className={headerStyle.dropDownItem}
                 onClick={() => {
                   navigate(`/users/${username}/articles`);
                   this.toggleMenu();
                 }}
               >
                 <i className='fa fa-newspaper-o'></i> My Articles
-              </DropDownItem>
-              <DropDownItem
+              </div>
+              <div
+                className={headerStyle.dropDownItem}
                 onClick={() => {
                   signOut();
                   this.toggleMenu();
                 }}
               >
                 <i className='fa fa-sign-out'></i> Sign Out
-              </DropDownItem>
-            </DropDownList>
+              </div>
+            </div>
           </div>
         ) : null}
       </div>
