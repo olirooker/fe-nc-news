@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getTopics } from '../api';
 import Loading from './Loading';
 import TopicCard from './TopicCard';
+import bannerStyle from './styles/banner.module.css';
 
 class TopicsList extends Component {
   state = {
@@ -19,13 +20,15 @@ class TopicsList extends Component {
     const { topics, isLoading } = this.state;
     return (
       <main>
-        <h1>Topics List</h1>
+        <div className={bannerStyle.topicsBanner}>
+          <h1 className={bannerStyle.pageTitle}>Topics</h1>
+        </div>
         {isLoading ? (
           <Loading />
         ) : (
           <ul>
             {topics.map((topic) => {
-              return <TopicCard topicData={topic} key={topic.slug} />;
+              return <TopicCard topic={topic} key={topic.slug} />;
             })}
           </ul>
         )}
