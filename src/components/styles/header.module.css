@@ -91,7 +91,9 @@ nav {
 }
 
 .dropDownList {
-  position: absolute;
+  /* position: absolute; */
+  display: flex;
+  align-items: center;
   width: 100%;
   background: #ffffff;
   border: 1px solid #e5e5e5;
@@ -102,17 +104,18 @@ nav {
 
 .dropDownItem {
   display: block;
+  text-align: center;
   padding: 2.6rem;
   background: none;
-  border: none;
-  border-top: 1px solid #e5e5e5;
+  /* border: none; */
+  border: 1px solid #e5e5e5;
   width: 100%;
   font-size: 1.6rem;
 }
 
-.dropDownItem:first-child {
+/* .dropDownItem:first-child {
   border-top: none;
-}
+} */
 
 .dropDownItem:hover {
   background: #eef0f1;
@@ -134,9 +137,20 @@ nav {
 }
 
 @media screen and (max-width: 500px) {
+  .dropDownList {
+    display: inline-block;
+    position: absolute;
+  }
+
   .dropDownItem {
     padding: 4rem 0;
     font-size: 2.2rem;
+    border: none;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .dropDownItem:first-child {
+    border-top: none;
   }
 }
 

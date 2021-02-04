@@ -1,0 +1,11 @@
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.loadingContainerPage {
+  composes: loadingContainer;
+  margin-top: 80px;
+}
