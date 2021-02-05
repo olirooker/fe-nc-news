@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
+import cardStyle from './styles/card.module.css';
+import userStyle from './styles/user.module.css';
 
 class UsersList extends Component {
-    state = {};
+  state = {};
 
-    render() {
-        return (
-            <div>
-                <h1>Users List</h1>
-                <p>Users List - List of article cards by the current user if signed in</p>
-            </div>
-        );
-    }
+  render() {
+    const { user } = this.props;
+    return (
+      <div className={cardStyle.card}>
+        <div className={userStyle.userContainer}>
+          <img
+            src={user.avatar_url}
+            alt='Your profile avatar'
+            className={userStyle.userAvatar}
+          />
+          <div className={userStyle.userDetails}>
+            <p className={userStyle.detail}>Name: {user.name}</p>
+            <p className={userStyle.detail}>Username: {user.username}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default UsersList;

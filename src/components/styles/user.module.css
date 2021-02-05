@@ -1,0 +1,27 @@
+.userContainer {
+  display: grid;
+  grid-template-columns: auto 2fr;
+  grid-template-areas: 'img info';
+}
+
+.userAvatar {
+  height: 8rem;
+  /* width: 100px; */
+  border: 1px solid #b5bdc4;
+  border-radius: 50%;
+  padding: 2rem;
+  margin-right: 2rem;
+  grid-area: img;
+}
+
+.userDetails {
+  grid-area: info;
+}
+
+.detail {
+  font-size: 2rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #202428;
+  margin-bottom: 1rem;
+}

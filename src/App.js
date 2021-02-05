@@ -56,7 +56,7 @@ class App extends Component {
               user={this.state.user}
             />
             <TopicsList path='/topics' />
-            <UsersList path='/users/:username' />
+            <UsersList path='/users/:username' user={this.state.user} />
             <ErrorMessage default errorMessage='Page not found!' />
           </Router>
         </StyledContainer>

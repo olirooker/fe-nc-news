@@ -111,6 +111,7 @@ nav {
   border: 1px solid #e5e5e5;
   width: 100%;
   font-size: 1.6rem;
+  cursor: pointer;
 }
 
 /* .dropDownItem:first-child {
